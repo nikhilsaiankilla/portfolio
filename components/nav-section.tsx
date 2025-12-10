@@ -7,6 +7,7 @@ import { Menu, X, Github, Linkedin, Terminal, Twitter } from 'lucide-react';
 import { ModeToggle } from './mode-toggle';
 
 const navItems = [
+    { name: 'Home', href: '/' },
     { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
     { name: 'Tech Stack', href: '#tech-stack' },
@@ -37,12 +38,12 @@ const NavSection = () => {
         >
             <div className="max-w-7xl mx-auto px-5 md:px-10 flex items-center justify-between">
 
-                {/* Logo Area */}
+                {/* Logo Area
                 <Link href="/" className="flex items-center gap-2 font-bold text-xl md:text-2xl tracking-tighter hover:text-cyan-500 transition-colors">
                     <div className="bg-cyan-500 text-white p-1 rounded-lg">
                         <Terminal size={20} />
                     </div>
-                </Link>
+                </Link> */}
 
                 {/* Desktop Navigation */}
                 <div className="hidden md:flex items-center gap-4">
@@ -62,13 +63,13 @@ const NavSection = () => {
                 <div className="flex items-center gap-2">
                     {/* Social Icons (Desktop only usually, but good to have) */}
                     <div className="hidden md:flex items-center gap-3 border-l border-gray-300 dark:border-gray-700 pl-4">
-                        <Link href="https://github.com" target="_blank" className="hover:text-cyan-500 transition-transform hover:-translate-y-1">
+                        <Link href="https://github.com/nikhilsaiankilla" target="_blank" className="hover:text-cyan-500 transition-transform hover:-translate-y-1">
                             <Github size={20} />
                         </Link>
-                        <Link href="https://linkedin.com" target="_blank" className="hover:text-cyan-500 transition-transform hover:-translate-y-1">
+                        <Link href="https://linkedin.com/in/nikhilsaiankilla" target="_blank" className="hover:text-cyan-500 transition-transform hover:-translate-y-1">
                             <Linkedin size={20} />
                         </Link>
-                        <Link href="https://linkedin.com" target="_blank" className="hover:text-cyan-500 transition-transform hover:-translate-y-1">
+                        <Link href="https://x.com/nikhilbuildss" target="_blank" className="hover:text-cyan-500 transition-transform hover:-translate-y-1">
                             <Twitter size={20} />
                         </Link>
                         <ModeToggle />

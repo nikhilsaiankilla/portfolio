@@ -1,10 +1,10 @@
 "use client"
 
 import Image from 'next/image';
-import { AnimatePresence, motion, Variants } from 'framer-motion'; // <--- Import Variants
+import { motion, Variants } from 'framer-motion'; // <--- Import Variants
 import { Badge } from '@/components/ui/badge';
-import { useState } from 'react';
 import Link from 'next/link';
+import TooltipImage from './tooltip-image';
 
 const HeroSection = () => {
     // Add ': Variants' type annotation here
@@ -41,17 +41,17 @@ const HeroSection = () => {
 
                 {/* Animated Badge */}
                 <motion.div variants={itemVariants} className="w-fit">
-                    <Badge className='text-green-700 bg-green-600/20 border border-green-700 flex items-center gap-2 px-3 py-1 text-[10px]'>
+                    <Badge className='text-green-500 bg-green-600/20 border border-green-500 flex items-center gap-2 px-3 py-1 text-[10px]'>
                         {/* Pulsing Green Dot */}
                         <motion.span
                             animate={{ opacity: [1, 0.4, 1] }}
                             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                            className='h-2 w-2 rounded-full bg-green-900'
+                            className='h-2 w-2 rounded-full bg-green-500'
                         />
                         Available to Work!
                     </Badge>
                 </motion.div>
-        
+
                 {/* Animated Name */}
                 <motion.h1
                     variants={itemVariants}
@@ -79,9 +79,9 @@ const HeroSection = () => {
                     transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.4 }}
                     className="relative"
                 >
-                    <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur opacity-30 animate-pulse"></div>
+                    <div className="absolute -inset-1 bg-linear-to-r from-cyan-400 to-blue-500 rounded-full blur opacity-30 animate-pulse"></div>
                     <Image
-                        src={'https://avatar.iran.liara.run/public/12'}
+                        src={`https://avatar.iran.liara.run/public/${Math.floor(Math.random() * 100)}`}
                         alt='Nikhil sai Avatar'
                         width={160}
                         height={160}
@@ -105,46 +105,6 @@ const techStack = [
     { name: 'Node.js', src: '/Node.js.svg' },
 ];
 
-// 2. Create a reusable component for the Icon + Tooltip
-const TechBadge = ({ name, src }: { name: string, src: string }) => {
-    const [isHovered, setIsHovered] = useState(false);
-
-    return (
-        <div
-            className='relative inline-flex items-center justify-center'
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
-            {/* The Tooltip */}
-            <AnimatePresence>
-                {isHovered && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                        animate={{ opacity: 1, y: -35, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.8 }}
-                        transition={{ duration: 0.2, type: "spring", stiffness: 300 }}
-                        className="absolute left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] px-2 py-1 rounded shadow-lg whitespace-nowrap z-50 pointer-events-none"
-                    >
-                        {name}
-                        {/* Little triangle arrow pointing down */}
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-900"></div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
-            {/* The Icon */}
-            <span className='p-1 bg-white w-fit h-fit rounded-full shadow-sm cursor-pointer hover:bg-gray-50 transition-colors'>
-                <Image
-                    src={src}
-                    alt={`${name} Icon`}
-                    width={20}
-                    height={20}
-                    unoptimized
-                />
-            </span>
-        </div>
-    );
-};
 
 function Bio() {
     return (
@@ -154,7 +114,7 @@ function Bio() {
             {/* Container for the icons */}
             <span className='inline-flex items-center justify-center flex-wrap gap-2 mx-1 align-middle'>
                 {techStack.map((tech) => (
-                    <TechBadge key={tech.name} name={tech.name} src={tech.src} />
+                    <TooltipImage key={tech.name} name={tech.name} src={tech.src} isBg />
                 ))}
             </span>
 

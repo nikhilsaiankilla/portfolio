@@ -1,5 +1,10 @@
+"use client"
+
 import { ChevronRight, Globe } from 'lucide-react';
 import { Badge } from './ui/badge';
+import { motion, Variants } from 'framer-motion';
+import AnimatedContainer from './animated-container';
+import SectionHeading from './section-heading';
 
 const experiences = [
     {
@@ -9,32 +14,44 @@ const experiences = [
         type: 'Part Time',
         date: 'Jan 2025 - Jun 2025',
         description: 'As a Software Engineer, working on full-stack development across web and mobile platforms. Building scalable applications with modern frameworks and cloud infrastructure.',
-        logo: 'Globe2', // Replace with actual path
+        logo: 'Globe2',
         current: false,
         logoFallback: <Globe size={20} />
     },
 ];
 
+
 const ExperienceSection = () => {
+    const itemVariants: Variants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: { type: 'spring', stiffness: 100 } // Now TypeScript knows 'spring' is valid
+        }
+    };
+
     return (
-        <section className="w-full border-b border-gray-200 dark:border-gray-800 py-10 px-5 md:px-10">
-            {/* Section Header */}
-            <h2 className="text-2xl font-bold text-black dark:text-white mb-8 font-heading">
-                Work Experience
-            </h2>
+        <AnimatedContainer>
+            <SectionHeading title='Work Experience!' />
 
             {/* Experience List */}
             <div className="space-y-8">
                 {experiences.map((exp) => (
-                    <div key={exp.id} className="group flex gap-4 md:gap-6 items-start">
+                    <motion.div
+                        key={exp.id}
+                        variants={itemVariants}
+                        className="group flex gap-4 md:gap-6 items-start p-3 -mx-3"
+                    >
 
                         {/* Logo Column */}
                         <div className="shrink-0 mt-1">
-                            <div className="w-12 h-12 rounded-xl bg-black dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 flex items-center justify-center text-white overflow-hidden shadow-sm">
-                                {/* Use Image if available, else fallback icon */}
-                                {/* <Image src={exp.logo} alt={exp.company} width={48} height={48} /> */}
+                            <motion.div
+                                whileHover={{ scale: 1.1, rotate: 5 }}
+                                className="w-12 h-12 rounded-xl bg-black dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 flex items-center justify-center text-white overflow-hidden shadow-sm transition-transform"
+                            >
                                 {exp.logoFallback}
-                            </div>
+                            </motion.div>
                         </div>
 
                         {/* Content Column */}
@@ -60,8 +77,8 @@ const ExperienceSection = () => {
                                         </span>
                                     )}
 
-                                    {/* Chevron Icon from image */}
-                                    <ChevronRight className="text-gray-400 w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                                    {/* Chevron Icon */}
+                                    <ChevronRight className="text-cyan-500 w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out" />
                                 </div>
 
                                 {/* Date */}
@@ -71,14 +88,14 @@ const ExperienceSection = () => {
                             </div>
 
                             {/* Description */}
-                            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
+                            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl group-hover:text-gray-900 dark:group-hover:text-gray-200 transition-colors">
                                 {exp.description}
                             </p>
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
             </div>
-        </section>
+        </AnimatedContainer>
     );
 };
 

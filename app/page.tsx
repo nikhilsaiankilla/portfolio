@@ -1,6 +1,7 @@
 import ExperienceSection from "@/components/experience-section";
 import HeroSection from "@/components/hero-section";
 import NavSection from "@/components/nav-section";
+import ProofOfWorkSection from "@/components/proof-of-work-section";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
         <NavSection />
         <HeroSection />
         <ExperienceSection />
+        <ProofOfWorkSection />
       </div>
     </div>
   );
