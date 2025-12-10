@@ -34,7 +34,7 @@ const HeroSection = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="w-full border-t-2 border-b-2 border-gray-700/10 dark:border-gray-700/40 py-10 flex flex-col md:flex-row items-center justify-between px-5 md:px-10 overflow-hidden"
+            className="w-full border-t-2 border-b-2 border-gray-700/10 dark:border-gray-700/40 py-10 flex items-center justify-between px-5 md:px-10 overflow-hidden flex-col-reverse md:flex-row space-y-10"
         >
             {/* ... rest of your JSX remains exactly the same ... */}
             <div className="w-full md:w-3/5 space-y-4">

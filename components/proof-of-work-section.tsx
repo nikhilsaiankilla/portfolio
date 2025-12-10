@@ -3,6 +3,9 @@
 import AnimatedContainer from './animated-container';
 import SectionHeading from './section-heading';
 import ProjectCard from './project-card';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import AnimatedButton from './animated-btn';
 
 const projects = [
   {
@@ -68,6 +71,9 @@ const ProofOfWorkSection = () => {
         {projects.map((project, index) => (
           <ProjectCard key={index} {...project} />
         ))}
+      </div>
+      <div className='w-full mt-10'>
+        <AnimatedButton link='/projects' label='View All Projects'/>
       </div>
     </AnimatedContainer>
   );

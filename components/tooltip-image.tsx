@@ -31,7 +31,12 @@ const TooltipImage = ({ name, src, width, height, isBg = false }: TooltipImagePr
                         transition={{ duration: 0.2, type: "spring", stiffness: 300 }}
                         className="absolute left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] px-2 py-1 rounded shadow-lg whitespace-nowrap z-50 pointer-events-none"
                     >
-                        {name}
+                        {/* Split the name by space and map over it */}
+                        {name.split(" ").map((word, index) => (
+                            <span key={index} className={`block text-center md:text-sm`}>
+                                {word}
+                            </span>
+                        ))}
                         {/* Little triangle arrow pointing down */}
                         <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-900"></div>
                     </motion.div>
@@ -39,7 +44,7 @@ const TooltipImage = ({ name, src, width, height, isBg = false }: TooltipImagePr
             </AnimatePresence>
 
             {/* The Icon */}
-            <span className={`p-1 w-fit h-fit rounded-full shadow-sm cursor-pointer transition-colors ${isBg ? "bg-white hover:bg-gray-300" : ""}`}>
+            <span className={`p-1 w-fit h-fit rounded-sm shadow-sm cursor-pointer transition-colors ${isBg ? "bg-white hover:bg-gray-300" : "border-dashed border-gray-400"}`}>
                 <Image
                     src={src}
                     alt={`${name} Icon`}
