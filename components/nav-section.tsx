@@ -1,22 +1,59 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, Linkedin, Twitter } from 'lucide-react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { Menu, X, Github, Linkedin, Terminal } from 'lucide-react';
 import { ModeToggle } from './mode-toggle';
 
 const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Contact', href: '/#contact' },
+    { name: 'Blogs', href: '/blogs' },
+    { name: 'Resume', href: '/resume' },
 ];
+
+// --- Animation Variants ---
+const navbarVariants: Variants = {
+    hidden: { y: -20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: { type: "spring", stiffness: 100, damping: 20 }
+    }
+};
+
+const mobileMenuVariants: Variants = {
+    hidden: { opacity: 0, height: 0, filter: "blur(10px)" },
+    visible: {
+        opacity: 1,
+        height: "auto",
+        filter: "blur(0px)",
+        transition: {
+            duration: 0.3,
+            ease: "easeOut",
+            staggerChildren: 0.05,
+            delayChildren: 0.05
+        }
+    },
+    exit: {
+        opacity: 0,
+        height: 0,
+        filter: "blur(10px)",
+        transition: { duration: 0.2 }
+    }
+};
+
+const mobileItemVariants = {
+    hidden: { opacity: 0, x: -10 },
+    visible: { opacity: 1, x: 0 }
+};
 
 const NavSection = () => {
     const [scrolled, setScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
-    // Effect to handle scroll state
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
@@ -26,100 +63,113 @@ const NavSection = () => {
     }, []);
 
     return (
-        <motion.nav
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            className={`transition-all duration-300 ${scrolled
-                ? 'bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-sm py-4'
-                : 'bg-transparent py-6'
-                }`}
+        <motion.header
+            initial="hidden"
+            animate="visible"
+            variants={navbarVariants}
+            className={`sticky top-0 z-50 w-full transition-all duration-300 ease-in-out ${scrolled
+                ? 'bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200 dark:border-zinc-800'
+                : 'bg-transparent'
+                }  py-4`}
         >
-            <div className="max-w-7xl mx-auto px-5 md:px-10 flex items-center justify-between">
+            <div className="w-full px-5 md:px-6 flex items-center justify-between">
+                <div className='flex items-end gap-6'>
+                    <Link href="/" className="flex items-center gap-2 group">
+                            <Terminal size={22} />
+                    </Link>
 
-                {/* Logo Area
-                <Link href="/" className="flex items-center gap-2 font-bold text-xl md:text-2xl tracking-tighter hover:text-cyan-500 transition-colors">
-                    <div className="bg-cyan-500 text-white p-1 rounded-lg">
-                        <Terminal size={20} />
-                    </div>
-                </Link> */}
-
-                {/* Desktop Navigation */}
-                <div className="hidden md:flex items-center gap-4">
-                    {navItems.map((item) => (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            className="text-sm font-medium hover:text-cyan-500 transition-colors relative group"
-                        >
-                            {item.name}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-500 transition-all group-hover:w-full"></span>
-                        </Link>
-                    ))}
+                    {/* --- Desktop Nav --- */}
+                    <nav className="hidden md:flex items-center gap-4">
+                        {navItems.map((item) => (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors relative group"
+                            >
+                                {item.name}
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-500 transition-all duration-300 group-hover:w-full"></span>
+                            </Link>
+                        ))}
+                    </nav>
                 </div>
+                <div className="flex items-center gap-3">
 
-                {/* Socials & Mobile Toggle */}
-                <div className="flex items-center gap-2">
-                    {/* Social Icons (Desktop only usually, but good to have) */}
-                    <div className="hidden md:flex items-center gap-3 border-l border-gray-300 dark:border-gray-700 pl-4">
-                        <Link href="https://github.com/nikhilsaiankilla" target="_blank" className="hover:text-cyan-500 transition-transform hover:-translate-y-1">
-                            <Github size={20} />
-                        </Link>
-                        <Link href="https://linkedin.com/in/nikhilsaiankilla" target="_blank" className="hover:text-cyan-500 transition-transform hover:-translate-y-1">
-                            <Linkedin size={20} />
-                        </Link>
-                        <Link href="https://x.com/nikhilbuildss" target="_blank" className="hover:text-cyan-500 transition-transform hover:-translate-y-1">
-                            <Twitter size={20} />
-                        </Link>
-                        <ModeToggle />
+                    {/* Socials (Desktop) */}
+                    <div className="hidden md:flex items-center gap-1 border-r border-gray-200 dark:border-zinc-800 pr-3 mr-1">
+                        <SocialLink href="https://github.com/nikhilsaiankilla" icon={<Github size={18} />} />
+                        <SocialLink href="https://linkedin.com/in/nikhilsaiankilla" icon={<Linkedin size={18} />} />
+                        <SocialLink href="https://x.com/nikhilbuildss" icon={<XIcon />} />
                     </div>
 
-                    {/* Mobile Menu Button */}
+                    <ModeToggle />
+
+                    {/* Mobile Menu Toggle */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                        className="md:hidden p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+                        aria-label="Toggle Menu"
                     >
                         {isOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
             </div>
 
-            {/* Mobile Menu Dropdown */}
+            {/* --- Mobile Menu Dropdown --- */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-white/95 dark:bg-black/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 overflow-hidden"
+                        variants={mobileMenuVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className="absolute top-full left-0 right-0 w-full overflow-hidden md:hidden"
                     >
-                        <div className="flex flex-col p-5 space-y-4">
-                            {navItems.map((item) => (
-                                <Link
-                                    key={item.name}
-                                    href={item.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className="text-lg font-medium hover:text-cyan-500 hover:pl-2 transition-all"
-                                >
-                                    {item.name}
-                                </Link>
-                            ))}
-                            <div className="flex gap-4 pt-4 border-t border-gray-200 dark:border-gray-800">
-                                <Link href="https://github.com" target="_blank" className="flex items-center gap-2 hover:text-cyan-500">
-                                    <Github size={20} /> Github
-                                </Link>
-                                <Link href="https://linkedin.com" target="_blank" className="flex items-center gap-2 hover:text-cyan-500">
-                                    <Linkedin size={20} /> LinkedIn
-                                </Link>
-                                <Link href="https://linkedin.com" target="_blank" className="flex items-center gap-2 hover:text-cyan-500">
-                                    <Twitter size={20} /> Twitter
-                                </Link>
+                        <div className="bg-white/95 dark:bg-black/95 backdrop-blur-xl border-b border-gray-200 dark:border-zinc-800 shadow-xl px-4 py-6">
+                            <div className="flex flex-col space-y-2">
+                                {navItems.map((item) => (
+                                    <motion.div key={item.name} variants={mobileItemVariants}>
+                                        <Link
+                                            href={item.href}
+                                            onClick={() => setIsOpen(false)}
+                                            className="block px-4 py-3 text-lg font-medium rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 text-gray-900 dark:text-gray-100 transition-colors"
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    </motion.div>
+                                ))}
                             </div>
+
+                            <motion.div
+                                variants={mobileItemVariants}
+                                className="mt-4 pt-4 border-t border-gray-200 dark:border-zinc-800 flex justify-center gap-6"
+                            >
+                                <SocialLink href="https://github.com/nikhilsaiankilla" icon={<Github size={22} />} />
+                                <SocialLink href="https://linkedin.com/in/nikhilsaiankilla" icon={<Linkedin size={22} />} />
+                                <SocialLink href="https://x.com/nikhilbuildss" icon={<XIcon className="w-5 h-5" />} />
+                            </motion.div>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-        </motion.nav>
+        </motion.header>
     );
 }
+
+// Helper Components
+const SocialLink = ({ href, icon }: { href: string, icon: React.ReactNode }) => (
+    <Link
+        href={href}
+        target="_blank"
+        className="p-2 text-gray-500 hover:text-cyan-500 dark:text-gray-400 dark:hover:text-cyan-400 transition-colors hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-md"
+    >
+        {icon}
+    </Link>
+);
+
+const XIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={`${className} fill-current`}>
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+    </svg>
+);
 
 export default NavSection;

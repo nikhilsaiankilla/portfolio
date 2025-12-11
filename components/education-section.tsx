@@ -11,28 +11,28 @@ import SectionHeading from './section-heading';
 const educationList = [
     {
         id: 1,
-        institution: 'Maharaja Agrasen Institute of Technology',
+        institution: 'Sri Indu College Of Engineering And Technology!',
         degree: 'B.Tech in Computer Science',
         date: '2021 - 2025',
-        score: '',
+        score: '7.44 CGPA',
         logo: '/logos/mait.png', // Replace with actual path
         fallbackIcon: <GraduationCap size={20} />
     },
     {
         id: 2,
-        institution: 'Siddhartha Public School',
-        degree: 'Class XII (CBSE)',
+        institution: 'Sri Gaytri Junior College!',
+        degree: 'Intermediate',
         date: '2019 - 2021',
-        score: '84.8%',
+        score: '789/1000',
         logo: '/logos/siddhartha.png',
         fallbackIcon: <School size={20} />
     },
     {
         id: 3,
-        institution: 'D.A.V. Public School',
+        institution: `St Hannah's School High School`,
         degree: 'Class X (SSC)',
         date: '2018- 2019',
-        score: '91.6%',
+        score: '8.3 CGPA',
         logo: '/logos/dav.png',
         fallbackIcon: <School size={20} />
     },

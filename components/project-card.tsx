@@ -1,36 +1,43 @@
 "use client";
 
-import { ArrowUpRight, GithubIcon } from 'lucide-react';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight, ArrowUpRight, GithubIcon, Globe } from 'lucide-react';
 import TooltipImage from './tooltip-image';
-import { motion, Variants } from 'framer-motion';
+import { useState } from 'react';
 
 interface ProjectProps {
     title: string;
     description: string;
     tags: { src: string; name: string }[];
     link: string;
+    github: string;
     image: string;
     status: string;
-    index?: number; // Added index for staggered delay calculation
+    index?: number;
+    id: string;
 }
 
-// 1. Define Animation Variants
 const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
     visible: (index: number) => ({
         opacity: 1,
         y: 0,
+        scale: 1,
         transition: {
-            delay: index * 0.1, // Stagger effect based on index
+            delay: index * 0.1,
             duration: 0.5,
             ease: "easeOut"
         }
     })
 };
 
-const ProjectCard = ({ title, description, tags, link, image, status, index = 0 }: ProjectProps) => {
+const ProjectCard = ({ title, description, tags, link, image, status, github, index = 0, id }: ProjectProps) => {
+
+    const [isGitHovered, setIsGitHovered] = useState<boolean>(false)
+    const [isDemoHovered, setIsDemoHovered] = useState<boolean>(false)
+
     return (
         <motion.div
             variants={cardVariants}
@@ -38,77 +45,112 @@ const ProjectCard = ({ title, description, tags, link, image, status, index = 0 
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             custom={index}
-            whileHover={{ y: -5, transition: { duration: 0.2 } }} // Micro-lift on hover
-            className='group relative h-[450px] w-full overflow-hidden rounded-sm bg-gray-100 dark:bg-zinc-900 shadow-sm hover:shadow-2xl transition-all duration-500'
+            className='group flex flex-col w-full rounded-sm overflow-hidden bg-gray-400/10 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 shadow-sm hover:shadow-lg transition-all duration-300'
         >
-            {/* 1. Background Image (The Hero) */}
-            <div className='absolute inset-0'>
-                {/* Placeholder pattern */}
-                <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#27272a_1px,transparent_1px)] bg-size-[16px_16px] opacity-50"></div>
-
-                {/* Actual Image */}
+            {/* 1. TOP GRID: Square Image Area */}
+            <div className="relative w-full aspect-square overflow-hidden bg-gray-200 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-800">
+                {/* Image */}
                 <Image
-                    src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuOUQUHO2HJahEVTn1NBsXX9bSQXHvHMN0aw&s"}
+                    src={image || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuOUQUHO2HJahEVTn1NBsXX9bSQXHvHMN0aw&s'}
                     alt={title}
-                    fill
+                    width={100}
+                    height={100}
                     unoptimized
-                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out opacity-90"
+                    className="w-full aspect-square"
                 />
-            </div>
 
-            {/* 2. Dark Overlay Gradient */}
-            <div className='absolute inset-0 bg-linear-to-t from-black/95 via-black/50 to-transparent opacity-60 group-hover:opacity-95 transition-opacity duration-500' />
-
-            {/* 3. Top Right Status (Optional - moved here for better visibility) */}
-            <div className='absolute top-4 right-4 z-20 translate-y-5 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300'>
-                <span className='px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-white/20 bg-black/40 backdrop-blur-md text-white shadow-lg'>
-                    {status}
-                </span>
-            </div>
-
-            {/* 4. Bottom Content Area */}
-            <div className='absolute bottom-0 left-0 right-0 p-6 md:p-8 flex flex-col justify-end text-white z-10'>
-
-                {/* Title */}
-                <div className='transform translate-y-8 group-hover:translate-y-0 transition-transform duration-300 ease-out'>
-                    <h3 className='text-2xl md:text-3xl font-bold leading-tight mb-2 drop-shadow-md font-heading'>{title}</h3>
+                {/* Status Badge (Top Right) */}
+                <div className='absolute top-3 right-3 z-10'>
+                    <span className='px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border border-white/20 bg-black/60 backdrop-blur-md text-white shadow-sm'>
+                        {status}
+                    </span>
                 </div>
+            </div>
 
-                {/* Description Container (Expands on hover) */}
-                <div className='grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-in-out'>
-                    <div className='overflow-hidden'>
-                        <div className='pt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100'>
-                            <p className='text-gray-300 text-sm md:text-base line-clamp-3 mb-4'>
-                                {description}
-                            </p>
+            {/* 2. BOTTOM GRID: Content Area */}
+            <div className='flex flex-col p-5 space-y-4'>
 
-                            {/* Tags */}
-                            <div className='flex flex-wrap gap-2 mb-4 px-3'>
-                                {tags?.map((tag, i) => (
-                                    <TooltipImage key={i} src={tag?.src} name={tag?.name} isBg />
-                                ))}
+                {/* Title & Description */}
+                <div className='space-y-2'>
+                    <div className='flex items-center justify-between'>
+                        <h3 className='text-xl md:text-2xl font-bold font-heading text-black dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors'>
+                            {title}
+                        </h3>
+                        <div className='flex items-center gap-6'>
+                            <div
+                                className='relative inline-flex items-center justify-center'
+                                onMouseEnter={() => setIsDemoHovered(true)}
+                                onMouseLeave={() => setIsDemoHovered(false)}
+                            >
+                                <AnimatePresence>
+                                    {isDemoHovered && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                                            animate={{ opacity: 1, y: -35, scale: 1 }}
+                                            exit={{ opacity: 0, y: 10, scale: 0.8 }}
+                                            transition={{ duration: 0.2, type: "spring", stiffness: 300 }}
+                                            className="absolute left-1/2 -translate-x-1/2 bg-white dark:bg-gray-600 text-black dark:text-white text-[10px] px-2 py-1.5 rounded shadow-lg whitespace-nowrap z-50 pointer-events-none"
+                                        >
+                                            View Website
+                                            {/* Little triangle arrow pointing down */}
+                                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-900"></div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                                <Link href={link} target="_blank" className=''>
+                                    <Globe size={20} />
+                                </Link>
                             </div>
-
-                            {/* Action Buttons */}
-                            <div className='w-full flex items-center justify-between gap-3 mt-4'>
-                                <motion.div className="w-full" whileTap={{ scale: 0.95 }}>
-                                    <Link href={link} target="_blank" className='flex items-center justify-center gap-2 p-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/10 text-white rounded-sm w-full transition-colors font-medium text-sm'>
-                                        <GithubIcon size={18} />
-                                        <span>Code</span>
-                                    </Link>
-                                </motion.div>
-
-                                <motion.div className="w-full" whileTap={{ scale: 0.95 }}>
-                                    <Link href={link} target="_blank" className='flex items-center justify-center gap-2 p-2 bg-cyan-500 hover:bg-cyan-400 text-white shadow-lg shadow-cyan-500/20 rounded-sm w-full transition-all font-medium text-sm'>
-                                        <span>Live Demo</span>
-                                        <ArrowUpRight size={18} />
-                                    </Link>
-                                </motion.div>
+                            <div
+                                className='relative inline-flex items-center justify-center'
+                                onMouseEnter={() => setIsGitHovered(true)}
+                                onMouseLeave={() => setIsGitHovered(false)}
+                            >
+                                <AnimatePresence>
+                                    {isGitHovered && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                                            animate={{ opacity: 1, y: -35, scale: 1 }}
+                                            exit={{ opacity: 0, y: 10, scale: 0.8 }}
+                                            transition={{ duration: 0.2, type: "spring", stiffness: 300 }}
+                                            className="absolute left-1/2 -translate-x-1/2 bg-white dark:bg-gray-600 text-black dark:text-white text-[10px] px-2 py-1.5 rounded shadow-lg whitespace-nowrap z-50 pointer-events-none"
+                                        >
+                                            View Github
+                                            {/* Little triangle arrow pointing down */}
+                                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-900"></div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                                <Link href={github} target="_blank" className=''>
+                                    <GithubIcon size={20} />
+                                </Link>
                             </div>
                         </div>
                     </div>
+                    <p className='text-sm text-gray-600 dark:text-gray-400 line-clamp-2 leading-relaxed'>
+                        {description}
+                    </p>
+                </div>
+
+                {/* Tech Stack */}
+                <div className='flex flex-wrap gap-2'>
+                    {tags && tags.length > 0 && tags?.slice(0, 5).map((tag, i) => (
+                        <TooltipImage key={i} src={tag?.src} name={tag?.name} isBg />
+                    ))}
+                    {tags?.length > 5 && (
+                        <span className="text-xs text-gray-400 flex items-center px-1">+{tags.length - 5}</span>
+                    )}
+                </div>
+                <div className='w-full group'>
+                    <Link
+                        href={`/projects/${id}`}
+                        className='flex items-center gap-2 text-gray-500 dark:text-gray-300 text-sm ml-auto w-fit hover:underline'
+                    >
+                        View Details <ArrowRight size={16} />
+                    </Link>
                 </div>
             </div>
+
         </motion.div>
     );
 };

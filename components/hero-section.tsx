@@ -36,9 +36,9 @@ const HeroSection = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="w-full border-t-2 border-b-2 border-gray-700/10 dark:border-gray-700/40 py-10 flex items-center justify-between px-5 md:px-10 overflow-hidden flex-col-reverse md:flex-row space-y-10"
+            className="w-full border-t-2 border-b-2 border-gray-700/10 dark:border-gray-700/40 py-10 flex items-center justify-between px-5 md:px-10 overflow-hidden flex-col-reverse md:flex-row"
         >
-            <div className="w-full md:w-3/5 space-y-4">
+            <div className="w-full md:w-3/5 space-y-4 mt-10 md:mt-0">
 
                 {/* Animated Name */}
                 <motion.h1
@@ -53,16 +53,18 @@ const HeroSection = () => {
                     <Bio />
                 </motion.div>
 
-                <motion.div variants={itemVariants} className='w-full flex items-center justify-start gap-3 mt-4'>
+                <motion.div variants={itemVariants} className='w-full flex items-center justify-start flex-wrap gap-3 mt-4'>
                     <AnimatedButton
                         label='Resume / CV'
                         link='/resume'
                         icon={<Paperclip className='w-4 h-4' />}
                         variant='outline'
+                        className='w-full md:w-fit'
                     />
                     <AnimatedButton
                         label='Get In Touch'
                         link='#contact'
+                        className='w-full md:w-fit'
                         icon={<Send className='w-4 h-4' />}
                     />
                 </motion.div>
@@ -71,7 +73,7 @@ const HeroSection = () => {
             {/* Right Image Section */}
             <motion.div
                 variants={itemVariants}
-                className="w-full md:w-2/5 flex items-center justify-center flex-col gap-8 mt-8 md:mt-0"
+                className="w-full md:w-2/5 flex items-center justify-center flex-col gap-8"
             >
                 <motion.div
                     whileHover={{ scale: 1.05, rotate: 3 }}

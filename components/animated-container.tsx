@@ -23,7 +23,7 @@ const AnimatedContainer = ({
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={containerVariants}
-            className="w-full border-b border-gray-200 dark:border-gray-800 py-10 px-5 md:px-10"
+            className="w-full border-b border-gray-200 dark:border-gray-800 py-10 px-2 md:px-10"
         >
             {children}
         </motion.section>
