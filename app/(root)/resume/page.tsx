@@ -1,18 +1,15 @@
+"use client"
+
 import AnimatedContainer from '@/components/animated-container'
 import FooterSection from '@/components/footer-section'
 import NavSection from '@/components/nav-section'
 import SectionHeading from '@/components/section-heading'
 import { Download } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 const ResumePage = () => {
-    // 1. REPLACE THIS with your actual Google Drive File ID
-    // Example: if your link is https://drive.google.com/file/d/123456789/view
-    // Your ID is "123456789"
-    const fileId = "14e8FwiLaF1OBULrw_NxeiLLU6uH7uzrW";
-
-    // 2. Construct the URLs
-    const embedUrl = `https://drive.google.com/file/d/${fileId}/preview`;
 
     return (
         <div className="w-full min-h-screen bg-white text-black dark:bg-black dark:text-white px-2">
@@ -20,14 +17,61 @@ const ResumePage = () => {
                 <NavSection />
                 <AnimatedContainer>
                     <div className="space-y-6 mb-10">
-                        <SectionHeading title='Resume' />
-                        {/* PDF Viewer Container */}
-                        <div className='w-full h-[800px] bg-gray-100 dark:bg-zinc-900 rounded-xl overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-sm'>
-                            <iframe
-                                src={embedUrl}
-                                className="w-full h-full"
-                                title="Resume PDF"
-                                allow="autoplay"
+                        <div className='w-full flex items-start justify-between'>
+                            <SectionHeading title='Resume' />
+
+                            <motion.button
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: 0.2 }}
+
+                                // Interaction Animations
+                                whileHover="hover"
+                                whileTap={{ scale: 0.95 }}
+
+                                className={`group relative inline-flex items-center justify-center gap-2 rounded-sm font-medium transition-colors w-fit md:px-8 md:py-2 p-2 bg-cyan-500 text-white shadow-lg shadow-cyan-500/20 border-transparent overflow-hidden cursor-pointer`}
+                            >
+                                <Download size={16} strokeWidth={2.5} />
+
+                                <motion.span
+                                    variants={{
+                                        hover: { x: 5 }
+                                    }}
+                                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                                    className="relative z-10 hidden md:block"
+                                >
+                                    <span className='relative z-10 text-sm font-normal'>Download</span>
+                                </motion.span>
+
+                                <motion.div
+                                    variants={{
+                                        hover: { opacity: 0.4, scale: 1.5 }
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                    className='absolute inset-0 rounded-full bg-cyan-500 blur-xl opacity-0 -z-10'
+                                />
+
+                                {/* Shine sweep effect */}
+                                <motion.div
+                                    variants={{
+                                        hover: { left: "100%" }
+                                    }}
+                                    initial={{ left: "-100%" }}
+                                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                                    className="absolute top-0 bottom-0 w-1/2 bg-linear-to-r from-transparent via-white/20 to-transparent -skew-x-12 z-0"
+                                />
+                            </motion.button>
+                        </div>
+                        <div className='w-full bg-gray-100 dark:bg-zinc-900 rounded-xl overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-sm'>
+                            <Image
+                                src={getPdfThumbnail('https://res.cloudinary.com/do5y2mtpk/image/upload/v1765185894/portfolio/resume/aikpnrebc6ilzjgxbsj7.pdf')}
+                                alt="PDF preview"
+                                loading="lazy"
+                                width={300}
+                                height={450}
+                                unoptimized
+                                className="rounded h-full w-full"
                             />
                         </div>
                     </div>
@@ -43,3 +87,11 @@ const ResumePage = () => {
 }
 
 export default ResumePage
+
+
+export function getPdfThumbnail(pdfUrl: string) {
+    if (!pdfUrl.includes('/upload/')) return pdfUrl;
+    const [base, rest] = pdfUrl.split('/upload/');
+    const withoutExt = rest.replace(/\.pdf$/, '');
+    return `${base}/upload/w_2600,pg_1,q_auto,f_auto/${withoutExt}.png`;
+}
