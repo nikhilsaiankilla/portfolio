@@ -72,7 +72,7 @@ const ProofOfWorkSection = () => {
           <ProjectCard key={index} {...project} />
         ))}
       </div>
-      <div className='w-full mt-10'>
+      <div className='w-full mt-10 flex items-center justify-center'>
         <AnimatedButton link='/projects' label='View All Projects'/>
       </div>
     </AnimatedContainer>

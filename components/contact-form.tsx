@@ -1,12 +1,11 @@
 "use client";
 
-import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { Send, User, Mail, MessageSquare } from 'lucide-react';
 import { Input } from '@/components/ui/input';       // Shadcn Input
-import { Textarea } from '@/components/ui/textarea'; // Shadcn Textarea
-import { Button } from '@/components/ui/button';     // Shadcn Button
+import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';       // Shadcn Label
+import { FormEvent } from 'react';
 
 const ContactForm = () => {
     // Animation Variants
@@ -30,6 +29,11 @@ const ContactForm = () => {
         },
     };
 
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+    }
+
+
     return (
         <motion.form
             variants={containerVariants}
@@ -37,7 +41,7 @@ const ContactForm = () => {
             whileInView="visible"
             viewport={{ once: true }}
             className="w-full max-w-md mx-auto space-y-6 bg-transparent p-2"
-            onSubmit={(e) => e.preventDefault()} // Add your submit logic here
+            onSubmit={handleSubmit}
         >
 
             {/* Name Field */}
@@ -46,11 +50,11 @@ const ContactForm = () => {
                     Name
                 </Label>
                 <div className="relative">
-                    <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 group-hover:text-cyan-500 transition-colors" />
+                    <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 group-focus-within:text-cyan-500 transition-colors" />
                     <Input
                         id="name"
-                        placeholder="John Doe"
-                        className="pl-10 bg-white/50 dark:bg-zinc-900/50 border-gray-200 dark:border-zinc-800 backdrop-blur-sm focus:bg-white dark:focus:bg-zinc-900 transition-all duration-300"
+                        placeholder="Goat Virat Kohli"
+                        className="pl-10 bg-white/50 dark:bg-zinc-900/50 border-gray-200 dark:border-zinc-800 focus:bg-white dark:focus:bg-zinc-900 transition-all duration-300"
                     />
                 </div>
             </motion.div>
@@ -65,8 +69,8 @@ const ContactForm = () => {
                     <Input
                         id="email"
                         type="email"
-                        placeholder="john@example.com"
-                        className="pl-10 bg-white/50 dark:bg-zinc-900/50 border-gray-200 dark:border-zinc-800 backdrop-blur-sm focus:bg-white dark:focus:bg-zinc-900 transition-all duration-300"
+                        placeholder="goatkohli@example.com"
+                        className="pl-10 bg-white/50 dark:bg-zinc-900/50 border-gray-200 dark:border-zinc-800 focus:bg-white dark:focus:bg-zinc-900 transition-all duration-300"
                     />
                 </div>
             </motion.div>
@@ -81,20 +85,56 @@ const ContactForm = () => {
                     <Textarea
                         id="message"
                         placeholder="Tell me about your project..."
-                        className="min-h-[120px] pl-10 bg-white/50 dark:bg-zinc-900/50 border-gray-200 dark:border-zinc-800 backdrop-blur-sm focus:bg-white dark:focus:bg-zinc-900 transition-all duration-300 resize-none"
+                        className="min-h-[120px] pl-10 bg-white/50 dark:bg-zinc-900/50 border-gray-200 dark:border-zinc-800 focus:bg-white dark:focus:bg-zinc-900 transition-all duration-300 resize-none"
                     />
                 </div>
             </motion.div>
 
             {/* Submit Button */}
             <motion.div variants={itemVariants}>
-                <Button
+                <motion.button
                     type="submit"
-                    className="w-full bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-all group"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+
+                    // Interaction Animations
+                    whileHover="hover"
+                    whileTap={{ scale: 0.95 }}
+
+                    className='group relative w-full flex items-center justify-center gap-2 px-8 py-2.5 bg-cyan-500 hover:bg-cyan-500 text-white rounded-sm font-medium overflow-hidden cursor-pointer'
                 >
-                    <span>Send Message</span>
-                    <Send className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                    <span className='relative z-10 text-sm font-normal'>Send Message</span>
+
+                    <motion.span
+                        variants={{
+                            hover: { x: 5 }
+                        }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        className="relative z-10"
+                    >
+                        <Send className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </motion.span>
+
+                    <motion.div
+                        variants={{
+                            hover: { opacity: 0.4, scale: 1.5 }
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className='absolute inset-0 rounded-full bg-cyan-500 blur-xl opacity-0 -z-10'
+                    />
+
+                    {/* Optional: Shine sweep effect */}
+                    <motion.div
+                        variants={{
+                            hover: { left: "100%" }
+                        }}
+                        initial={{ left: "-100%" }}
+                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                        className="absolute top-0 bottom-0 w-1/2 bg-linear-to-r from-transparent via-white/20 to-transparent -skew-x-12 z-0"
+                    />
+                </motion.button>
             </motion.div>
 
         </motion.form>

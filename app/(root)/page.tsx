@@ -1,3 +1,4 @@
+import AboutSection from "@/components/about-section";
 import ContactSection from "@/components/contact-section";
 import EducationSection from "@/components/education-section";
 import ExperienceSection from "@/components/experience-section";
@@ -15,6 +16,7 @@ export default function Home() {
         <ProofOfWorkSection />
         <ExperienceSection />
         <SkillsSection />
+        <AboutSection />
         <EducationSection />
         <ContactSection />
       </div>

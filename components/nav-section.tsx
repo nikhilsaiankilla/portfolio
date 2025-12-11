@@ -3,14 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, Linkedin, Terminal, Twitter } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Twitter } from 'lucide-react';
 import { ModeToggle } from './mode-toggle';
 
 const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Tech Stack', href: '#tech-stack' },
     { name: 'Contact', href: '#contact' },
 ];
 

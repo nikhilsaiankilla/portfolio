@@ -33,7 +33,7 @@ const TooltipImage = ({ name, src, width, height, isBg = false }: TooltipImagePr
                     >
                         {/* Split the name by space and map over it */}
                         {name.split(" ").map((word, index) => (
-                            <span key={index} className={`block text-center md:text-sm`}>
+                            <span key={index} className={`block text-center`}>
                                 {word}
                             </span>
                         ))}
@@ -44,7 +44,7 @@ const TooltipImage = ({ name, src, width, height, isBg = false }: TooltipImagePr
             </AnimatePresence>
 
             {/* The Icon */}
-            <span className={`p-1 w-fit h-fit rounded-sm shadow-sm cursor-pointer transition-colors ${isBg ? "bg-white hover:bg-gray-300" : "border-dashed border-gray-400"}`}>
+            <span className={`p-1 w-fit h-fit rounded-sm shadow-sm cursor-pointer border border-dashed border-gray-600 ${isBg && "bg-gray-100 hover:bg-gray-300"} hover:rotate-6 transaction-all duration-200 ease-in`}>
                 <Image
                     src={src}
                     alt={`${name} Icon`}

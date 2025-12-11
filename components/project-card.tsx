@@ -83,7 +83,7 @@ const ProjectCard = ({ title, description, tags, link, image, status, index = 0 
                             </p>
 
                             {/* Tags */}
-                            <div className='flex flex-wrap gap-2 mb-4'>
+                            <div className='flex flex-wrap gap-2 mb-4 px-3'>
                                 {tags?.map((tag, i) => (
                                     <TooltipImage key={i} src={tag?.src} name={tag?.name} isBg />
                                 ))}
@@ -92,14 +92,14 @@ const ProjectCard = ({ title, description, tags, link, image, status, index = 0 
                             {/* Action Buttons */}
                             <div className='w-full flex items-center justify-between gap-3 mt-4'>
                                 <motion.div className="w-full" whileTap={{ scale: 0.95 }}>
-                                    <Link href={link} target="_blank" className='flex items-center justify-center gap-2 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/10 text-white rounded-sm w-full transition-colors font-medium text-sm'>
+                                    <Link href={link} target="_blank" className='flex items-center justify-center gap-2 p-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/10 text-white rounded-sm w-full transition-colors font-medium text-sm'>
                                         <GithubIcon size={18} />
                                         <span>Code</span>
                                     </Link>
                                 </motion.div>
 
                                 <motion.div className="w-full" whileTap={{ scale: 0.95 }}>
-                                    <Link href={link} target="_blank" className='flex items-center justify-center gap-2 p-3 bg-cyan-500 hover:bg-cyan-400 text-white shadow-lg shadow-cyan-500/20 rounded-sm w-full transition-all font-medium text-sm'>
+                                    <Link href={link} target="_blank" className='flex items-center justify-center gap-2 p-2 bg-cyan-500 hover:bg-cyan-400 text-white shadow-lg shadow-cyan-500/20 rounded-sm w-full transition-all font-medium text-sm'>
                                         <span>Live Demo</span>
                                         <ArrowUpRight size={18} />
                                     </Link>
