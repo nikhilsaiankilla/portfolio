@@ -2,62 +2,80 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SkillForm } from "@/components/forms/skill-form";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import SkillCard from "@/components/skill-card";
+
+export interface skillTypes {
+    id: string;
+    name: string;
+    src: string;
+    created_at: string;
+}
 
 export default function SkillsPage() {
-    const [view, setView] = useState<"list" | "form">("list");
-    const [editingSkill, setEditingSkill] = useState<any>(null);
+    const [skills, setSkills] = useState<skillTypes[]>([]);
+    const [error, setError] = useState('');
 
-    // 1. Handle Create Click
-    const handleCreate = () => {
-        setEditingSkill(null); // Clear data for new entry
-        setView("form");
-    };
+    useEffect(() => {
+        const fetchSkills = async () => {
+            try {
+                const res = await fetch('/api/skills', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
 
-    // 2. Handle Edit Click (Pass this to your skill list item)
-    const handleEdit = (skill: any) => {
-        setEditingSkill(skill);
-        setView("form");
-    };
+                if (!res.ok) {
+                    setError('Somehting went wrong please try again');
+                    return;
+                }
 
-    // 3. Handle Submission (API Call)
-    const onSubmit = async (data: any) => {
-        console.log("Submitting:", data);
-        // TODO: await createOrUpdateSkill(data);
-        setView("list");
-    };
+                const json = await res.json();
 
+                console.log(json);
+
+                if (json) {
+                    setSkills(json);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fetchSkills();
+    }, [])
     return (
-        <div className="space-y-6">
-            {view === "list" ? (
-                <>
-                    <div className="flex justify-between items-center">
-                        <h1 className="text-2xl font-bold">Skills Library</h1>
-                        <Button onClick={handleCreate} className="bg-cyan-500 text-white">
+        <div className="space-y-6 mt-5">
+
+            <div className="flex justify-between items-center">
+                <h1 className="text-2xl font-bold">Skills Library</h1>
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <Button className="bg-cyan-500 text-white hover:bg-cyan-400 cursor-pointer">
                             <Plus className="mr-2 h-4 w-4" /> Add Skill
                         </Button>
-                    </div>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <SkillForm />
+                        <DialogClose asChild>
+                            <Button variant="outline">Cancel</Button>
+                        </DialogClose>
+                    </DialogContent>
+                </Dialog>
+            </div>
 
-                    {/* Your Skills Grid/List would go here */}
-                    <div className="p-10 text-center border-2 border-dashed rounded-xl dark:border-zinc-800">
-                        <p className="text-gray-500">List of skills...</p>
-                        <Button variant="link" onClick={() => handleEdit({ id: "1", name: "React", src: "/react.svg" })}>
-                            Test Edit Mode
-                        </Button>
-                    </div>
-                </>
-            ) : (
-                <div className="max-w-xl mx-auto">
-                    <SkillForm
-                        initialData={editingSkill}
-                        onSubmit={onSubmit}
-                        onCancel={() => setView("list")}
-                    />
-                </div>
-            )}
-        </div>
+            {/* Your Skills Grid/List would go here */}
+            <div className="w-full flex items-start gap-3">
+                {
+                    skills && skills.length > 0 && skills.map((s, index) => (<SkillCard name={s?.name} src={s?.src} id={s?.id} isEdit/>))
+                }
+            </div>
+
+        </div >
     );
 }

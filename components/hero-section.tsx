@@ -83,15 +83,15 @@ const HeroSection = () => {
                     transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.4 }}
                     className="relative"
                 >
-                    <div className="absolute -inset-1 bg-linear-to-r from-cyan-400 to-blue-500 rounded-full blur opacity-30 animate-pulse"></div>
+                    <div className="absolute -inset-1 bg-linear-to-r from-cyan-400 to-blue-500 rounded-sm blur opacity-30 animate-pulse"></div>
                     <Image
-                        src={`https://avatar.iran.liara.run/public/${Math.floor(Math.random() * 100)}`}
+                        src={`/nikhil.jpeg`}
                         alt='Nikhil sai Avatar'
                         width={160}
                         height={160}
                         unoptimized
                         title='Yes this my Orginal Image!!'
-                        className='relative w-40 h-40 md:w-48 md:h-48 rounded-full shadow-2xl border-4 border-white dark:border-gray-800 object-cover cursor-pointer z-10'
+                        className='relative w-40 h-40 md:w-48 md:h-48 rounded-sm shadow-2xl border-4 border-white dark:border-gray-800 object-cover cursor-pointer z-10'
                     />
                 </motion.div>
                 <motion.div variants={itemVariants} className="w-fit">

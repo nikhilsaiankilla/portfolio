@@ -5,8 +5,8 @@ let db: any = null;
 
 export async function getDbInstance() {
     if (db) return db;
-    const db_url = process.env.DATABASE_URL!
-
+    const db_url = process.env.DATEBASE_URL!
+    
     if (!db_url) {
         throw new Error("Database url is missing!!")
     }
