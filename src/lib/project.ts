@@ -16,34 +16,34 @@ export const getProjectById = (slug: string) => {
         }
     }
 
-    const projectMdx = getProjectMdx(slug)
+    // const projectMdx = getProjectMdx(slug)
 
-    if (!projectMdx) {
-        return {
-            slug: project.slug,
-            error: null,
+    // if (!projectMdx) {
+    //     return {
+    //         slug: project.slug,
+    //         error: null,
 
-            title: project.title,
-            description: project.description,
-            image: project.image,
+    //         title: project.title,
+    //         description: project.description,
+    //         image: project.image,
 
-            technologies: project.technologies,
-            github: project.github,
-            live: project.live,
+    //         technologies: project.technologies,
+    //         github: project.github,
+    //         live: project.live,
 
-            role: project.role,
-            team: project.team,
-            status: project.status,
-            featured: project.featured,
+    //         role: project.role,
+    //         team: project.team,
+    //         status: project.status,
+    //         featured: project.featured,
 
-            challenges: project.challenges,
-            learnings: project.learnings,
+    //         challenges: project.challenges,
+    //         learnings: project.learnings,
 
-            isPublished: project.isPublished,
+    //         isPublished: project.isPublished,
 
-            content: projectMdx ?? "Content is Missing!! Please inform Admin.",
-        };
-    }
+    //         content: project?.content ?? "Content is Missing!! Please inform Admin.",
+    //     };
+    // }
 
     return {
         slug: project.slug,
@@ -67,7 +67,7 @@ export const getProjectById = (slug: string) => {
 
         isPublished: project.isPublished,
 
-        content: projectMdx ?? "Content is Missing!! Please inform Admin.",
+        content: project?.content ?? "Content is Missing!! Please inform Admin.",
     };
 }
 
