@@ -141,7 +141,7 @@ const ContactSection = () => {
                             {/* 3. Razorpay (Link) */}
                             <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
                                 <Link
-                                    href="https://razorpay.me/nikhilsaiankilla"
+                                    href="https://razorpay.me/@nikhilsaiankilla"
                                     target="_blank"
                                     className="flex items-center gap-2 px-2 py-1 bg-gray-50 dark:bg-zinc-900 rounded-lg shadow-sm hover:shadow-md transition-all group border border-dashed border-gray-600 dark:border-zinc-700"
                                 >
