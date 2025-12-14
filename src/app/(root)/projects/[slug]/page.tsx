@@ -1,8 +1,4 @@
-export const runtime = "nodejs";
-
 import AnimatedContainer from '@/src/components/animated-container'
-import FooterSection from '@/src/components/footer-section'
-import NavSection from '@/src/components/nav-section'
 import { ProjectComponents } from '@/src/components/project-components';
 import SectionHeading from '@/src/components/section-heading'
 import { MDXRemote } from 'next-mdx-remote/rsc';
