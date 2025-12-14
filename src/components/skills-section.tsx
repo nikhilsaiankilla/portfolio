@@ -1,13 +1,13 @@
 "use client";
 
-import { useSkills } from '../hooks/use-skills';
+import { getAllSkills } from '../lib/skills';
 import AnimatedContainer from './animated-container'
 import SectionHeading from './section-heading'
 import SkillCard from './skill-card';
 import { Skeleton } from './ui/skeleton';
 
 const SkillsSection = () => {
-    const { skills, isLoading, error, refetch } = useSkills();
+    const skills = getAllSkills();
 
     return (
         <AnimatedContainer>
@@ -54,18 +54,12 @@ const SkillsSection = () => {
                 {/* Skills Grid */}
                 <section className='w-full flex items-start justify-start flex-wrap gap-3'>
                     {
-                        !isLoading && skills && skills.length > 0
+                        skills && skills.length > 0
                             ?
                             skills?.map((t, index) => (
                                 <SkillCard key={index} src={t?.src} name={t?.name} index={index} id={t.id} />
                             ))
                             : <p className='text-center text-gray-500 dark:text-gray-300 text-xs'>No Skills Found!!</p>
-                    }
-                    {
-                        error && <p className='text-center text-red-500 text-xs'>Something Went wrong while fetching Skills!!</p>
-                    }
-                    {
-                        isLoading && Array.from({ length: 20 }).map((_, idx) => (<Skeleton className="p-1 w-[100px] rounded-sm" />))
                     }
                 </section>
             </div>
