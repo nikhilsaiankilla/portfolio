@@ -63,28 +63,32 @@ export const getAllProjects = () => {
 };
 
 export const getRelatedProjects = (slug: string) => {
-    const currentProject = projects.find((project, idx) => (project?.slug === slug));
+    const currentProject = projects.find((project) => project.slug === slug);
 
-    if (!currentProject) {
+    if (!currentProject || !currentProject.technologies) {
         return [];
     }
 
-    const techOfCurrentProject = currentProject.technologies?.map((t) => t.toLowerCase());
+    // Create a Set for O(1) lookup speed
+    const currentTechSet = new Set(currentProject.technologies.map((t) => t.toLowerCase()));
 
-    // calculate the relevance score based on the tech shared between projects 
-    const allProjectsExceptCurrentProject = projects.filter((p) => p.slug !== slug);
+    const projectsWithSharedTech = projects
+        .filter((project) => project.slug !== slug && project.isPublished) // Exclude current & drafts
+        .map((project) => {
+            // FIX: Count only the matching technologies
+            const sharedCount = project.technologies.filter((tech) => 
+                currentTechSet.has(tech.toLowerCase())
+            ).length;
 
-    const projectsWithSharedTech = allProjectsExceptCurrentProject.map((project) => {
-        const sharedTechnologies = project.technologies.map((tech) => (techOfCurrentProject.includes(tech.toLowerCase())))
-        return {
-            project,
-            score: sharedTechnologies.length,
-        }
-    })
-        .filter((p) => p.score > 0)
-        .sort((a, b) => a.score - b.score)
+            return {
+                project,
+                score: sharedCount,
+            };
+        })
+        .filter((p) => p.score > 0) // Must have at least one match
+        .sort((a, b) => b.score - a.score); // FIX: Sort Descending (Highest score first)
 
     return projectsWithSharedTech
         .slice(0, 2)
         .map((item) => item.project);
-} 
+};

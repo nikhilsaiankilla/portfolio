@@ -2,7 +2,7 @@ import AnimatedContainer from '@/src/components/animated-container'
 import { ProjectComponents } from '@/src/components/project-components';
 import SectionHeading from '@/src/components/section-heading'
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import rehypeHighlight from '@shikijs/rehype';
+import rehypeHighlight from 'rehype-highlight';
 import Image from 'next/image';
 import { getProjectById, getRelatedProjects } from '@/src/lib/project';
 import { Separator } from '@/src/components/ui/separator';
@@ -166,14 +166,7 @@ const page = async ({ params }: ProjectProps) => {
                             components={ProjectComponents}
                             options={{
                                 mdxOptions: {
-                                    rehypePlugins: [
-                                        [
-                                            rehypeHighlight,
-                                            {
-                                                theme: 'github-dark',
-                                            },
-                                        ],
-                                    ],
+                                    rehypePlugins: [rehypeHighlight],
                                 },
                             }}
                         />
