@@ -17,7 +17,7 @@ const AnimatedTooltip = ({
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <div
+        <span
             className="relative inline-flex items-center justify-center"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -60,7 +60,7 @@ const AnimatedTooltip = ({
             >
                 {children}
             </span>
-        </div>
+        </span>
     );
 };
 

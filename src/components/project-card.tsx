@@ -44,6 +44,7 @@ const cardVariants: Variants = {
 };
 
 const ProjectCard = ({ title, description, technologies, live, image, status, github, index = 0, slug }: ProjectProps) => {
+    const config = getStatusConfig(status);
 
     return (
         <motion.div
@@ -67,12 +68,28 @@ const ProjectCard = ({ title, description, technologies, live, image, status, gi
                         priority
                     />
                 </div>
-                
+
                 {/* Status Badge (Top Right) */}
                 <div className='absolute top-3 right-3 z-10'>
-                    <span className='px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border border-white/20 bg-black/60 backdrop-blur-md text-white shadow-sm'>
-                        {status}
-                    </span>
+                    <div className={`
+            flex items-center gap-2 px-2.5 py-1 rounded-full 
+            border backdrop-blur-md shadow-sm
+            transition-colors duration-300
+            ${config.container}
+        `}>
+                        {/* Status Dot */}
+                        <span className="relative flex h-1.5 w-1.5">
+                            {config.pulse && (
+                                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${config.dot}`}></span>
+                            )}
+                            <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${config.dot}`}></span>
+                        </span>
+
+                        {/* Status Text */}
+                        <span className='text-[10px] font-bold uppercase tracking-wider leading-none pb-px'>
+                            {status}
+                        </span>
+                    </div>
                 </div>
             </div>
 
@@ -113,7 +130,7 @@ const ProjectCard = ({ title, description, technologies, live, image, status, gi
                         status && <Badge className='dark:bg-[#0A0A0A] dark:text-white border border-dashed border-gray-600/70 text-black bg-gray-300 text-[10px] shadow-2xl shadow-black px-2 rounded-sm'>{status}</Badge>
                     }
                     {technologies && technologies.length > 0 && technologies?.slice(0, 2).map((tag, i) => (
-                        <Badge className='dark:bg-[#0A0A0A] dark:text-white border border-dashed border-gray-600/70 text-black bg-gray-300 text-[10px] shadow-2xl shadow-black px-2 rounded-sm'>{tag}</Badge>
+                        <Badge key={i} className='dark:bg-[#0A0A0A] dark:text-white border border-dashed border-gray-600/70 text-black bg-gray-300 text-[10px] shadow-2xl shadow-black px-2 rounded-sm'>{tag}</Badge>
                     ))}
                     {technologies?.length > 2 && (
                         <span className="text-xs text-gray-400 flex items-center px-1">+{technologies.length - 2}</span>
@@ -134,3 +151,44 @@ const ProjectCard = ({ title, description, technologies, live, image, status, gi
 };
 
 export default ProjectCard;
+
+
+const getStatusConfig = (status: string) => {
+    // Normalize to lowercase to handle any capitalization variations
+    const s = status.toLowerCase();
+
+    if (s === 'completed') {
+        return {
+            container: "bg-emerald-500/20 border-emerald-500/30 text-emerald-100",
+            dot: "bg-emerald-400",
+            pulse: false
+        };
+    }
+    if (s === 'building') {
+        return {
+            container: "bg-amber-500/20 border-amber-500/30 text-amber-100",
+            dot: "bg-amber-400",
+            pulse: true // Animates the dot for active work
+        };
+    }
+    if (s === 'open source') {
+        return {
+            container: "bg-blue-500/20 border-blue-500/30 text-blue-100",
+            dot: "bg-blue-400",
+            pulse: false
+        };
+    }
+    if (s === 'not started') {
+        return {
+            container: "bg-zinc-800/60 border-zinc-700/50 text-zinc-300",
+            dot: "bg-zinc-500",
+            pulse: false
+        };
+    }
+    // Default Fallback
+    return {
+        container: "bg-white/10 border-white/20 text-white",
+        dot: "bg-white",
+        pulse: false
+    };
+};

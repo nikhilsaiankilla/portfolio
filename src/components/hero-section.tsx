@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 import { Badge } from '@/src/components/ui/badge';
-import TooltipImage from './animated-tooltip';
 import { Paperclip, Send } from 'lucide-react';
 import AnimatedButton from './animated-btn';
 import { Link } from 'next-view-transitions';
@@ -96,14 +95,24 @@ const HeroSection = () => {
                     />
                 </motion.div>
                 <motion.div variants={itemVariants} className="w-fit">
-                    <Badge className='text-green-500 bg-green-600/20 border border-green-500 flex items-center gap-2 px-3 py-1 text-[10px]'>
-                        {/* Pulsing Green Dot */}
-                        <motion.span
-                            animate={{ opacity: [1, 0.4, 1] }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                            className='h-2 w-2 rounded-full bg-green-500'
-                        />
-                        Available to Work!
+                    <Badge className="relative overflow-hidden rounded-full bg-emerald-500/15 border-emerald-500/20 px-3 py-1 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/25 transition-colors">
+                        <div className="flex items-center gap-2">
+                            {/* The Dot Container */}
+                            <div className="relative flex h-2 w-2 items-center justify-center">
+                                {/* The Ping Animation (Ring) */}
+                                <motion.span
+                                    animate={{ scale: [1, 2], opacity: [0.8, 0] }}
+                                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
+                                    className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"
+                                />
+                                {/* The Static Dot */}
+                                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                            </div>
+
+                            <span className="text-[10px] font-semibold uppercase tracking-wide">
+                                Available to Work
+                            </span>
+                        </div>
                     </Badge>
                 </motion.div>
             </motion.div>

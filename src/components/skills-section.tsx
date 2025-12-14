@@ -10,9 +10,8 @@ const SkillsSection = () => {
     const skills = getAllSkills();
 
     return (
-        <AnimatedContainer>
-            <div className="relative space-y-6" id='tech-stack'>
-
+        <div className='w-full' id='tech-stack'>
+            <AnimatedContainer>
                 {/* Header + Hint Container */}
                 <div className="flex items-end justify-between">
                     <SectionHeading title='Skills' />
@@ -62,8 +61,8 @@ const SkillsSection = () => {
                             : <p className='text-center text-gray-500 dark:text-gray-300 text-xs'>No Skills Found!!</p>
                     }
                 </section>
-            </div>
-        </AnimatedContainer>
+            </AnimatedContainer>
+        </div>
     )
 }
 

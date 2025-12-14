@@ -1,13 +1,19 @@
 "use client";
 
 import { motion, Variants } from 'framer-motion';
-import { Send, User, Mail, MessageSquare } from 'lucide-react';
+import { Send, User, Mail, MessageSquare, Loader } from 'lucide-react';
 import { Input } from '@/src/components/ui/input';       // Shadcn Input
 import { Textarea } from '@/src/components/ui/textarea';
 import { Label } from '@/src/components/ui/label';       // Shadcn Label
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
+import { sendEmail } from '../lib/resend';
+import { toast } from 'sonner';
 
 const ContactForm = () => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+
     // Animation Variants
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -29,8 +35,38 @@ const ContactForm = () => {
         },
     };
 
-    const handleSubmit = async (e: FormEvent) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        // 1. Basic Client-side Validation
+        if (!name.trim() || !email.trim() || !message.trim()) {
+            return toast.error('Please fill in all fields');
+        }
+
+        setIsSubmitting(true);
+
+        try {
+            const res = await sendEmail({ name, userEmail: email, message });
+
+            if (!res?.success) {
+                toast.error(res?.error || 'Failed to send message');
+                return;
+            }
+
+            // 2. Success Feedback
+            toast.success('Message sent successfully! I will reach out soon.');
+
+            // 3. Reset Form Fields
+            setName('');
+            setEmail('');
+            setMessage('');
+        } catch (error) {
+            toast.error('Something went wrong. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
     }
 
 
@@ -53,6 +89,7 @@ const ContactForm = () => {
                     <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 group-focus-within:text-cyan-500 transition-colors" />
                     <Input
                         id="name"
+                        onChange={(e) => setName(e.target?.value)}
                         placeholder="Goat Virat Kohli"
                         className="pl-10 bg-white/50 dark:bg-zinc-900/50 border-gray-200 dark:border-zinc-800 focus:bg-white dark:focus:bg-zinc-900 transition-all duration-300"
                     />
@@ -69,6 +106,7 @@ const ContactForm = () => {
                     <Input
                         id="email"
                         type="email"
+                        onChange={(e) => setEmail(e.target?.value)}
                         placeholder="goatkohli@example.com"
                         className="pl-10 bg-white/50 dark:bg-zinc-900/50 border-gray-200 dark:border-zinc-800 focus:bg-white dark:focus:bg-zinc-900 transition-all duration-300"
                     />
@@ -84,6 +122,7 @@ const ContactForm = () => {
                     <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-gray-400 group-focus-within:text-cyan-500 transition-colors" />
                     <Textarea
                         id="message"
+                        onChange={(e) => setMessage(e.target?.value)}
                         placeholder="Tell me about your project..."
                         className="min-h-[120px] pl-10 bg-white/50 dark:bg-zinc-900/50 border-gray-200 dark:border-zinc-800 focus:bg-white dark:focus:bg-zinc-900 transition-all duration-300 resize-none"
                     />
@@ -105,7 +144,7 @@ const ContactForm = () => {
 
                     className='group relative w-full flex items-center justify-center gap-2 px-8 py-2.5 bg-cyan-500 hover:bg-cyan-500 text-white rounded-sm font-medium overflow-hidden cursor-pointer'
                 >
-                    <span className='relative z-10 text-sm font-normal'>Send Message</span>
+                    <span className='relative z-10 text-sm font-normal flex items-center gap-2'>{isSubmitting ? <><Loader size={12} className='animate-spin' />Sending message!!</> : 'Send Message'}</span>
 
                     <motion.span
                         variants={{
