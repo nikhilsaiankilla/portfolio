@@ -27,7 +27,7 @@ const ResumePage = () => {
                             {/* 3. Changed motion.button to motion.a */}
                             <motion.a
                                 href={downloadUrl}
-                                download="Resume.pdf" // Fallback filename
+                                download="nikhilsai-resume.pdf"
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -108,5 +108,5 @@ export function getDownloadUrl(pdfUrl: string) {
     if (!pdfUrl.includes('/upload/')) return pdfUrl;
     const [base, rest] = pdfUrl.split('/upload/');
     // fl_attachment forces the browser to download the file instead of opening it
-    return `${base}/upload/fl_attachment/${rest}`;
+    return `${base}/upload/fl_attachment:nikhilsai-resume.pdf/${rest}`;
 }
