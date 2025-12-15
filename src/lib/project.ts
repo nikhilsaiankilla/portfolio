@@ -1,4 +1,4 @@
-import { projects } from "@/src/config/projects"
+import { Project, projects } from "@/src/config/projects"
 
 export const getProjectById = (slug: string) => {
     const project = projects.find((p, index) => (p.slug === slug))
@@ -40,13 +40,12 @@ export const getAllProjects = () => {
     if (projects.length === 0) return [];
 
     const publishedFeatured = projects.filter(
-        (project) => project.isPublished === true && project.featured === true
+        (project): project is Project & { publishedOn: string } =>
+            project.featured === true && isPublishedWithDate(project)
     );
 
     if (publishedFeatured.length < 4) {
-        const published = projects.filter(
-            (project) => project.isPublished === true
-        );
+        const published = projects.filter(isPublishedWithDate);
 
         return published.sort(
             (a, b) =>
@@ -92,3 +91,9 @@ export const getRelatedProjects = (slug: string) => {
         .slice(0, 2)
         .map((item) => item.project);
 };
+
+function isPublishedWithDate(
+    project: Project
+): project is Project & { publishedOn: string } {
+    return project.isPublished === true && typeof project.publishedOn === "string";
+}
