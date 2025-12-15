@@ -2,6 +2,59 @@ import AnimatedContainer from '@/src/components/animated-container'
 import FooterSection from '@/src/components/footer-section'
 import NavSection from '@/src/components/nav-section'
 import SectionHeading from '@/src/components/section-heading'
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Blogs",
+    description:
+        "Writing about what I’m building and learning system design, backend engineering, analytics, and lessons from shipping real products.",
+    keywords: [
+        "Nikhil Sai Blog",
+        "Engineering Blog",
+        "System Design",
+        "Backend Engineering",
+        "Full Stack Development",
+        "Analytics Systems",
+        "Developer Tools",
+        "Kafka",
+        "ClickHouse",
+        "Next.js",
+        "Building in Public",
+    ],
+    metadataBase: new URL("https://nikhilsai.in"),
+    alternates: {
+        canonical: "https://nikhilsai.in/blogs",
+    },
+    openGraph: {
+        title: "Blog — Nikhil Sai",
+        description:
+            "Thoughts, breakdowns, and lessons from building products, backend systems, and developer tools.",
+        url: "https://nikhilsai.in/blogs",
+        siteName: "Nikhil Sai / Blog",
+        images: [
+            {
+                url: "/og-image.png",
+                width: 1200,
+                height: 630,
+                alt: "Nikhil Sai Blog",
+            },
+        ],
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Blog — Nikhil Sai",
+        description:
+            "Writing about system design, backend engineering, analytics, and building real products.",
+        images: ["/og-image.png"],
+        creator: "@nikhilbuildss",
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
+};
+
 
 const page = () => {
     return (

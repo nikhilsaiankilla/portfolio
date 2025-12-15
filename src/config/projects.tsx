@@ -1,281 +1,38 @@
-export const projects = [
-    {
-        slug: "chill-guy",
-        title: "I'm a chill guy",
-        description:
-            "AI-based GitHub profile roaster that analyzes repositories and generates humorous, filtered AI responses.",
-        image: "https://picsum.photos/1200/1600",
-        technologies: [
-            "React",
-            "Express",
-            "Gemini API",
-            "GitHub API",
-            "Tailwind CSS",
-            "Vercel",
-            "Netlify",
-        ],
-        timeline: "Ongoing",
-        github: "https://github.com/ramxcodes/chill-guy",
-        live: "https://chillguy.ramx.in",
-        role: "Full Stack",
-        team: "Solo",
-        status: "Completed",
-        featured: false,
-        challenges: [
-            "GitHub API rate limiting",
-            "AI prompt engineering",
-            "Response content filtering",
-            "Performance optimization",
-        ],
-        learnings: [
-            "Gemini API integration",
-            "GitHub API data processing",
-            "AI prompt optimization",
-            "Content moderation techniques",
-        ],
-        isPublished: true,
-        publishedOn: "12/06/2002",
-        content : `# I'm a Chill Guy: AI-Powered GitHub Profile Roaster
+export interface Project {
+    slug: string;
+    title: string;
+    description: string;
 
-## Overview
+    image: string;
 
-"I'm a chill guy" is a fun AI-powered web application that analyzes GitHub profiles and delivers witty, humorous roasts based on users' coding habits, project choices, contribution patterns, and profile information. Built with React and powered by Google's Gemini AI, this project combines humor with technical analysis to create an entertaining developer experience.
+    technologies: string[];
 
-## How It Works
+    role: string;
+    team: "Solo" | "Team";
+    status: "Building" | "Completed" | "Live" | "Open Source";
 
-- **Simple Input**: Users enter their GitHub username
-- **Profile Analysis**: App fetches comprehensive GitHub data via GitHub API
-- **AI Processing**: Gemini AI analyzes the data and generates personalized roasts
-- **Instant Results**: Users receive humorous commentary about their coding journey
-- **Shareable Content**: Roasts can be easily shared with friends and colleagues
+    timeline?: string;
 
-## What Gets Analyzed
+    github?: string;
+    live?: string;
 
-### **Profile Information**
+    featured: boolean;
+    isPublished: boolean;
+    publishedOn?: string;
 
-- **Bio & Description**: Personal information and self-descriptions
-- **Profile Picture**: Avatar choices and profile aesthetics
-- **Location & Links**: Geographic info and social links
-- **Account Age**: How long they've been on GitHub
+    challenges?: string[];
+    learnings?: string[];
 
-### **Contribution Patterns**
+    content?: string; // long-form markdown
+}
 
-- **Commit Frequency**: Daily, weekly, and monthly contribution patterns
-- **Contribution Graph**: The famous green squares analysis
-- **Streak Analysis**: Longest streaks and gaps in activity
-- **Weekend vs Weekday**: Work-life balance in coding
-
-### **Repository Analysis**
-
-- **Project Types**: Languages, frameworks, and project categories
-- **Repository Names**: Creative (or not so creative) naming conventions
-- **README Quality**: Documentation standards and project descriptions
-- **Star Counts**: Popularity of projects and social proof
-
-### **Coding Habits**
-
-- **Language Preferences**: Most used programming languages
-- **Framework Choices**: Technology stack preferences
-- **Project Completion**: Finished vs abandoned projects
-- **Code Quality Indicators**: Repository maintenance and updates
-
-## Why I Built This
-
-I created this project for several reasons:
-
-- **Developer Humor**: The tech community loves self-deprecating humor about coding habits
-- **GitHub API Practice**: Wanted to explore comprehensive GitHub data analysis
-- **AI Integration**: Experiment with Google's Gemini AI for creative content generation
-- **Community Fun**: Create something that developers could share and enjoy together
-- **Quick Project**: Build something entertaining in a short timeframe
-
-## Tech Stack
-
-### Frontend
-
-- **React**: Modern UI library for interactive user interface
-- **Tailwind CSS**: Utility-first CSS for rapid styling and responsive design
-- **Vercel**: Frontend deployment with global CDN and instant deployments
-
-### Backend
-
-- **Express.js**: Lightweight Node.js server for API endpoints
-- **Netlify**: Backend deployment for serverless function handling
-- **GitHub API**: Comprehensive profile and repository data fetching
-- **Gemini AI API**: Google's AI model for generating roast content
-
-## Technical Implementation
-
-### GitHub Data Collection
-
-- **Profile Fetching**: Basic user information, bio, and account details
-- **Repository Analysis**: Public repositories with languages, stars, and update patterns
-- **Contribution Data**: Commit history and contribution graph information
-- **Rate Limit Handling**: Efficient API usage within GitHub's rate limits
-
-### AI Roast Generation
-
-- **Prompt Engineering**: Crafted prompts to generate humorous, not offensive content
-- **Context Building**: Structured data formatting for AI consumption
-- **Response Processing**: Content filtering and formatting for display
-- **Safety Measures**: Content moderation to ensure appropriate humor
-
-### User Experience
-
-- **Simple Interface**: Clean, minimal design focused on the core functionality
-- **Loading States**: Engaging loading animations while processing data
-- **Error Handling**: Graceful handling of invalid usernames or API errors
-- **Responsive Design**: Works seamlessly across desktop and mobile devices
-
-## Behind the Scenes
-
-This project taught me that sometimes the best projects are the simplest ones that solve a fun problem. The combination of real data analysis with AI creativity resulted in something that developers genuinely enjoyed using and sharing. It also demonstrated the power of combining multiple APIs to create unique user experiences.
-
-The "chill guy" was a instagram trend, so i thought why not build a website for it.
-`
-    },
-
-    {
-        slug: "dumcel-cloud",
-        title: "Dumcel Cloud",
-        description:
-            "A Vercel-like deployment platform for React apps built with a microservices architecture supporting automated builds and deployments.",
-        image: "/project/dumcel.png",
-        technologies: [
-            "Next.js",
-            "Node.js",
-            "Docker",
-            "AWS ECS",
-            "Redis",
-            "Kafka",
-        ],
-        github: "https://github.com/yourusername/dumcel",
-        live: "",
-        timeline: "Ongoing",
-        role: "Backend + Platform",
-        team: "Solo",
-        status: "Open Source",
-        featured: true,
-        challenges: [
-            "Distributed build orchestration",
-            "Containerized deployments",
-            "Real-time status tracking",
-            "Log ingestion at scale",
-        ],
-        learnings: [
-            "Microservices architecture",
-            "AWS ECS deployment workflows",
-            "Kafka-based pipelines",
-            "Infrastructure design",
-        ],
-        isPublished: false,
-        publishedOn: "12/06/2002",
-        content : `# I'm a Chill Guy: AI-Powered GitHub Profile Roaster
-
-## Overview
-
-"I'm a chill guy" is a fun AI-powered web application that analyzes GitHub profiles and delivers witty, humorous roasts based on users' coding habits, project choices, contribution patterns, and profile information. Built with React and powered by Google's Gemini AI, this project combines humor with technical analysis to create an entertaining developer experience.
-
-## How It Works
-
-- **Simple Input**: Users enter their GitHub username
-- **Profile Analysis**: App fetches comprehensive GitHub data via GitHub API
-- **AI Processing**: Gemini AI analyzes the data and generates personalized roasts
-- **Instant Results**: Users receive humorous commentary about their coding journey
-- **Shareable Content**: Roasts can be easily shared with friends and colleagues
-
-## What Gets Analyzed
-
-### **Profile Information**
-
-- **Bio & Description**: Personal information and self-descriptions
-- **Profile Picture**: Avatar choices and profile aesthetics
-- **Location & Links**: Geographic info and social links
-- **Account Age**: How long they've been on GitHub
-
-### **Contribution Patterns**
-
-- **Commit Frequency**: Daily, weekly, and monthly contribution patterns
-- **Contribution Graph**: The famous green squares analysis
-- **Streak Analysis**: Longest streaks and gaps in activity
-- **Weekend vs Weekday**: Work-life balance in coding
-
-### **Repository Analysis**
-
-- **Project Types**: Languages, frameworks, and project categories
-- **Repository Names**: Creative (or not so creative) naming conventions
-- **README Quality**: Documentation standards and project descriptions
-- **Star Counts**: Popularity of projects and social proof
-
-### **Coding Habits**
-
-- **Language Preferences**: Most used programming languages
-- **Framework Choices**: Technology stack preferences
-- **Project Completion**: Finished vs abandoned projects
-- **Code Quality Indicators**: Repository maintenance and updates
-
-## Why I Built This
-
-I created this project for several reasons:
-
-- **Developer Humor**: The tech community loves self-deprecating humor about coding habits
-- **GitHub API Practice**: Wanted to explore comprehensive GitHub data analysis
-- **AI Integration**: Experiment with Google's Gemini AI for creative content generation
-- **Community Fun**: Create something that developers could share and enjoy together
-- **Quick Project**: Build something entertaining in a short timeframe
-
-## Tech Stack
-
-### Frontend
-
-- **React**: Modern UI library for interactive user interface
-- **Tailwind CSS**: Utility-first CSS for rapid styling and responsive design
-- **Vercel**: Frontend deployment with global CDN and instant deployments
-
-### Backend
-
-- **Express.js**: Lightweight Node.js server for API endpoints
-- **Netlify**: Backend deployment for serverless function handling
-- **GitHub API**: Comprehensive profile and repository data fetching
-- **Gemini AI API**: Google's AI model for generating roast content
-
-## Technical Implementation
-
-### GitHub Data Collection
-
-- **Profile Fetching**: Basic user information, bio, and account details
-- **Repository Analysis**: Public repositories with languages, stars, and update patterns
-- **Contribution Data**: Commit history and contribution graph information
-- **Rate Limit Handling**: Efficient API usage within GitHub's rate limits
-
-### AI Roast Generation
-
-- **Prompt Engineering**: Crafted prompts to generate humorous, not offensive content
-- **Context Building**: Structured data formatting for AI consumption
-- **Response Processing**: Content filtering and formatting for display
-- **Safety Measures**: Content moderation to ensure appropriate humor
-
-### User Experience
-
-- **Simple Interface**: Clean, minimal design focused on the core functionality
-- **Loading States**: Engaging loading animations while processing data
-- **Error Handling**: Graceful handling of invalid usernames or API errors
-- **Responsive Design**: Works seamlessly across desktop and mobile devices
-
-## Behind the Scenes
-
-This project taught me that sometimes the best projects are the simplest ones that solve a fun problem. The combination of real data analysis with AI creativity resulted in something that developers genuinely enjoyed using and sharing. It also demonstrated the power of combining multiple APIs to create unique user experiences.
-
-The "chill guy" was a instagram trend, so i thought why not build a website for it.
-`
-    },
-
+export const projects: Project[] = [
     {
         slug: "visly-analytics",
         title: "Visly Analytics",
         description:
-            "A privacy-first web analytics platform with a lightweight SDK, real-time ingestion pipeline, and high-performance dashboards.",
-        image: "/project/visly.png",
+            "A privacy-first web analytics platform with minimal configuration that automatically tracks page views, clicks, visitors, and sessions.",
+        image: "/projects/visly.png",
         technologies: [
             "Next.js",
             "Node.js",
@@ -283,381 +40,827 @@ The "chill guy" was a instagram trend, so i thought why not build a website for 
             "Redis",
             "ClickHouse",
             "PostgreSQL",
+            "Tailwind Css",
+            "Shadcn",
         ],
-        github: "https://github.com/yourusername/visly",
-        live: "",
-        timeline: "Ongoing",
         role: "Full Stack",
         team: "Solo",
         status: "Building",
+        timeline: "Ongoing",
+        github: "https://github.com/nikhilsai/visly",
+        live: "https://visly.nikhilsaiankilla.blog",
         featured: true,
+        isPublished: true,
+        publishedOn: "15/12/2025",
         challenges: [
+            "Designing a zero-config tracking system",
             "High-throughput event ingestion",
-            "Real-time analytics",
-            "SDK design",
-            "Data modeling for OLAP",
+            "Sessionization and visitor identification",
+            "Real-time analytics performance",
         ],
         learnings: [
             "Analytics system design",
-            "ClickHouse query optimization",
-            "SDK architecture",
-            "Event-driven systems",
+            "Event driven architectures",
+            "ClickHouse performance tuning",
+            "SDK and data pipeline design",
+            "Package creation",
         ],
-        isPublished: true,
-        publishedOn: "12/06/2002",
-        content : `# I'm a Chill Guy: AI-Powered GitHub Profile Roaster
+        content: `# Visly Analytics
 
-## Overview
+Visly is a **privacy-first web analytics platform** designed for developers who want meaningful insights without complex setup, invasive tracking, or bloated dashboards.  
+The goal is simple: **drop in minimal config, and Visly handles the rest**.
 
-"I'm a chill guy" is a fun AI-powered web application that analyzes GitHub profiles and delivers witty, humorous roasts based on users' coding habits, project choices, contribution patterns, and profile information. Built with React and powered by Google's Gemini AI, this project combines humor with technical analysis to create an entertaining developer experience.
+Page views, clicks, visitors, sessions — tracked automatically.
 
-## How It Works
+---
 
-- **Simple Input**: Users enter their GitHub username
-- **Profile Analysis**: App fetches comprehensive GitHub data via GitHub API
-- **AI Processing**: Gemini AI analyzes the data and generates personalized roasts
-- **Instant Results**: Users receive humorous commentary about their coding journey
-- **Shareable Content**: Roasts can be easily shared with friends and colleagues
+## Why Visly Exists
 
-## What Gets Analyzed
+Most analytics tools fail in one of two ways:
 
-### **Profile Information**
+- Too complex to set up correctly  
+- Too invasive to user privacy  
 
-- **Bio & Description**: Personal information and self-descriptions
-- **Profile Picture**: Avatar choices and profile aesthetics
-- **Location & Links**: Geographic info and social links
-- **Account Age**: How long they've been on GitHub
+Visly is built for modern developers who want:
+- Zero or near-zero configuration
+- Real-time insights
+- Full ownership of their data
+- No cookies, no fingerprinting, no dark patterns
 
-### **Contribution Patterns**
+---
 
-- **Commit Frequency**: Daily, weekly, and monthly contribution patterns
-- **Contribution Graph**: The famous green squares analysis
-- **Streak Analysis**: Longest streaks and gaps in activity
-- **Weekend vs Weekday**: Work-life balance in coding
+## Core Features
 
-### **Repository Analysis**
+### Minimal Configuration
 
-- **Project Types**: Languages, frameworks, and project categories
-- **Repository Names**: Creative (or not so creative) naming conventions
-- **README Quality**: Documentation standards and project descriptions
-- **Star Counts**: Popularity of projects and social proof
+- Add a lightweight SDK
+- Provide a project key
+- Start receiving analytics instantly
 
-### **Coding Habits**
+No event schemas to define. No dashboards to wire manually.
 
-- **Language Preferences**: Most used programming languages
-- **Framework Choices**: Technology stack preferences
-- **Project Completion**: Finished vs abandoned projects
-- **Code Quality Indicators**: Repository maintenance and updates
+---
 
-## Why I Built This
+### Automatic Tracking
 
-I created this project for several reasons:
+Visly automatically captures:
 
-- **Developer Humor**: The tech community loves self-deprecating humor about coding habits
-- **GitHub API Practice**: Wanted to explore comprehensive GitHub data analysis
-- **AI Integration**: Experiment with Google's Gemini AI for creative content generation
-- **Community Fun**: Create something that developers could share and enjoy together
-- **Quick Project**: Build something entertaining in a short timeframe
+- **Page Views** – route changes and navigation
+- **Visitors** – anonymous, privacy-safe identification
+- **Sessions** – intelligent sessionization
+- **Clicks & Interactions** – key UI interactions without manual instrumentation
+
+All without cookies or personal data.
+
+---
+
+### Privacy-First by Design
+
+- No cookies
+- No fingerprinting
+- No personal identifiers
+- GDPR-friendly by default
+
+Analytics should not come at the cost of user trust.
+
+---
+
+### Real-Time Analytics
+
+- Events ingested in real time
+- Live dashboards powered by a high-performance data pipeline
+- Designed to handle high write throughput with low latency reads
+
+---
+
+## Technical Architecture
+
+### Event Ingestion Pipeline
+
+- Lightweight SDK sends events
+- Events flow through **Kafka** for durability and scale
+- **Redis** used for fast session lookups and caching
+- **ClickHouse** powers analytical queries at scale
+- **PostgreSQL** stores metadata and configuration
+
+Built to scale from side projects to high-traffic products.
+
+---
+
+### Session & Visitor Modeling
+
+- Privacy-safe visitor identification
+- Intelligent session windows
+- Accurate aggregation without invasive tracking
+
+---
 
 ## Tech Stack
 
-### Frontend
+**Frontend**
+- Next.js
+- Tailwind CSS
 
-- **React**: Modern UI library for interactive user interface
-- **Tailwind CSS**: Utility-first CSS for rapid styling and responsive design
-- **Vercel**: Frontend deployment with global CDN and instant deployments
+**Backend & Infrastructure**
+- Node.js
+- Kafka
+- Redis
+- ClickHouse
+- PostgreSQL
 
-### Backend
+---
 
-- **Express.js**: Lightweight Node.js server for API endpoints
-- **Netlify**: Backend deployment for serverless function handling
-- **GitHub API**: Comprehensive profile and repository data fetching
-- **Gemini AI API**: Google's AI model for generating roast content
+## Challenges Faced
 
-## Technical Implementation
+- Designing a truly zero-config analytics flow
+- Handling high-throughput event ingestion
+- Accurate sessionization without cookies
+- Query performance at scale
+- Keeping the SDK lightweight and fast
 
-### GitHub Data Collection
+---
 
-- **Profile Fetching**: Basic user information, bio, and account details
-- **Repository Analysis**: Public repositories with languages, stars, and update patterns
-- **Contribution Data**: Commit history and contribution graph information
-- **Rate Limit Handling**: Efficient API usage within GitHub's rate limits
+## Key Learnings
 
-### AI Roast Generation
+- Analytics system design at scale
+- Event-driven architectures
+- ClickHouse query optimization
+- Designing developer-friendly SDKs
+- Privacy-first product thinking
 
-- **Prompt Engineering**: Crafted prompts to generate humorous, not offensive content
-- **Context Building**: Structured data formatting for AI consumption
-- **Response Processing**: Content filtering and formatting for display
-- **Safety Measures**: Content moderation to ensure appropriate humor
+---
 
-### User Experience
+## Status
 
-- **Simple Interface**: Clean, minimal design focused on the core functionality
-- **Loading States**: Engaging loading animations while processing data
-- **Error Handling**: Graceful handling of invalid usernames or API errors
-- **Responsive Design**: Works seamlessly across desktop and mobile devices
+Visly is currently **under active development**.  
+The focus is on stability, performance, and an exceptional developer experience before public launch.
 
-## Behind the Scenes
+---
 
-This project taught me that sometimes the best projects are the simplest ones that solve a fun problem. The combination of real data analysis with AI creativity resulted in something that developers genuinely enjoyed using and sharing. It also demonstrated the power of combining multiple APIs to create unique user experiences.
-
-The "chill guy" was a instagram trend, so i thought why not build a website for it.
-`
+If analytics should be invisible, fast, and respectful — Visly is built for that.
+`,
     },
+    {
+        slug: "dumcel-cloud",
+        title: "Dumcel Cloud",
+        description:
+            "A React-focused cloud deployment platform that connects GitHub repositories and enables one-click deployments with full build logs and deployment history.",
+        image: "/projects/dumcel.png",
+        technologies: [
+            "Next.js",
+            "Aws S3",
+            "Node.js",
+            "Docker",
+            "AWS ECS",
+            "Redis",
+            "Kafka",
+        ],
+        role: "Backend + Platform",
+        team: "Solo",
+        status: "Completed",
+        timeline: "completed",
 
+        github: "https://github.com/nikhilsaiankilla/dumcel",
+        live: "https://dumcel.nikhilsaiankilla.blog",
+
+        featured: true,
+        isPublished: true,
+        publishedOn: "10/11/2025",
+        challenges: [
+            "Secure GitHub OAuth integration",
+            "Containerized build pipelines",
+            "Real-time log streaming",
+            "Deployment history and rollback design",
+        ],
+        learnings: [
+            "Platform engineering fundamentals",
+            "CI/CD system design",
+            "Docker-based build orchestration",
+            "Observability and log pipelines",
+        ],
+        content: `# Dumcel Cloud
+
+Dumcel Cloud is a **React-focused cloud deployment platform** designed to make deploying frontend applications straightforward and observable.  
+Connect a GitHub repository, trigger a deployment manually, and Dumcel handles builds, containers, logs, and deployment history.
+
+---
+
+## Why Dumcel Exists
+
+Frontend developers need:
+- Predictable deployments
+- Clear visibility into builds
+- Control over when code goes live
+- No deep DevOps knowledge
+
+Dumcel removes infrastructure friction while keeping developers in control.
+
+---
+
+## Core Features
+
+### GitHub Integration
+
+- Secure GitHub OAuth integration
+- Repository access for build pipelines
+- Webhook support for metadata and commit context
+
+Deployments are **manual by design**, not automatic.
+
+---
+
+### Manual Deployment Pipeline
+
+- Deploy when *you* decide
+- Deterministic, containerized builds
+- Isolated build environments per deployment
+
+No surprise production changes.
+
+---
+
+### Logs & Deployment History
+
+- Real-time build logs during deployments
+- Persistent logs for debugging
+- Full deployment history with commit references and status
+
+Observability is a core feature.
+
+---
+
+### Custom Domains & Routing
+
+- Wildcard custom domain support
+- Automatic domain mapping per project
+- Reverse proxy for routing traffic to active deployments
+
+Production-ready networking without manual setup.
+
+---
+
+## Technical Architecture
+
+### Microservices Architecture
+
+- Independent services for builds, deployments, logging, and orchestration
+- Event-driven communication between services
+- Fault isolation to prevent cascading failures
+
+Designed for long-term scalability.
+
+---
+
+### Infrastructure
+
+- **Docker** for build isolation
+- **AWS ECS** for container orchestration
+- **Kafka** for event pipelines
+- **Redis** for queues and ephemeral state
+- **Node.js** services for orchestration and APIs
+
+---
+
+## Tech Stack
+
+**Frontend**
+- Next.js
+- Tailwind CSS
+
+**Backend & Platform**
+- Node.js
+- Docker
+- AWS ECS
+- Kafka
+- Redis
+
+---
+
+## Challenges Faced
+
+- Designing reliable microservice boundaries
+- Streaming logs in real time
+- Deployment state consistency across services
+- Secure domain routing and reverse proxy setup
+- Preventing partial failures from impacting the platform
+
+---
+
+## Key Learnings
+
+- Microservices system design
+- Platform observability patterns
+- Reverse proxy and domain routing
+- Event-driven orchestration
+- Building developer-focused infrastructure
+
+---
+
+## Status
+
+Dumcel Cloud is **Deployed** you can try it now.  
+The focus is on stability, observability, and clean system boundaries before broader adoption.
+
+---
+
+Dumcel prioritizes **control, visibility, and correctness** over automation hype.
+`,
+    },
     {
         slug: "job-nextly",
         title: "Job Nextly",
         description:
-            "An AI-powered job application tracker that analyzes job descriptions and helps manage applications efficiently.",
-        image: "/project/jobnextly.png",
+            "An AI-assisted job application tracking platform with Gmail sync, application status management, and automated email scheduling.",
+        image: "/projects/jobnextly.png",
         technologies: [
             "Next.js",
             "Gemini API",
-            "PostgreSQL",
-            "Tailwind CSS",
+            "firebase Storage",
             "Firebase",
+            "Tailwind CSS",
         ],
-        github: "https://github.com/yourusername/job-nextly",
-        live: "",
-        timeline: "Completed",
         role: "Full Stack",
         team: "Solo",
         status: "Completed",
-        featured: false,
+        timeline: "Completed",
+
+        github: "https://github.com/nikhilsaiankilla/jobnextly",
+        live: "https://jobnextly.vercel.app",
+
+        featured: true,
+        isPublished: true,
+        publishedOn: "14/11/2025",
         challenges: [
-            "AI response consistency",
-            "Structured job data extraction",
-            "UX for tracking workflows",
+            "Gmail API integration and permissions",
+            "Reliable email syncing",
+            "Designing application tracking workflows",
+            "Email scheduling reliability",
         ],
         learnings: [
-            "AI-assisted productivity tools",
-            "Prompt structuring",
+            "Gmail API and OAuth flows",
+            "Workflow-based product design",
+            "Background jobs and scheduling",
             "Data modeling for tracking systems",
         ],
-        isPublished: true,
-        publishedOn: "12/06/2002",
-        content : `# I'm a Chill Guy: AI-Powered GitHub Profile Roaster
+        content: `# Job Nextly
 
-## Overview
+Job Nextly is a **job application tracking platform** built to help candidates stay organized without relying on brittle automation.  
+It combines **Gmail sync**, **manual tracking**, and **visual analytics** to give a clear picture of your job search progress.
 
-"I'm a chill guy" is a fun AI-powered web application that analyzes GitHub profiles and delivers witty, humorous roasts based on users' coding habits, project choices, contribution patterns, and profile information. Built with React and powered by Google's Gemini AI, this project combines humor with technical analysis to create an entertaining developer experience.
+---
 
-## How It Works
+## Why Job Nextly Exists
 
-- **Simple Input**: Users enter their GitHub username
-- **Profile Analysis**: App fetches comprehensive GitHub data via GitHub API
-- **AI Processing**: Gemini AI analyzes the data and generates personalized roasts
-- **Instant Results**: Users receive humorous commentary about their coding journey
-- **Shareable Content**: Roasts can be easily shared with friends and colleagues
+Job searching quickly becomes chaotic:
+- Emails are scattered across inboxes
+- Application statuses are hard to remember
+- Progress feels invisible over time
 
-## What Gets Analyzed
+Job Nextly exists to turn a messy job hunt into a **clear, trackable workflow**.
 
-### **Profile Information**
+---
 
-- **Bio & Description**: Personal information and self-descriptions
-- **Profile Picture**: Avatar choices and profile aesthetics
-- **Location & Links**: Geographic info and social links
-- **Account Age**: How long they've been on GitHub
+## Core Features
 
-### **Contribution Patterns**
+### Gmail Sync
 
-- **Commit Frequency**: Daily, weekly, and monthly contribution patterns
-- **Contribution Graph**: The famous green squares analysis
-- **Streak Analysis**: Longest streaks and gaps in activity
-- **Weekend vs Weekday**: Work-life balance in coding
+- Secure Gmail integration
+- Sync job-related emails into the platform
+- Extract basic metadata (company, subject, date)
 
-### **Repository Analysis**
+Emails inform tracking — they don’t control it.
 
-- **Project Types**: Languages, frameworks, and project categories
-- **Repository Names**: Creative (or not so creative) naming conventions
-- **README Quality**: Documentation standards and project descriptions
-- **Star Counts**: Popularity of projects and social proof
+---
 
-### **Coding Habits**
+### Manual Application Tracking
 
-- **Language Preferences**: Most used programming languages
-- **Framework Choices**: Technology stack preferences
-- **Project Completion**: Finished vs abandoned projects
-- **Code Quality Indicators**: Repository maintenance and updates
+- Add and update applications manually
+- Track stages like applied, interview, offer, rejected
+- Full control over your job data
 
-## Why I Built This
+No auto-changing states. No guessing.
 
-I created this project for several reasons:
+---
 
-- **Developer Humor**: The tech community loves self-deprecating humor about coding habits
-- **GitHub API Practice**: Wanted to explore comprehensive GitHub data analysis
-- **AI Integration**: Experiment with Google's Gemini AI for creative content generation
-- **Community Fun**: Create something that developers could share and enjoy together
-- **Quick Project**: Build something entertaining in a short timeframe
+### Analytics & Insights
+
+- Visual analytics powered by **Recharts**
+- Track applications over time
+- See response rates and stage distributions
+- Identify patterns in your job search
+
+Progress made visible.
+
+---
+
+## Technical Architecture
+
+### Data Flow
+
+- Gmail API for email syncing
+- PostgreSQL for application and email metadata
+- Analytics queries aggregated for charts
+- Frontend dashboards powered by Recharts
+
+Built for clarity, not complexity.
+
+---
 
 ## Tech Stack
 
-### Frontend
+**Frontend**
+- Next.js
+- Tailwind CSS
+- Recharts
 
-- **React**: Modern UI library for interactive user interface
-- **Tailwind CSS**: Utility-first CSS for rapid styling and responsive design
-- **Vercel**: Frontend deployment with global CDN and instant deployments
+**Backend**
+- Node.js
+- PostgreSQL
+- Firebase
+- Gmail API
 
-### Backend
+---
 
-- **Express.js**: Lightweight Node.js server for API endpoints
-- **Netlify**: Backend deployment for serverless function handling
-- **GitHub API**: Comprehensive profile and repository data fetching
-- **Gemini AI API**: Google's AI model for generating roast content
+## Challenges Faced
 
-## Technical Implementation
+- Gmail API permissions and OAuth flows
+- Email-to-application mapping
+- Designing flexible tracking states
+- Meaningful analytics without overfitting data
 
-### GitHub Data Collection
+---
 
-- **Profile Fetching**: Basic user information, bio, and account details
-- **Repository Analysis**: Public repositories with languages, stars, and update patterns
-- **Contribution Data**: Commit history and contribution graph information
-- **Rate Limit Handling**: Efficient API usage within GitHub's rate limits
+## Key Learnings
 
-### AI Roast Generation
+- Gmail API integration
+- UX design for tracking workflows
+- Analytics visualization with Recharts
+- Balancing automation with user control
 
-- **Prompt Engineering**: Crafted prompts to generate humorous, not offensive content
-- **Context Building**: Structured data formatting for AI consumption
-- **Response Processing**: Content filtering and formatting for display
-- **Safety Measures**: Content moderation to ensure appropriate humor
+---
 
-### User Experience
+## Status
 
-- **Simple Interface**: Clean, minimal design focused on the core functionality
-- **Loading States**: Engaging loading animations while processing data
-- **Error Handling**: Graceful handling of invalid usernames or API errors
-- **Responsive Design**: Works seamlessly across desktop and mobile devices
+Job Nextly is **completed** and usable as a personal productivity tool.
 
-## Behind the Scenes
+---
 
-This project taught me that sometimes the best projects are the simplest ones that solve a fun problem. The combination of real data analysis with AI creativity resulted in something that developers genuinely enjoyed using and sharing. It also demonstrated the power of combining multiple APIs to create unique user experiences.
-
-The "chill guy" was a instagram trend, so i thought why not build a website for it.
-`
+Job Nextly focuses on **clarity, control, and insight** — not automation for its own sake.
+`,
     },
-
     {
-        slug: "comic-portfolio",
-        title: "Comic Portfolio",
+        slug: "devroastify",
+        title: "DevRoastify",
         description:
-            "A comic-themed developer portfolio with rich micro-interactions and animated storytelling.",
-        image: "/project/portfolio.png",
-        technologies: ["Next.js", "Framer Motion", "Tailwind CSS"],
-        github: "https://github.com/yourusername/portfolio",
-        live: "https://yourportfolio.com",
-        timeline: "Completed",
-        role: "Frontend",
+            "A GitHub roast card generator that analyzes profiles and repositories to generate humorous, shareable developer roast cards.",
+        image: "/projects/dev-rostify.png",
+        technologies: [
+            "React",
+            "Node.js",
+            "GitHub API",
+            "Gemini API",
+            "Tailwind CSS",
+        ],
+        role: "Full Stack",
         team: "Solo",
-        status: "Live",
-        featured: true,
+        status: "Completed",
+        timeline: "Completed",
+
+        github: "https://github.com/nikhilsaiankilla/devroastify",
+        live: "https://dev-roastify.vercel.app/",
+
+        featured: false,
+        isPublished: true,
+        publishedOn: "11/11/2025",
         challenges: [
-            "Balancing creativity with performance",
-            "Animation-heavy UI optimization",
+            "GitHub API rate limiting",
+            "Prompt engineering for safe humor",
+            "Dynamic card generation",
+            "Content moderation",
         ],
         learnings: [
-            "Advanced Framer Motion patterns",
-            "Interactive UI storytelling",
+            "AI prompt design",
+            "API rate-limit handling",
+            "Dynamic image/card generation",
+            "Balancing humor with safety",
         ],
-        isPublished: true,
-        publishedOn: "12/06/2002",
-        content : `# I'm a Chill Guy: AI-Powered GitHub Profile Roaster
+        content: `# DevRoastify
 
-## Overview
+DevRoastify is a **GitHub roast card generator** that analyzes a user’s GitHub profile and turns the results into a **shareable visual card**.  
+Profiles are roasted using AI, rendered as HTML, and captured as PNG images users can copy and share.
 
-"I'm a chill guy" is a fun AI-powered web application that analyzes GitHub profiles and delivers witty, humorous roasts based on users' coding habits, project choices, contribution patterns, and profile information. Built with React and powered by Google's Gemini AI, this project combines humor with technical analysis to create an entertaining developer experience.
+---
 
-## How It Works
+## Why DevRoastify Exists
 
-- **Simple Input**: Users enter their GitHub username
-- **Profile Analysis**: App fetches comprehensive GitHub data via GitHub API
-- **AI Processing**: Gemini AI analyzes the data and generates personalized roasts
-- **Instant Results**: Users receive humorous commentary about their coding journey
-- **Shareable Content**: Roasts can be easily shared with friends and colleagues
+Developers love:
+- GitHub stats
+- Self-deprecating humor
+- Shareable tech content
 
-## What Gets Analyzed
+DevRoastify combines all three into a fun, lightweight project that turns GitHub data into something entertaining.
 
-### **Profile Information**
+---
 
-- **Bio & Description**: Personal information and self-descriptions
-- **Profile Picture**: Avatar choices and profile aesthetics
-- **Location & Links**: Geographic info and social links
-- **Account Age**: How long they've been on GitHub
+## Core Features
 
-### **Contribution Patterns**
+### GitHub Profile Analysis
 
-- **Commit Frequency**: Daily, weekly, and monthly contribution patterns
-- **Contribution Graph**: The famous green squares analysis
-- **Streak Analysis**: Longest streaks and gaps in activity
-- **Weekend vs Weekday**: Work-life balance in coding
+- Fetches public GitHub profile and repository data
+- Analyzes activity, repositories, and patterns
+- Builds structured context for AI consumption
 
-### **Repository Analysis**
+---
 
-- **Project Types**: Languages, frameworks, and project categories
-- **Repository Names**: Creative (or not so creative) naming conventions
-- **README Quality**: Documentation standards and project descriptions
-- **Star Counts**: Popularity of projects and social proof
+### AI-Powered Roasts
 
-### **Coding Habits**
+- Uses **Gemini API** to generate humorous roast text
+- Carefully designed prompts to keep content funny, not offensive
+- Dynamic roast generation per user
 
-- **Language Preferences**: Most used programming languages
-- **Framework Choices**: Technology stack preferences
-- **Project Completion**: Finished vs abandoned projects
-- **Code Quality Indicators**: Repository maintenance and updates
+Prompt quality directly impacts output quality.
 
-## Why I Built This
+---
 
-I created this project for several reasons:
+### Card Generation & Export
 
-- **Developer Humor**: The tech community loves self-deprecating humor about coding habits
-- **GitHub API Practice**: Wanted to explore comprehensive GitHub data analysis
-- **AI Integration**: Experiment with Google's Gemini AI for creative content generation
-- **Community Fun**: Create something that developers could share and enjoy together
-- **Quick Project**: Build something entertaining in a short timeframe
+- Roast rendered as an HTML card
+- **Puppeteer** used to capture the HTML as a PNG image
+- Users can copy or download the generated card easily
+
+Designed for sharing on social platforms.
+
+---
+
+## Technical Architecture
+
+### Rendering Pipeline
+
+1. GitHub API fetches user data  
+2. Structured data passed to Gemini for roast generation  
+3. Roast rendered into an HTML card  
+4. Puppeteer captures the card as a PNG  
+5. Image served to the user for copying or sharing  
+
+---
 
 ## Tech Stack
 
-### Frontend
+**Frontend**
+- React
+- Tailwind CSS
 
-- **React**: Modern UI library for interactive user interface
-- **Tailwind CSS**: Utility-first CSS for rapid styling and responsive design
-- **Vercel**: Frontend deployment with global CDN and instant deployments
+**Backend**
+- Node.js
+- GitHub API
+- Gemini API
+- Puppeteer
 
-### Backend
+---
 
-- **Express.js**: Lightweight Node.js server for API endpoints
-- **Netlify**: Backend deployment for serverless function handling
-- **GitHub API**: Comprehensive profile and repository data fetching
-- **Gemini AI API**: Google's AI model for generating roast content
+## Challenges Faced
 
-## Technical Implementation
+- GitHub API rate limiting
+- Prompt engineering for consistent humor
+- Rendering HTML accurately for screenshots
+- Puppeteer performance and reliability
 
-### GitHub Data Collection
+---
 
-- **Profile Fetching**: Basic user information, bio, and account details
-- **Repository Analysis**: Public repositories with languages, stars, and update patterns
-- **Contribution Data**: Commit history and contribution graph information
-- **Rate Limit Handling**: Efficient API usage within GitHub's rate limits
+## Key Learnings
 
-### AI Roast Generation
+- AI prompt design and iteration
+- HTML-to-image rendering pipelines
+- Puppeteer automation
+- Balancing humor with safety constraints
 
-- **Prompt Engineering**: Crafted prompts to generate humorous, not offensive content
-- **Context Building**: Structured data formatting for AI consumption
-- **Response Processing**: Content filtering and formatting for display
-- **Safety Measures**: Content moderation to ensure appropriate humor
+---
 
-### User Experience
+## Status
 
-- **Simple Interface**: Clean, minimal design focused on the core functionality
-- **Loading States**: Engaging loading animations while processing data
-- **Error Handling**: Graceful handling of invalid usernames or API errors
-- **Responsive Design**: Works seamlessly across desktop and mobile devices
+DevRoastify is **completed** and publicly usable as a fun side project.
 
-## Behind the Scenes
+---
 
-This project taught me that sometimes the best projects are the simplest ones that solve a fun problem. The combination of real data analysis with AI creativity resulted in something that developers genuinely enjoyed using and sharing. It also demonstrated the power of combining multiple APIs to create unique user experiences.
-
-The "chill guy" was a instagram trend, so i thought why not build a website for it.
-`
+DevRoastify proves that small, well-executed ideas can be both technical and fun.
+`,
     },
+    {
+        slug: "pitch-point",
+        title: "Pitch Point",
+        description:
+            "A startup listing and discovery platform inspired by Y Combinator, where founders can showcase startups and users can explore early-stage companies.",
+        image: "/projects/pitch-point.png",
+        technologies: [
+            "Next.js",
+            "Node.js",
+            'Next Auth',
+            "Tailwind CSS",
+        ],
+        role: "Full Stack",
+        team: "Solo",
+        status: "Completed",
+        timeline: "completed",
+
+        github: "https://github.com/nikhilsaiankilla/yc_direactory",
+        live: "https://pitchpointt.vercel.app/",
+
+        featured: false,
+        isPublished: true,
+        publishedOn: "10/10/2025",
+        challenges: [
+            "Designing scalable startup data models",
+            "Founder onboarding flows",
+            "Search and discovery relevance",
+            "Moderation and quality control",
+        ],
+        learnings: [
+            "Marketplace-style product design",
+            "Search and ranking strategies",
+            "Founder-centric UX",
+            "Content moderation systems",
+        ],
+        content: `# Pitch Point
+
+Pitch Point is a **startup listing and discovery platform** inspired by Y Combinator, focused on clean presentation and simple founder onboarding.  
+Startups are showcased as structured cards, making it easy to browse, evaluate, and discover early-stage ideas.
+
+---
+
+## Why Pitch Point Exists
+
+Discovering early-stage startups is often fragmented:
+- Scattered across social platforms
+- Poorly structured information
+- No consistent presentation
+
+Pitch Point brings startups into a **single, clean, card-based interface**.
+
+---
+
+## Core Features
+
+### Startup Cards
+
+- Card-based startup listings
+- Clear display of idea, stage, and description
+- Consistent layout for easy comparison
+
+Designed for fast scanning.
+
+---
+
+### Authentication & User Access
+
+- Secure authentication for founders
+- Protected routes for creating and managing listings
+- Public browsing without login
+
+Keeps contribution gated, discovery open.
+
+---
+
+### Founder-Focused UI
+
+- Simple submission flows
+- Minimal friction for listing a startup
+- Clean UI built for clarity, not noise
+
+---
+
+## Technical Architecture
+
+### Frontend-Centric Design
+
+- Built with **Next.js**
+- Server-side rendering for fast initial loads
+- Component-driven UI architecture
+
+---
+
+## Tech Stack
+
+**Frontend**
+- Next.js
+- Tailwind CSS
+
+**Backend & Auth**
+- Next.js API routes
+- Authentication (JWT / OAuth-based)
+
+---
+
+## Challenges Faced
+
+- Designing scalable card-based layouts
+- Auth-protected UI flows
+- Balancing simplicity with useful structure
+- Preventing low-quality or spam submissions
+
+---
+
+## Key Learnings
+
+- Auth flows in Next.js
+- UI patterns for content discovery
+- Designing founder-first experiences
+- Component reuse and layout systems
+
+---
+
+## Status
+
+Pitch Point is **under development**, with focus on UI polish and founder onboarding.
+
+---
+
+Pitch Point prioritizes **clarity, structure, and signal** over hype.
+`,
+    },
+    {
+        slug: "gpt3-landing",
+        title: "GPT-3 Landing Page",
+        description:
+            "My first React landing page built to learn and apply Tailwind CSS with a clean, modern UI.",
+        image: "/projects/gpt3.png",
+        technologies: [
+            "React",
+            "Tailwind CSS",
+        ],
+        role: "Frontend",
+        team: "Solo",
+        status: "Completed",
+        timeline: "Completed",
+
+        github: "https://github.com/nikhilsaiankilla/GPT-3-ReactJS-",
+        live: "https://gpt-3-reactjs.vercel.app/",
+
+        featured: false,
+        isPublished: true,
+        publishedOn: "10/10/2025",
+        challenges: [
+            "Learning Tailwind CSS fundamentals",
+            "Responsive layout design",
+            "Component structuring in React",
+        ],
+        learnings: [
+            "Utility-first CSS workflow",
+            "Responsive design principles",
+            "Basic React component architecture",
+        ],
+        content: `# GPT-3 Landing Page
+
+This was my **first React application**.
+
+It’s a **simple static landing page** built to get hands-on with **React** and **Tailwind CSS**.  
+No backend, no complex logic — just learning the fundamentals and shipping something real.
+
+---
+
+## What This Project Is
+
+- A static marketing-style landing page
+- Built entirely with React components
+- Styled using Tailwind CSS
+
+Pure frontend.
+
+---
+
+## Tech Stack
+
+- React
+- Tailwind CSS
+
+---
+
+## What I Focused On
+
+- Understanding React component structure
+- Learning Tailwind’s utility-first approach
+- Responsive layouts
+- Clean spacing and visual hierarchy
+
+---
+
+## Why I Built It
+
+This project was about:
+- Moving from tutorials to building
+- Learning by doing
+- Getting comfortable with React as a framework
+
+It marks the start of my frontend journey.
+
+---
+
+## Status
+
+Completed.
+
+---
+
+It’s not flashy but it shipped, and it taught me the basics.
+`,
+    }
 ];

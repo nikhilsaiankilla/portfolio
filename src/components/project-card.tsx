@@ -1,11 +1,10 @@
 "use client";
 
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowRight, GithubIcon, Globe } from 'lucide-react';
 import { Link } from 'next-view-transitions';
 import { Badge } from './ui/badge';
-import { useState } from 'react';
 import AnimatedTooltip from './animated-tooltip';
 
 interface ProjectProps {
@@ -14,17 +13,19 @@ interface ProjectProps {
     description: string;
     image: string;
     technologies: string[];
-    github: string;
-    live: string;
-    timeline: string;
-    role: string;
-    team: string;
+    github?: string;
+    live?: string;
     status: string;
-    featured: boolean;
-    challenges: string[];
-    learnings: string[];
-    isPublished: boolean;
-    publishedOn: string;
+    
+    // timeline: string;
+    // role: string;
+    // team: string;
+
+    // featured: boolean;
+    // challenges: string[];
+    // learnings: string[];
+    // isPublished: boolean;
+    // publishedOn: string;
 
     index?: number;
 }
@@ -126,14 +127,11 @@ const ProjectCard = ({ title, description, technologies, live, image, status, gi
 
                 {/* Tech Stack */}
                 <div className='flex flex-wrap gap-1'>
-                    {
-                        status && <Badge className='dark:bg-[#0A0A0A] dark:text-white border border-dashed border-gray-600/70 text-black bg-gray-300 text-[10px] shadow-2xl shadow-black px-2 rounded-sm'>{status}</Badge>
-                    }
-                    {technologies && technologies.length > 0 && technologies?.slice(0, 2).map((tag, i) => (
+                    {technologies && technologies.length > 0 && technologies?.slice(0, 3).map((tag, i) => (
                         <Badge key={i} className='dark:bg-[#0A0A0A] dark:text-white border border-dashed border-gray-600/70 text-black bg-gray-300 text-[10px] shadow-2xl shadow-black px-2 rounded-sm'>{tag}</Badge>
                     ))}
-                    {technologies?.length > 2 && (
-                        <span className="text-xs text-gray-400 flex items-center px-1">+{technologies.length - 2}</span>
+                    {technologies?.length > 3 && (
+                        <span className="text-xs text-gray-400 flex items-center px-1">+{technologies.length - 3}</span>
                     )}
                 </div>
                 <div className='w-full group'>

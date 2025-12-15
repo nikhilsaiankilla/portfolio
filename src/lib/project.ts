@@ -76,7 +76,7 @@ export const getRelatedProjects = (slug: string) => {
         .filter((project) => project.slug !== slug && project.isPublished) // Exclude current & drafts
         .map((project) => {
             // FIX: Count only the matching technologies
-            const sharedCount = project.technologies.filter((tech) => 
+            const sharedCount = project.technologies.filter((tech) =>
                 currentTechSet.has(tech.toLowerCase())
             ).length;
 
