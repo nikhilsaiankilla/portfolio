@@ -3,15 +3,14 @@
 import { motion, Variants } from 'framer-motion'
 import AnimatedContainer from './animated-container';
 import Image from 'next/image';
-import TooltipImage from './animated-tooltip';
 import { Link } from 'next-view-transitions';
 import AnimatedTooltip from './animated-tooltip';
 
 const techStack = [
-    { name: 'Next.js', src: '/Next.js.svg' },
-    { name: 'AWS', src: '/AWS.svg' },
-    { name: 'Docker', src: '/Docker.svg' },
-    { name: 'Node.js', src: '/Node.js.svg' },
+    { name: 'Next.js', src: '/skills/nextjs.png' },
+    { name: 'AWS', src: '/skills/aws.png' },
+    { name: 'Docker', src: '/skills/docker.png' },
+    { name: 'Node.js', src: '/skills/nodejs.png' },
 ];
 
 const AboutSection = () => {
@@ -65,33 +64,37 @@ const AboutSection = () => {
                 </motion.div>
 
                 {/* Text Content Area */}
-                <div className='w-full col-span-1 md:col-span-2 flex flex-col justify-center space-y-4'>
+                <div className="w-full col-span-1 md:col-span-2 flex flex-col justify-center space-y-3">
                     <motion.h1
                         variants={itemVariants}
-                        className='text-lg md:text-2xl font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-500 to-blue-600 font-heading tracking-tight'
+                        className="text-lg md:text-2xl font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-500 to-blue-600 font-heading tracking-tight"
                     >
-                        Nikhil Sai Ankilla!!
+                        Nikhil Sai Ankilla
                     </motion.h1>
 
-                    <p className='text-gray-600 dark:text-gray-300 leading-relaxed'>
-                        I'm a <span className='font-bold text-black dark:text-white'>Full Stack Developer</span> passionate about building apps and contributing to <span className='text-cyan-600 dark:text-cyan-400 font-medium'>Open Source</span>; I'm actively seeking full-time roles, so if you have leads or just want to chat, my <Link href={'#contact'} className='text-cyan-500 hover:underline'>inbox is always open!</Link> 😉
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        I’m a <span className="font-semibold text-black dark:text-white">Full Stack Developer</span> building
+                        products end to end web apps, backend systems, and developer tools.
+                        I care about how systems work, not just how they look.
                     </p>
 
-                    <h2 className='text-lg font-bold text-gray-600 dark:text-gray-400'>Skills</h2>
-                    <div className='w-full flex items-start justify-start gap-2'>
-                        {
-                            techStack?.map((t, index) => (
-                                <AnimatedTooltip label={t.name} key={index}>
-                                    <Image
-                                        src={t.src}
-                                        width={30}
-                                        height={30}
-                                        className='p-1 rounded-sm bg-white shadow-2xl hover:rotate-6 transition-all duration-100 ease-in'
-                                        alt={t.name}
-                                    />
-                                </AnimatedTooltip>
-                            ))
-                        }
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Currently exploring system design through personal projects and open source.
+                        Open to full time roles <Link href="#contact" className="text-cyan-500 hover:underline">let’s talk</Link>.
+                    </p>
+
+                    <div className="w-full flex items-start justify-start gap-2 flex-wrap pt-2">
+                        {techStack?.map((t, index) => (
+                            <AnimatedTooltip label={t.name} key={index}>
+                                <Image
+                                    src={t.src}
+                                    width={30}
+                                    height={30}
+                                    className="p-1 rounded-sm bg-white shadow-2xl hover:rotate-6 transition-all duration-100 ease-in"
+                                    alt={t.name}
+                                />
+                            </AnimatedTooltip>
+                        ))}
                     </div>
                 </div>
             </div>

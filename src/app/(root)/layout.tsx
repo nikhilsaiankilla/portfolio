@@ -19,9 +19,59 @@ const comicNeue = Comic_Neue({
 });
 
 export const metadata: Metadata = {
-  title: "Nikhil Sai Portfolio",
-  description: "Your friendly Developer from Hyderabad India",
+  title: {
+    default: "Nikhil Sai — Full Stack Developer",
+    template: "%s | Nikhil Sai",
+  },
+  description:
+    "Full stack developer building products across web, backend systems, and developer tools. Interested in system design, analytics, and scalable platforms.",
+  keywords: [
+    "Nikhil Sai",
+    "Full Stack Developer",
+    "Web Developer",
+    "Backend Engineer",
+    "System Design",
+    "Developer Tools",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Kafka",
+    "ClickHouse",
+  ],
+  metadataBase: new URL("https://nikhilsai.in"),
+  alternates: {
+    canonical: "https://nikhilsai.in",
+  },
+  openGraph: {
+    title: "Nikhil Sai — Full Stack Developer",
+    description:
+      "Building real-world products, backend systems, and developer tools. Exploring scalable architectures and modern web stacks.",
+    url: "https://nikhilsai.in",
+    siteName: "Nikhil Sai / Portfolio",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Nikhil Sai Portfolio",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nikhil Sai — Full Stack Developer",
+    description:
+      "Building products, backend systems, and developer tools. Documenting what I build and what I learn.",
+    images: ["/og-image.png"],
+    creator: "@nikhilbuildss",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
+
 
 export default function RootLayout({
   children,
@@ -31,6 +81,9 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en" suppressHydrationWarning>
+        <head>
+          <script defer src="https://cloud.umami.is/script.js" data-website-id="d4bb3fad-5fce-48b5-8f8a-17f873fd923f"></script>
+        </head>
         <body
           className={`${poppins.variable} ${comicNeue.variable} antialiased`}
         >

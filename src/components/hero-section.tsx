@@ -124,34 +124,35 @@ export default HeroSection;
 
 // 1. Define the Data for your icons
 const techStack = [
-    { name: 'Next.js', src: '/Next.js.svg' },
-    { name: 'AWS', src: '/AWS.svg' },
-    { name: 'Docker', src: '/Docker.svg' },
-    { name: 'Node.js', src: '/Node.js.svg' },
+    { name: 'Next.js', src: '/skills/nextjs.png' },
+    { name: 'AWS', src: '/skills/aws.png' },
+    { name: 'Docker', src: '/skills/docker.png' },
+    { name: 'Node.js', src: '/skills/nodejs.png' },
 ];
 
 
 function Bio() {
     return (
-        <p className='leading-relaxed text-gray-800 dark:text-gray-300'>
-            I'm a <span className='font-semibold text-cyan-500'>Full Stack Developer</span> from India who turns coffee into clean, consumer-facing apps. My main weapons are
-
-            {/* Container for the icons */}
-            <span className='inline-flex items-center justify-center flex-wrap gap-2 mx-1 align-middle'>
+        <p className="leading-relaxed text-gray-800 dark:text-gray-300">
+            I’m a <span className="font-semibold text-cyan-500">Full Stack Developer</span> focused on building
+            real-world products from consumer-facing web apps to backend systems and developer tools.
+            I care about clean architecture, performance, and shipping things that actually get used.
+            I mostly work with <span className="inline-flex items-center justify-center flex-wrap gap-2 mx-1 align-middle">
                 {techStack.map((tech, index) => (
                     <AnimatedTooltip label={tech.name} key={index}>
                         <Image
                             src={tech.src}
                             width={25}
                             height={25}
-                            className='p-1 rounded-sm bg-white shadow-2xl hover:rotate-6 transition-all duration-100 ease-in'
+                            className="p-1 rounded-sm bg-white shadow-2xl hover:rotate-6 transition-all duration-100 ease-in"
                             alt={tech.name}
                         />
                     </AnimatedTooltip>
                 ))}
-            </span>
-
-            Next.js, Docker, and AWS, but you can <Link href="#tech-stack" className='text-cyan-500 hover:underline'>check out my full inventory here</Link>. I thrive in chaotic, fast-moving startups where "shipping" is the love language. Yes, even on Sundays.
+            </span> but the stack is just a tool.
+            What matters is designing systems that scale, break gracefully, and ship fast.
+            You can <Link href="#tech-stack" className="text-cyan-500 hover:underline">see the full stack here</Link>.
         </p>
+
     );
 }

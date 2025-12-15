@@ -1,10 +1,7 @@
-"use client";
-
 import { getAllSkills } from '../lib/skills';
 import AnimatedContainer from './animated-container'
 import SectionHeading from './section-heading'
 import SkillCard from './skill-card';
-import { Skeleton } from './ui/skeleton';
 
 const SkillsSection = () => {
     const skills = getAllSkills();

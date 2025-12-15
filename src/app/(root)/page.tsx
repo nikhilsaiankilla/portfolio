@@ -8,6 +8,7 @@ import NavSection from "@/src/components/nav-section";
 import ProofOfWorkSection from "@/src/components/proof-of-work-section";
 import SkillsSection from "@/src/components/skills-section";
 
+
 export default function Home() {
   return (
     <div className="w-full min-h-screen bg-white text-black dark:bg-black dark:text-white px-2">

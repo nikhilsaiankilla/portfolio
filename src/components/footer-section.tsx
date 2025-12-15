@@ -1,10 +1,9 @@
 import AnimatedContainer from './animated-container'
 import { Github, Linkedin } from 'lucide-react'
-import TooltipImage from './animated-tooltip';
 import { Link } from 'next-view-transitions';
 import AnimatedTooltip from './animated-tooltip';
-import Image from 'next/image';
 import { XIcon } from './nav-section';
+import SkillCard from './skill-card';
 
 const FooterSection = () => {
     const currentYear = new Date().getFullYear();
@@ -34,10 +33,12 @@ const FooterSection = () => {
                         &copy; {currentYear} Nikhil Sai. All rights reserved.
                     </p>
                     <p className='text-xs text-gray-400 dark:text-gray-500 flex items-center gap-2'>
-                        Built using <AnimatedTooltip label="Next Js"><Image src={'/Next.js.svg'} alt='Next Js' width={30} height={30} className='p-1 bg-white shadow-2xl rounded-sm hover:rotate-6 transition-all duration-100 ease-in' /></AnimatedTooltip> & <AnimatedTooltip label="Next Js"><Image src={'/Next.js.svg'} alt='Tailwind Css' width={30} height={30} className='p-1 bg-white shadow-2xl rounded-sm hover:rotate-6 transition-all duration-100 ease-in' /></AnimatedTooltip>
+                        Built using <SkillCard src={"/skills/nextjs.png"} name={'Next Js'} index={1} id={'1'} /> & <SkillCard src={"/skills/tailwind.png"} name={'Tailwind css'} index={1} id={'1'} />
                     </p>
                 </div>
             </div>
+            
+            
         </AnimatedContainer>
     )
 }

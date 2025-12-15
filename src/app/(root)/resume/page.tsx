@@ -8,12 +8,15 @@ import { Download } from 'lucide-react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
-// 1. Define the URL in one place
-const RESUME_URL = 'https://res.cloudinary.com/do5y2mtpk/image/upload/v1765185894/portfolio/resume/aikpnrebc6ilzjgxbsj7.pdf';
-
 const ResumePage = () => {
-    // 2. Generate the download-specific URL
-    const downloadUrl = getDownloadUrl(RESUME_URL);
+    // 1. Define the URL in one place
+    const RESUME_URL = process?.env.RESUME_URL;
+
+    let downloadUrl
+
+    if (RESUME_URL) {
+        downloadUrl = getDownloadUrl(RESUME_URL);
+    }
 
     return (
         <div className="w-full min-h-screen bg-white text-black dark:bg-black dark:text-white px-2">
@@ -70,17 +73,21 @@ const ResumePage = () => {
                                 />
                             </motion.a>
                         </div>
-                        <div className='w-full bg-gray-100 dark:bg-zinc-900 rounded-xl overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-sm'>
-                            <Image
-                                src={getPdfThumbnail(RESUME_URL)}
-                                alt="PDF preview"
-                                loading="lazy"
-                                width={300}
-                                height={450}
-                                unoptimized
-                                className="rounded h-full w-full"
-                            />
-                        </div>
+                        {
+                            RESUME_URL ? <div className='w-full bg-gray-100 dark:bg-zinc-900 rounded-xl overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-sm'>
+                                <Image
+                                    src={getPdfThumbnail(RESUME_URL)}
+                                    alt="PDF preview"
+                                    loading="lazy"
+                                    width={300}
+                                    height={450}
+                                    unoptimized
+                                    className="rounded h-full w-full"
+                                />
+                            </div>
+                                :
+                                <p className='text-center mt-10 text-sm text-gray-600 dark:text-gray-300'>Resume Not Found!!</p>
+                        }
                     </div>
                 </AnimatedContainer>
 

@@ -80,7 +80,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
 }
 
-
 interface ProjectProps {
     params: Promise<{ slug: string }>
 }

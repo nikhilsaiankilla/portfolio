@@ -3,7 +3,6 @@
 import { AnimatePresence, motion, Variants } from 'framer-motion'
 import Image from 'next/image';
 import { useState } from 'react';
-import AnimatedTooltip from './animated-tooltip';
 
 interface TooltipImageProps {
     name: string;
@@ -43,8 +42,8 @@ const SkillCard = ({ name, src, id, isEdit = false }: TooltipImageProps) => {
                 flex items-center gap-2 border border-dashed 
                 border-gray-600 dark:border-zinc-700 px-4 
                 bg-gray-500/10 dark:hover:bg-zinc-900 
-                transition-colors duration-200
-                relative
+                transition-colors duration-200 dark:bg-gray-500/20
+                relative cursor-grab active:cursor-grabbing
                 ${isEdit ? "cursor-pointer hover:border-cyan-500 hover:bg-cyan-500/10" : "cursor-grab active:cursor-grabbing"}
             `}
         >
