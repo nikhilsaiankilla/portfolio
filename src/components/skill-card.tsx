@@ -18,7 +18,13 @@ const cardVariants: Variants = {
         opacity: 1,
         y: 0,
         scale: 1,
-        transition: { type: "spring", stiffness: 260, damping: 20 }
+        transition: {
+            type: "spring",
+            stiffness: 400,
+            damping: 25,
+            mass: 0.5,
+            delay: 0.1 
+        }
     }
 };
 
@@ -28,7 +34,14 @@ const SkillCard = ({ name, src, id, isEdit = false }: TooltipImageProps) => {
     // --- 1. The Card Content (Shared UI) ---
     const CardContent = (
         <motion.div
+            // 1. Enable variants
             variants={cardVariants}
+            
+            // 2. Add viewport triggers directly here
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+
             drag={!isEdit}
             onDragStart={() => setIsDragging(true)}
             onDragEnd={() => setIsDragging(false)}

@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import ContactForm from './contact-form';
 import { XIcon } from './nav-section';
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 const ContactSection = () => {
     const [copied, setCopied] = useState(false);

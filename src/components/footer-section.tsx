@@ -4,6 +4,7 @@ import { Link } from 'next-view-transitions';
 import AnimatedTooltip from './animated-tooltip';
 import { XIcon } from './nav-section';
 import SkillCard from './skill-card';
+import Image from 'next/image';
 
 const FooterSection = () => {
     const currentYear = new Date().getFullYear();
@@ -33,12 +34,30 @@ const FooterSection = () => {
                         &copy; {currentYear} Nikhil Sai. All rights reserved.
                     </p>
                     <p className='text-xs text-gray-400 dark:text-gray-500 flex items-center gap-2'>
-                        Built using <SkillCard src={"/skills/nextjs.png"} name={'Next Js'} index={1} id={'1'} /> & <SkillCard src={"/skills/tailwind.png"} name={'Tailwind css'} index={1} id={'1'} />
+                        Built using <Link
+                            href={'https://nextjs.org/'}
+                            target='_blank'
+                            className='p-1 w-fit h-fit rounded-lg flex items-center gap-2 border border-dashed border-gray-500 dark:border-zinc-700 px-4 bg-gray-500/10 dark:hover:bg-zinc-900'>
+                            <Image src={'/skills/nextjs.png'} alt={`Icon`} width={20} height={20} unoptimized className="drop-shadow-sm" />
+                            <span className='text-xs font-medium text-gray-700 dark:text-gray-300 pointer-events-none'>
+                                Next js
+                            </span>
+                        </Link>
+                        &
+                        <Link
+                            href={'https://tailwindcss.com/'}
+                            target='_blank'
+                            className='p-1 w-fit h-fit rounded-lg flex items-center gap-2 border border-dashed border-gray-500 dark:border-zinc-700 px-4 bg-gray-500/10 dark:hover:bg-zinc-900'>
+                            <Image src={'/skills/tailwind.png'} alt={`Icon`} width={20} height={20} unoptimized className="drop-shadow-sm" />
+                            <span className='text-xs font-medium text-gray-700 dark:text-gray-300 pointer-events-none'>
+                                Tailwind
+                            </span>
+                        </Link>
                     </p>
                 </div>
             </div>
-            
-            
+
+
         </AnimatedContainer>
     )
 }

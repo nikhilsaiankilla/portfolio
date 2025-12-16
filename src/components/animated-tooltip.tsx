@@ -36,15 +36,9 @@ const AnimatedTooltip = ({
                         }}
                         className="absolute left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] px-2 py-1 rounded shadow-lg whitespace-nowrap z-50 pointer-events-none"
                     >
-                        {typeof label === "string" ? (
-                            label.split(" ").map((word, i) => (
-                                <span key={i} className="block text-center">
-                                    {word}
-                                </span>
-                            ))
-                        ) : (
-                            label
-                        )}
+                        <span className="text-center wrap-break-word">
+                            {label}
+                        </span>
 
                         {/* Arrow */}
                         <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 

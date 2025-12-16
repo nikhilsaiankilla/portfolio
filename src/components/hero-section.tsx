@@ -76,14 +76,12 @@ const HeroSection = () => {
                 className="w-full md:w-2/5 flex items-center justify-center flex-col gap-8"
             >
                 <motion.div
-                    whileHover={{ scale: 1.05, rotate: 3 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ scale: 0.5, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.4 }}
                     className="relative"
                 >
-                    <div className="absolute -inset-1 bg-linear-to-r from-cyan-400 to-blue-500 rounded-sm blur opacity-30 animate-pulse"></div>
                     <Image
                         src={`/nikhil.jpeg`}
                         alt='Nikhil sai Avatar'
@@ -91,7 +89,7 @@ const HeroSection = () => {
                         height={160}
                         unoptimized
                         title='Yes this my Orginal Image!!'
-                        className='relative w-40 h-40 md:w-48 md:h-48 rounded-sm shadow-2xl border-4 border-white dark:border-gray-800 object-cover cursor-pointer z-10'
+                        className='relative w-40 h-40 md:w-48 md:h-48 rounded-full shadow-2xl object-cover cursor-pointer z-10'
                     />
                 </motion.div>
                 <motion.div variants={itemVariants} className="w-fit">
@@ -122,37 +120,16 @@ const HeroSection = () => {
 
 export default HeroSection;
 
-// 1. Define the Data for your icons
-const techStack = [
-    { name: 'Next.js', src: '/skills/nextjs.png' },
-    { name: 'AWS', src: '/skills/aws.png' },
-    { name: 'Docker', src: '/skills/docker.png' },
-    { name: 'Node.js', src: '/skills/nodejs.png' },
-];
-
-
 function Bio() {
     return (
-        <p className="leading-relaxed text-gray-800 dark:text-gray-300">
-            I’m a <span className="font-semibold text-cyan-500">Full Stack Developer</span> focused on building
-            real-world products from consumer-facing web apps to backend systems and developer tools.
-            I care about clean architecture, performance, and shipping things that actually get used.
-            I mostly work with <span className="inline-flex items-center justify-center flex-wrap gap-2 mx-1 align-middle">
-                {techStack.map((tech, index) => (
-                    <AnimatedTooltip label={tech.name} key={index}>
-                        <Image
-                            src={tech.src}
-                            width={25}
-                            height={25}
-                            className="p-1 rounded-sm bg-white shadow-2xl hover:rotate-6 transition-all duration-100 ease-in"
-                            alt={tech.name}
-                        />
-                    </AnimatedTooltip>
-                ))}
-            </span> but the stack is just a tool.
-            What matters is designing systems that scale, break gracefully, and ship fast.
-            You can <Link href="#tech-stack" className="text-cyan-500 hover:underline">see the full stack here</Link>.
-        </p>
-
+        <div className='w-full space-y-4'>
+            <p className="leading-relaxed text-gray-700 dark:text-gray-400 text-sm sm:text-lg">
+                I’m a <span className="font-semibold text-cyan-500">Full Stack Developer</span> making stuff, breaking stuff,
+                and learning stuff while building real-world products.
+            </p>
+            <p className="leading-relaxed text-gray-700 dark:text-gray-400 text-sm sm:text-lg">
+                I focus on clean architecture and performance, designing systems that scale, break gracefully, and ship fast.
+            </p>
+        </div>
     );
 }
