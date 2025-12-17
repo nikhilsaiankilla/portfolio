@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from "next";
 import { Poppins, Comic_Neue } from "next/font/google";
 import "./globals.css";
@@ -95,6 +96,7 @@ export default function RootLayout({
             <ReactLenis root>
               <Toaster />
               {children}
+              <Analytics />
             </ReactLenis>
           </ThemeProvider>
         </body>
