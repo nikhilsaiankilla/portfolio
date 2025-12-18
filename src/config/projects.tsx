@@ -180,6 +180,18 @@ Built to scale from side projects to high-traffic products.
 
 ---
 
+## Infrastructure & Demo Environment Notes
+
+To keep the demo environment lightweight and cost-efficient, some background processing components are currently **disabled**.
+
+- The full event pipeline (Kafka → Worker → ClickHouse) has been designed, implemented, and validated.
+- Continuous background workers are paused in the demo environment since real-time processing is not required for showcasing core functionality.
+- All architectural components, deployment configurations, and scaling paths remain intact and can be re-enabled as needed.
+
+This approach allows Visly to demonstrate production-grade system design while avoiding unnecessary infrastructure cost during development and portfolio usage.
+
+---
+
 ## Key Learnings
 
 - Analytics system design at scale
@@ -318,6 +330,18 @@ Designed for long-term scalability.
 - **Kafka** for event pipelines
 - **Redis** for queues and ephemeral state
 - **Node.js** services for orchestration and APIs
+
+---
+
+## Infrastructure & Demo Environment Notes
+
+To keep the platform sustainable for demo and portfolio usage, certain background and orchestration components are currently **scaled down or disabled**.
+
+- The full ECS-based microservices architecture, Kafka event pipeline, and Redis-backed coordination layers have been designed, implemented, and validated.
+- Continuous background workers and high-throughput pipelines are paused where not required for interactive demos.
+- All services remain containerized with preserved deployment workflows and can be re-enabled or scaled horizontally when needed.
+
+This setup reflects real-world platform engineering tradeoffs: maintaining production-grade architecture while optimizing operational cost during early-stage usage.
 
 ---
 
