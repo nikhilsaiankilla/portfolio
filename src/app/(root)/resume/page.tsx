@@ -10,7 +10,7 @@ import { motion } from 'framer-motion'
 
 const ResumePage = () => {
     // 1. Define the URL in one place
-    const RESUME_URL = 'https://res.cloudinary.com/do5y2mtpk/image/upload/v1765185894/portfolio/resume/aikpnrebc6ilzjgxbsj7.pdf';
+    const RESUME_URL = 'https://res.cloudinary.com/do5y2mtpk/image/upload/v1766238616/resume/nikhil_sai_resume_ujbkzu.pdf';
 
     const downloadUrl = getDownloadUrl(RESUME_URL);
 
