@@ -45,7 +45,7 @@ export const projects: Project[] = [
         ],
         role: "Full Stack",
         team: "Solo",
-        status: "Building",
+        status: "Completed",
         timeline: "Ongoing",
         github: "https://github.com/nikhilsai/visly",
         live: "https://visly.nikhilsaiankilla.blog",
