@@ -35,7 +35,7 @@ export const metadata: Metadata = {
         siteName: "Nikhil Sai / Blog",
         images: [
             {
-                url: "/og-image.png",
+                url: "/og-image-blogs.png",
                 width: 1200,
                 height: 630,
                 alt: "Nikhil Sai Blog",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
         title: "Blog — Nikhil Sai",
         description:
             "Writing about system design, backend engineering, analytics, and building real products.",
-        images: ["/og-image.png"],
+        images: ["/og-image-blogs.png"],
         creator: "@nikhilbuildss",
     },
     robots: {
@@ -72,7 +72,7 @@ const page = () => {
                         </div>
                         {
                             blogs && blogs.length > 0 ?
-                                <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 px-2'>
+                                <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-6 mt-8'>
                                     {blogs.map((blog, index) => (
                                         <BlogCard key={index} {...blog} />
                                     ))}

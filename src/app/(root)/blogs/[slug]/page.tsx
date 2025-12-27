@@ -11,7 +11,7 @@ import BlogCard from "@/src/components/blog-card";
 import { Calendar, Clock } from "lucide-react";
 import { ProjectComponents } from "@/src/components/project-components";
 
-export async function generateMetadata({
+export async function getServerSidepProps({
     params,
 }: {
     params: Promise<{ slug: string }>;
@@ -35,8 +35,8 @@ export async function generateMetadata({
     }
 
     const siteUrl = "https://nikhilsai.in";
-    const blogUrl = `${siteUrl}/blogs/${slug}`;
-    const ogImage = blog.image ?? `${siteUrl}/og-image.png`;
+    const blogUrl = blog.canonical ?? `${siteUrl}/blogs/${slug}`;
+    const ogImage = blog.image ?? `${siteUrl}/og-image-blogs.png`;
 
     return {
         title: `${blog.title} | Blog`,
@@ -164,7 +164,7 @@ const BlogPage = async ({ params }: BlogPageProps) => {
             <AnimatedContainer>
                 <SectionHeading title="Related Blogs" />
                 {relatedBlogs && relatedBlogs.length > 0 ? (
-                    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 px-2">
+                    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                         {relatedBlogs.slice(0, 2).map((blog, index) => (
                             <BlogCard key={index} {...blog} index={index} />
                         ))}

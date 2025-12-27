@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     siteName: "Nikhil Sai / Projects",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image-projects.png",
         width: 1200,
         height: 630,
         alt: "Nikhil Sai Projects",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     title: "Projects — Nikhil Sai",
     description:
       "A showcase of products and systems I’ve built — from frontend interfaces to backend infrastructure.",
-    images: ["/og-image.png"],
+    images: ["/og-image-projects.png"],
     creator: "@nikhilbuildss",
   },
   robots: {

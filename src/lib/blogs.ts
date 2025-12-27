@@ -23,8 +23,9 @@ export const getBlogById = (slug: string) => {
         featured: blog.featured,
         readingTime: blog.readingTime,
         publishedOn: blog.publishedOn,
-        
+
         isPublished: blog.isPublished,
+        canonical: blog.canonical,
 
         content: blog?.content ?? "Content is Missing!! Please inform Admin.",
     };
