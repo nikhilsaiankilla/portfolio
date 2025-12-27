@@ -48,7 +48,7 @@ export const projects: Project[] = [
         status: "Completed",
         timeline: "Ongoing",
         github: "https://github.com/nikhilsai/visly",
-        live: "https://visly.nikhilsaiankilla.blog",
+        live: "https://visly.nikhilsai.in",
         featured: true,
         isPublished: true,
         publishedOn: "15/12/2025",
@@ -233,7 +233,7 @@ If analytics should be invisible, fast, and respectful — Visly is built for th
         timeline: "completed",
 
         github: "https://github.com/nikhilsaiankilla/dumcel",
-        live: "https://dumcel.nikhilsaiankilla.blog",
+        live: "https://dumcel.nikhilsai.in",
 
         featured: true,
         isPublished: true,

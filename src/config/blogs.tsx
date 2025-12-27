@@ -1,106 +1,223 @@
-export const blogs = [
-    {
-        slug: "building-privacy-first-analytics",
-        title: "Building Privacy-First Analytics from Scratch",
-        description:
-            "Lessons learned while designing a privacy-first analytics system without cookies, fingerprinting, or invasive tracking.",
-        image: "/blogs/privacy-analytics.png",
-        tags: [
-            "System Design",
-            "Analytics",
-            "Privacy",
-            "Backend",
-            "ClickHouse",
-        ],
-        status: "Published",
-        isPublished: true,
-        publishedOn: "2025-12-15",
-        readingTime: "8 min read",
-        featured: true,
-        content: `# Building Privacy-First Analytics from Scratch
+export interface BlogTypes {
+  slug: string;
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  isPublished: boolean;
+  publishedOn: string;
+  readingTime: string;
+  featured: boolean;
+  content: string;
+}
 
-Modern analytics tools often trade user privacy for convenience.  
-This post documents how I approached building a **privacy-first analytics system** without cookies, fingerprinting, or personal identifiers.
+export const blogs: BlogTypes[] = [
+  {
+    slug: "rate-limiting-using-redis",
+    title: "How to Add a Simple Rate Limiter to an Express App Using Redis",
+    description:
+      "A practical walkthrough of building a Redis-based rate limiter for an Express API using atomic operations and TTL.",
+    image: "/blogs/ratelimiter-blog.png",
+    tags: [
+      "Node.js",
+      "Rate Limiting",
+      "Software Development",
+      "Scalability",
+      "API Development",
+      "Software Engineering",
+      "Express",
+      "Redis",
+      "Backend",
+    ],
+    isPublished: true,
+    publishedOn: "2025-01-26",
+    readingTime: "4 min read",
+    featured: true,
+    content: `
+When building APIs, one of the first real problems you run into is abuse — too many requests from the same client, intentional or accidental.
 
----
+While learning Redis, I realized I didn’t fully understand **how rate limiting actually works under the hood**. Instead of using a library, I decided to build a simple rate limiter myself to understand the mechanics clearly.
 
-## The Problem with Traditional Analytics
-
-Most analytics platforms fail in predictable ways:
-
-- Heavy configuration
-- Cookie-based tracking
-- Poor performance at scale
-- Privacy concerns by default
-
-I wanted analytics that developers could trust **and** users wouldn’t feel uncomfortable with.
-
----
-
-## Design Goals
-
-Before writing code, I locked these constraints:
-
-- No cookies
-- No fingerprinting
-- Minimal configuration
-- High write throughput
-- Fast analytical queries
-
-These constraints heavily influenced every architectural decision.
+This post explains how to add a **basic rate limiter to an Express app using Redis**, and why this approach works well in distributed systems.
 
 ---
 
-## Event Ingestion Strategy
+## What is rate limiting?
 
-Events are sent through a lightweight SDK and processed asynchronously.
+Rate limiting is a technique used to **restrict how many requests a client can make** to an API within a specific time window.
 
-Key choices:
-- Kafka for durability and scale
-- Stateless ingestion services
-- Strict schema control
+For example:
+- Allow **10 requests per minute per IP**
+- Block requests once the limit is exceeded
 
-This allowed the system to absorb traffic spikes without data loss.
-
----
-
-## Storage & Query Layer
-
-For analytics workloads:
-- **ClickHouse** for fast aggregations
-- **Redis** for session lookups
-- **PostgreSQL** for metadata
-
-This separation kept reads fast and writes predictable.
+Rate limiting helps protect your application from:
+- accidental infinite loops
+- brute force attacks
+- unfair or abusive usage
 
 ---
 
-## Sessionization Without Cookies
+## Why Redis?
 
-Instead of cookies:
-- Short-lived identifiers
-- Time-window based session modeling
-- No cross-site tracking
+You could store request counts in memory, but that breaks as soon as:
+- the server restarts
+- your application scales to multiple instances
 
-This kept analytics accurate while remaining privacy-safe.
+Redis works well for rate limiting because:
+- it’s fast and in-memory
+- it’s shared across all app instances
+- it supports atomic operations like \`INCR\`
+- it supports automatic expiration with \`EXPIRE\`
 
----
-
-## What I Learned
-
-- Privacy constraints improve system design
-- Analytics workloads are fundamentally different from CRUD apps
-- ClickHouse rewards careful schema planning
-- Developer experience matters as much as performance
+These features make Redis ideal for distributed rate limiting.
 
 ---
 
-## Final Thoughts
+## Rate limiting strategy (Fixed Window)
 
-Privacy-first analytics is harder — but worth it.  
-The tradeoffs force better architecture and more honest products.
+In this implementation, we’ll use a **fixed window rate limiter**:
 
-If you're building analytics today, start with privacy as a **constraint**, not a feature.
+- Each client has a request counter
+- The counter resets every fixed interval (for example, 60 seconds)
+- Redis automatically deletes the counter after the window expires
+
+This strategy is simple and easy to reason about.
+
+---
+
+## Redis data model
+
+For each client (IP-based for simplicity):
+
+- **Key:** \`rate:<ip>\`
+- **Value:** request count
+- **TTL:** window duration (in seconds)
+
+Redis handles both counting and cleanup automatically.
+
+---
+
+## Setting up Redis
+
+Install the Redis client:
+
+\`\`\`bash
+npm install ioredis
+\`\`\`
+
+Create a shared Redis connection:
+
+\`\`\`javascript
+const Redis = require("ioredis");
+
+const redisClient = new Redis();
+\`\`\`
+
+This client should be reused across requests, not created inside the middleware.
+
+---
+
+## Building the rate limiter middleware
+
+Below is a simple Express middleware that enforces rate limiting using Redis:
+
+\`\`\`javascript
+const Redis = require("ioredis");
+
+const redisClient = new Redis();
+
+const WINDOW_SIZE_IN_SECONDS = 60; // 1 minute
+const MAX_REQUESTS = 10;
+
+const rateLimiter = async (req, res, next) => {
+  try {
+    const key = \`rate:\${req.ip}\`;
+
+    const currentRequests = await redisClient.incr(key);
+
+    // First request in the window sets the expiry
+    if (currentRequests === 1) {
+      await redisClient.expire(key, WINDOW_SIZE_IN_SECONDS);
+    }
+
+    if (currentRequests > MAX_REQUESTS) {
+      return res.status(429).json({
+        error: "Too many requests. Please try again later.",
+      });
+    }
+
+    next();
+  } catch (error) {
+    // Fail open if Redis is unavailable
+    console.error("Rate limiter error:", error);
+    next();
+  }
+};
+
+module.exports = rateLimiter;
+\`\`\`
+
+---
+
+## Why this works
+
+Several details make this approach reliable:
+
+- \`INCR\` is atomic, so it’s safe under concurrent requests
+- The first request sets the expiration window
+- Redis automatically deletes the key after the TTL expires
+- No in-memory state is required
+- Works across multiple application instances
+
+This is why Redis is commonly used for rate limiting in real-world systems.
+
+---
+
+## Using the rate limiter at route level
+
+You can apply the middleware only where it’s needed:
+
+\`\`\`javascript
+const express = require("express");
+const rateLimiter = require("./rateLimiter");
+
+const app = express();
+
+app.get("/api/data", rateLimiter, (req, res) => {
+  res.json({ message: "This route is rate limited" });
+});
+
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
+\`\`\`
+
+This keeps your application flexible and avoids unnecessary global limits.
+
+---
+
+## Limitations of this approach
+
+This implementation is intentionally simple. In production systems, you may also need:
+- sliding window or token bucket algorithms
+- user-based limits instead of IP-based limits
+- rate-limit headers (\`X-RateLimit-*\`)
+- Lua scripts to combine \`INCR\` and \`EXPIRE\` safely
+- better fallback behavior if Redis is unavailable
+
+For learning purposes and many real-world use cases, this approach is sufficient.
+
+---
+
+## Final thoughts
+
+If you’re learning backend development, try building components like:
+- rate limiters
+- caching layers
+- authentication middleware
+
+They may look simple, but they expose important engineering trade-offs.
+
+Building a Redis based rate limiter helped me understand distributed systems better and appreciate the power of tools like Redis.
 `
-    },
-]
+  }]
