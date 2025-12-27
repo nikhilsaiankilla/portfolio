@@ -29,7 +29,6 @@ const BlogCard = ({
     slug,
     title,
     description,
-    image,
     tags,
     publishedOn,
     readingTime,
@@ -45,39 +44,15 @@ const BlogCard = ({
             custom={index}
             className="group flex flex-col w-full rounded-sm overflow-hidden bg-gray-400/10 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 shadow-sm hover:shadow-lg transition-all duration-300"
         >
-            {/* Image */}
-            <div className="relative w-full aspect-video overflow-hidden bg-gray-200 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-800">
-                <Image
-                    src={image || "https://placehold.co/1200x675"}
-                    alt={title}
-                    fill
-                    priority={featured}
-                    className="object-cover"
-                />
-
-                {featured && (
-                    <div className="absolute top-3 right-3 z-10">
-                        <Badge className="bg-cyan-600/90 text-white text-[10px] uppercase tracking-wide">
-                            Featured
-                        </Badge>
-                    </div>
-                )}
-            </div>
-
             {/* Content */}
             <div className="flex flex-col p-5 space-y-4">
-                {/* Meta */}
-                <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-                    <span className="flex items-center gap-1">
-                        <Calendar size={14} />
-                        {publishedOn}
-                    </span>
-                    <span className="flex items-center gap-1">
-                        <Clock size={14} />
-                        {readingTime}
-                    </span>
+                <div className="h-5">
+                    {featured && (
+                        <Badge className="bg-cyan-600/70 text-white text-[10px] px-2 rounded-sm">
+                            Featured
+                        </Badge>
+                    )}
                 </div>
-
                 {/* Title & Description */}
                 <div className="space-y-2">
                     <h3 className="text-xl md:text-2xl font-bold font-heading text-black dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
@@ -103,6 +78,18 @@ const BlogCard = ({
                             +{tags.length - 3}
                         </span>
                     )}
+                </div>
+
+                {/* Meta */}
+                <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+                    <span className="flex items-center gap-1">
+                        <Calendar size={14} />
+                        {publishedOn}
+                    </span>
+                    <span className="flex items-center gap-1">
+                        <Clock size={14} />
+                        {readingTime}
+                    </span>
                 </div>
 
                 {/* CTA */}
