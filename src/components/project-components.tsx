@@ -107,25 +107,15 @@ export const ProjectComponents = {
         [key: string]: unknown;
     }) => {
         const getTextContent = (node: React.ReactNode): string => {
-            if (typeof node === 'string') {
-                return node;
-            }
-            if (typeof node === 'number') {
-                return String(node);
-            }
-            if (
-                React.isValidElement(node) &&
-                node.props &&
-                typeof node.props === 'object'
-            ) {
-                return getTextContent(
-                    (node.props as { children?: React.ReactNode }).children,
-                );
+            if (typeof node === "string") return node;
+            if (typeof node === "number") return String(node);
+            if (React.isValidElement(node)) {
+                return getTextContent((node.props as { children?: React.ReactNode }).children);
             }
             if (Array.isArray(node)) {
-                return node.map(getTextContent).join('');
+                return node.map(getTextContent).join("");
             }
-            return '';
+            return "";
         };
 
         const codeText = getTextContent(children);
@@ -133,7 +123,7 @@ export const ProjectComponents = {
         return (
             <div className="group relative mb-4">
                 <pre
-                    className="overflow-x-auto rounded-lg border bg-muted/30 p-4 text-sm [&>code]:bg-transparent [&>code]:p-0"
+                    className="overflow-x-auto rounded-lg border bg-muted/40 p-4 text-sm"
                     {...props}
                 >
                     {children}
@@ -151,7 +141,8 @@ export const ProjectComponents = {
         className?: string;
         [key: string]: unknown;
     }) => {
-        if (className?.includes('language-')) {
+        // BLOCK code (handled by rehype-highlight)
+        if (className?.includes("language-")) {
             return (
                 <code className={className} {...props}>
                     {children}
@@ -159,8 +150,12 @@ export const ProjectComponents = {
             );
         }
 
+        // INLINE code
         return (
-            <code className="rounded px-2 py-1 text-sm font-mono" {...props}>
+            <code
+                className="rounded bg-muted/60 px-1.5 py-0.5 font-mono text-sm"
+                {...props}
+            >
                 {children}
             </code>
         );
