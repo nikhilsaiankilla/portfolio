@@ -1,4 +1,8 @@
 import { Project, projects } from "@/src/config/projects"
+import path from "path"
+import fs from 'fs'
+
+const projectDiractory = path.join(process.cwd(), 'src/data/projects');
 
 export const getProjectById = (slug: string) => {
     const project = projects.find((p, index) => (p.slug === slug))
@@ -9,6 +13,8 @@ export const getProjectById = (slug: string) => {
             error: 'Project Not Found!!',
         }
     }
+
+    const content = getProjectContentBySlug(slug)
 
     return {
         slug: project.slug,
@@ -32,11 +38,11 @@ export const getProjectById = (slug: string) => {
 
         isPublished: project.isPublished,
 
-        content: project?.content ?? "Content is Missing!! Please inform Admin.",
+        content: content ?? "Content is Missing!! Please inform Admin.",
     };
 }
 
-export const getAllProjects = () => {
+export const getAllFeaturedProjects = () => {
     if (projects.length === 0) return [];
 
     const publishedFeatured = projects.filter(
@@ -92,8 +98,36 @@ export const getRelatedProjects = (slug: string) => {
         .map((item) => item.project);
 };
 
+export const getAllProjects = () => {
+    if (projects.length === 0) return [];
+
+    const publishedProjects = projects.filter((pro, idx) => pro.isPublished === true && isPublishedWithDate(pro));
+
+    if (publishedProjects.length === 0) return [];
+
+    const publishedProjectsSortedByPublishedDates = publishedProjects.sort((a, b) =>
+        new Date(b?.publishedOn as string).getTime() - new Date(a?.publishedOn as string).getTime()
+    )
+
+    return publishedProjectsSortedByPublishedDates;
+}
+
 function isPublishedWithDate(
     project: Project
 ): project is Project & { publishedOn: string } {
     return project.isPublished === true && typeof project.publishedOn === "string";
+}
+
+function getProjectContentBySlug(slug: string) {
+    if (!slug) return "";
+
+    const projectPath = path.join(projectDiractory, `${slug}.mdx`);
+
+    if (!fs.existsSync(projectPath)) {
+        return `${slug} Mdx Content file is missing please inform the admin!!`
+    }
+
+    const readContentOfProjectUsingSlug = fs.readFileSync(projectPath, 'utf-8')
+
+    return readContentOfProjectUsingSlug;
 }

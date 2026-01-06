@@ -34,7 +34,7 @@ const ContactSection = () => {
                     </h2>
 
                     {/* 2. Text with Inline Badges */}
-                    <p className="text-lg text-gray-600 dark:text-gray-400 max-w-lg leading-relaxed">
+                    <div className="text-lg text-gray-600 dark:text-gray-400 max-w-lg leading-relaxed">
                         Want to chat? Just shoot me a dm via{' '}
 
                         <div
@@ -91,7 +91,7 @@ const ContactSection = () => {
                             </MotionLink>
                         </div>
                         {' '}or reach out from below form{' '}
-                    </p>
+                    </div>
 
                     <ContactForm />
 

@@ -1,0 +1,185 @@
+When building APIs, one of the first real problems you run into is abuse — too many requests from the same client, intentional or accidental.
+
+While learning Redis, I realized I didn’t fully understand **how rate limiting actually works under the hood**. Instead of using a library, I decided to build a simple rate limiter myself to understand the mechanics clearly.
+
+This post explains how to add a **basic rate limiter to an Express app using Redis**, and why this approach works well in distributed systems.
+
+---
+
+## What is rate limiting?
+
+Rate limiting is a technique used to **restrict how many requests a client can make** to an API within a specific time window.
+
+For example:
+- Allow **10 requests per minute per IP**
+- Block requests once the limit is exceeded
+
+Rate limiting helps protect your application from:
+- accidental infinite loops
+- brute force attacks
+- unfair or abusive usage
+
+---
+
+## Why Redis?
+
+You could store request counts in memory, but that breaks as soon as:
+- the server restarts
+- your application scales to multiple instances
+
+Redis works well for rate limiting because:
+- it’s fast and in-memory
+- it’s shared across all app instances
+- it supports atomic operations like `INCR`
+- it supports automatic expiration with `EXPIRE`
+
+These features make Redis ideal for distributed rate limiting.
+
+---
+
+## Rate limiting strategy (Fixed Window)
+
+In this implementation, we’ll use a **fixed window rate limiter**:
+
+- Each client has a request counter
+- The counter resets every fixed interval (for example, 60 seconds)
+- Redis automatically deletes the counter after the window expires
+
+This strategy is simple and easy to reason about.
+
+---
+
+## Redis data model
+
+For each client (IP-based for simplicity):
+
+- **Key:** `rate:<ip>`
+- **Value:** request count
+- **TTL:** window duration (in seconds)
+
+Redis handles both counting and cleanup automatically.
+
+---
+
+## Setting up Redis
+
+Install the Redis client:
+
+```bash
+npm install ioredis
+```
+
+### Create a shared Redis connection:
+
+```javascript
+const Redis = require("ioredis");
+
+const redisClient = new Redis();
+```
+This client should be reused across requests, not created inside the middleware.
+
+---
+
+### Building the rate limiter middleware
+
+Below is a simple Express middleware that enforces rate limiting using Redis:
+
+```javascript
+const Redis = require("ioredis");
+
+const redisClient = new Redis();
+
+const WINDOW_SIZE_IN_SECONDS = 60; // 1 minute
+const MAX_REQUESTS = 10;
+
+const rateLimiter = async (req, res, next) => {
+  try {
+    const key = `rate:${req.ip}`;
+
+    const currentRequests = await redisClient.incr(key);
+
+    // First request in the window sets the expiry
+    if (currentRequests === 1) {
+      await redisClient.expire(key, WINDOW_SIZE_IN_SECONDS);
+    }
+
+    if (currentRequests > MAX_REQUESTS) {
+      return res.status(429).json({
+        error: "Too many requests. Please try again later.",
+      });
+    }
+
+    next();
+  } catch (error) {
+    // Fail open if Redis is unavailable
+    console.error("Rate limiter error:", error);
+    next();
+  }
+};
+
+module.exports = rateLimiter;
+```
+
+### Why this works
+
+Several details make this approach reliable:
+
+- INCR is atomic, so it’s safe under concurrent requests
+- The first request sets the expiration window
+- Redis automatically deletes the key after the TTL expires
+- No in-memory state is required
+- Works across multiple application instances
+This is why Redis is commonly used for rate limiting in real-world systems.
+
+### Using the rate limiter at route level
+
+You can apply the middleware only where it’s needed:
+
+```javascript
+const express = require("express");
+const rateLimiter = require("./rateLimiter");
+
+const app = express();
+
+app.get("/api/data", rateLimiter, (req, res) => {
+  res.json({ message: "This route is rate limited" });
+});
+
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
+```
+This keeps your application flexible and avoids unnecessary global limits.
+
+---
+
+### Limitations of this approach
+
+This implementation is intentionally simple. In production systems, you may also need:
+
+- sliding window or token bucket algorithms
+
+- user-based limits instead of IP-based limits
+
+- rate-limit headers (X-RateLimit-*)
+
+- Lua scripts to combine INCR and EXPIRE safely
+
+- better fallback behavior if Redis is unavailable
+
+For learning purposes and many real-world use cases, this approach is sufficient.
+
+
+## Final thoughts
+
+If you’re learning backend development, try building components like:
+
+- rate limiters
+
+- caching layers
+
+- authentication middleware
+
+They may look simple, but they expose important engineering trade offs.
+
+Building a Redis-based rate limiter helped me understand distributed systems better and appreciate the power of tools like Redis.

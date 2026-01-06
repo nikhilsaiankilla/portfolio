@@ -1,4 +1,8 @@
+import path from "path";
 import { blogs, BlogTypes } from "../config/blogs";
+import fs from 'fs'
+
+const blogDiractory = path.join(process.cwd(), 'src/data/blogs');
 
 export const getBlogById = (slug: string) => {
     const blog = blogs.find((p, index) => (p.slug === slug))
@@ -9,6 +13,8 @@ export const getBlogById = (slug: string) => {
             error: 'Blog Not Found!!',
         }
     }
+
+    const content = getContentUsingSlug(slug);
 
     return {
         slug: blog.slug,
@@ -27,11 +33,11 @@ export const getBlogById = (slug: string) => {
         isPublished: blog.isPublished,
         canonical: blog.canonical,
 
-        content: blog?.content ?? "Content is Missing!! Please inform Admin.",
+        content: content ?? "Content is Missing!! Please inform Admin.",
     };
 }
 
-export const getAllBlogs = () => {
+export const getAllFeaturedBlogs = () => {
     if (blogs.length === 0) return [];
 
     const publishedFeatured = blogs.filter(
@@ -55,6 +61,20 @@ export const getAllBlogs = () => {
             new Date(a.publishedOn).getTime()
     );
 };
+
+export const getAllBlogs = () => {
+    if (blogs.length === 0) return []
+
+    const publishedBlogs = blogs.filter((blog) => blog.isPublished === true)
+
+    if (publishedBlogs.length === 0) return [];
+
+    const blogsSortedInDescendingOrder = blogs.sort((a, b) =>
+        new Date(b.publishedOn).getTime() - new Date(a.publishedOn).getTime()
+    )
+
+    return blogsSortedInDescendingOrder;
+}
 
 export const getRelatedBlogs = (slug: string) => {
     const currentProject = blogs.find((project) => project.slug === slug);
@@ -91,4 +111,18 @@ function isPublishedWithDate(
     blog: BlogTypes
 ): blog is BlogTypes & { publishedOn: string } {
     return blog.isPublished === true && typeof blog.publishedOn === "string";
+}
+
+function getContentUsingSlug(slug: string) {
+    if (!slug) return '';
+
+    const blogPath = path.join(blogDiractory, `${slug}.mdx`);
+
+    const title = slug.split('-').join(" ");
+
+    if (!fs.existsSync(blogPath)) return `${title} Mdx is missing please inform Admin!!`
+
+    const readContentOfBlogUsingSlug = fs.readFileSync(blogPath, 'utf-8');
+
+    return readContentOfBlogUsingSlug;
 }

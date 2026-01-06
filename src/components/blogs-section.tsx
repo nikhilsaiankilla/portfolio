@@ -1,11 +1,11 @@
 import AnimatedContainer from './animated-container';
 import SectionHeading from './section-heading';
 import AnimatedButton from './animated-btn';
-import { getAllBlogs } from '../lib/blogs';
+import { getAllFeaturedBlogs } from '../lib/blogs';
 import BlogCard from './blog-card';
 
 const BlogsSection = () => {
-    const blogs = getAllBlogs();
+    const blogs = getAllFeaturedBlogs();
     return (
         <AnimatedContainer>
             <SectionHeading title='Blogs' />

@@ -2,10 +2,10 @@ import AnimatedContainer from './animated-container';
 import SectionHeading from './section-heading';
 import ProjectCard from './project-card';
 import AnimatedButton from './animated-btn';
-import { getAllProjects } from '../lib/project';
+import { getAllFeaturedProjects } from '../lib/project';
 
 const ProofOfWorkSection = () => {
-  const projects = getAllProjects();
+  const projects = getAllFeaturedProjects();
   return (
     <AnimatedContainer>
       <SectionHeading title='Proof of work!' />

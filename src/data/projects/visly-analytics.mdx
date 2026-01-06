@@ -1,0 +1,145 @@
+# Visly Analytics
+
+Visly is a **privacy-first web analytics platform** designed for developers who want meaningful insights without complex setup, invasive tracking, or bloated dashboards.  
+The goal is simple: **drop in minimal config, and Visly handles the rest**.
+
+Page views, clicks, visitors, sessions — tracked automatically.
+
+---
+
+## Why Visly Exists
+
+Most analytics tools fail in one of two ways:
+
+- Too complex to set up correctly  
+- Too invasive to user privacy  
+
+Visly is built for modern developers who want:
+- Zero or near-zero configuration
+- Real-time insights
+- Full ownership of their data
+- No cookies, no fingerprinting, no dark patterns
+
+---
+
+## Core Features
+
+### Minimal Configuration
+
+- Add a lightweight SDK
+- Provide a project key
+- Start receiving analytics instantly
+
+No event schemas to define. No dashboards to wire manually.
+
+---
+
+### Automatic Tracking
+
+Visly automatically captures:
+
+- **Page Views** – route changes and navigation
+- **Visitors** – anonymous, privacy-safe identification
+- **Sessions** – intelligent sessionization
+- **Clicks & Interactions** – key UI interactions without manual instrumentation
+
+All without cookies or personal data.
+
+---
+
+### Privacy-First by Design
+
+- No cookies
+- No fingerprinting
+- No personal identifiers
+- GDPR-friendly by default
+
+Analytics should not come at the cost of user trust.
+
+---
+
+### Real-Time Analytics
+
+- Events ingested in real time
+- Live dashboards powered by a high-performance data pipeline
+- Designed to handle high write throughput with low latency reads
+
+---
+
+## Technical Architecture
+
+### Event Ingestion Pipeline
+
+- Lightweight SDK sends events
+- Events flow through **Kafka** for durability and scale
+- **Redis** used for fast session lookups and caching
+- **ClickHouse** powers analytical queries at scale
+- **PostgreSQL** stores metadata and configuration
+
+Built to scale from side projects to high-traffic products.
+
+---
+
+### Session & Visitor Modeling
+
+- Privacy-safe visitor identification
+- Intelligent session windows
+- Accurate aggregation without invasive tracking
+
+---
+
+## Tech Stack
+
+**Frontend**
+- Next.js
+- Tailwind CSS
+
+**Backend & Infrastructure**
+- Node.js
+- Kafka
+- Redis
+- ClickHouse
+- PostgreSQL
+
+---
+
+## Challenges Faced
+
+- Designing a truly zero-config analytics flow
+- Handling high-throughput event ingestion
+- Accurate sessionization without cookies
+- Query performance at scale
+- Keeping the SDK lightweight and fast
+
+---
+
+## Infrastructure & Demo Environment Notes
+
+To keep the demo environment lightweight and cost-efficient, some background processing components are currently **disabled**.
+
+- The full event pipeline (Kafka → Worker → ClickHouse) has been designed, implemented, and validated.
+- Continuous background workers are paused in the demo environment since real-time processing is not required for showcasing core functionality.
+- All architectural components, deployment configurations, and scaling paths remain intact and can be re-enabled as needed.
+
+This approach allows Visly to demonstrate production-grade system design while avoiding unnecessary infrastructure cost during development and portfolio usage.
+
+---
+
+## Key Learnings
+
+- Analytics system design at scale
+- Event-driven architectures
+- ClickHouse query optimization
+- Designing developer-friendly SDKs
+- Privacy-first product thinking
+
+---
+
+## Status
+
+Visly is currently **under active development**.  
+The focus is on stability, performance, and an exceptional developer experience before public launch.
+
+---
+
+If analytics should be invisible, fast, and respectful — Visly is built for that.

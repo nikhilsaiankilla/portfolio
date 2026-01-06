@@ -1,0 +1,104 @@
+ # HookPeek
+
+HookPeek is a **webhook inspection and debugging tool** built to help developers understand what third party services actually send to their backend.
+
+It focuses on **observation, not processing** capturing raw webhook requests exactly as they arrive.
+
+---
+
+## Why HookPeek Exists
+
+Webhook debugging is painful:
+- Payments succeed but backend state doesn’t update
+- Providers retry webhooks without clear visibility
+- Logs miss headers, retries, or malformed payloads
+
+HookPeek exists to remove guesswork and show **raw truth**.
+
+---
+
+## Core Features
+
+### Webhook Endpoint Generation
+
+- Generate a temporary webhook URL instantly
+- Plug it into Stripe or any webhook provider
+- No authentication required to start
+
+Simple and fast.
+
+---
+
+### Request Inspection
+
+- Capture **any HTTP method**
+- Store raw request bodies (JSON or plain text)
+- Inspect headers and query parameters
+- View retries and delivery attempts
+
+Nothing is parsed or altered.
+
+---
+
+### Request History & Pagination
+
+- Timestamped request logs
+- Paginated views for high-volume traffic
+- Click-to-inspect detailed request payloads
+
+Built for real-world debugging.
+
+---
+
+## Technical Architecture
+
+### Data Flow
+
+- Incoming webhook requests captured via API routes
+- Raw payloads stored safely without assumptions
+- PostgreSQL used for persistence
+- Cleanup jobs remove stale data automatically
+
+Designed to survive malformed input and retries.
+
+---
+
+## Tech Stack
+
+**Frontend**
+- Next.js
+- Tailwind CSS
+
+**Backend**
+- Node.js
+- PostgreSQL (Supabase)
+- Drizzle ORM
+
+---
+
+## Challenges Faced
+
+- Handling invalid or non-JSON payloads safely
+- Supporting all HTTP methods in Next.js routes
+- Preventing race conditions during request counting
+- Designing secure cron jobs for data cleanup
+
+---
+
+## Key Learnings
+
+- Webhook systems must never assume payload shape
+- Safe parsing is critical for production stability
+- Databases should handle concurrency, not application logic
+- Cleanup and retention are essential for long-running systems
+
+---
+
+## Status
+
+HookPeek is **actively developed** and verified using real Stripe webhooks.
+
+---
+
+HookPeek is built with a single goal:  
+**Stop guessing. See your webhooks.**
