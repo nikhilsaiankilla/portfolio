@@ -8,6 +8,7 @@ import HeroSection from "@/src/components/hero-section";
 import NavSection from "@/src/components/nav-section";
 import ProofOfWorkSection from "@/src/components/proof-of-work-section";
 import SkillsSection from "@/src/components/skills-section";
+import VisitorSection from "@/src/components/visitor-section";
 
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
         <EducationSection />
         <BlogsSection />
         <ContactSection />
+        <VisitorSection />
         <FooterSection />
       </div>
     </div>
