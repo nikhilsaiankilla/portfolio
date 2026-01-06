@@ -1,0 +1,99 @@
+# DevRoastify
+
+DevRoastify is a **GitHub roast card generator** that analyzes a user’s GitHub profile and turns the results into a **shareable visual card**.  
+Profiles are roasted using AI, rendered as HTML, and captured as PNG images users can copy and share.
+
+---
+
+## Why DevRoastify Exists
+
+Developers love:
+- GitHub stats
+- Self-deprecating humor
+- Shareable tech content
+
+DevRoastify combines all three into a fun, lightweight project that turns GitHub data into something entertaining.
+
+---
+
+## Core Features
+
+### GitHub Profile Analysis
+
+- Fetches public GitHub profile and repository data
+- Analyzes activity, repositories, and patterns
+- Builds structured context for AI consumption
+
+---
+
+### AI-Powered Roasts
+
+- Uses **Gemini API** to generate humorous roast text
+- Carefully designed prompts to keep content funny, not offensive
+- Dynamic roast generation per user
+
+Prompt quality directly impacts output quality.
+
+---
+
+### Card Generation & Export
+
+- Roast rendered as an HTML card
+- **Puppeteer** used to capture the HTML as a PNG image
+- Users can copy or download the generated card easily
+
+Designed for sharing on social platforms.
+
+---
+
+## Technical Architecture
+
+### Rendering Pipeline
+
+1. GitHub API fetches user data  
+2. Structured data passed to Gemini for roast generation  
+3. Roast rendered into an HTML card  
+4. Puppeteer captures the card as a PNG  
+5. Image served to the user for copying or sharing  
+
+---
+
+## Tech Stack
+
+**Frontend**
+- React
+- Tailwind CSS
+
+**Backend**
+- Node.js
+- GitHub API
+- Gemini API
+- Puppeteer
+
+---
+
+## Challenges Faced
+
+- GitHub API rate limiting
+- Prompt engineering for consistent humor
+- Rendering HTML accurately for screenshots
+- Puppeteer performance and reliability
+
+---
+
+## Key Learnings
+
+- AI prompt design and iteration
+- HTML-to-image rendering pipelines
+- Puppeteer automation
+- Balancing humor with safety constraints
+
+---
+
+## Status
+
+DevRoastify is **completed** and publicly usable as a fun side project.
+
+---
+
+DevRoastify proves that small, well-executed ideas can be both technical and fun.

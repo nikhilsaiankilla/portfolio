@@ -63,6 +63,17 @@ const NavSection = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    useEffect(() => {
+        const store = async () => {
+            try {
+                await fetch('/api/visit', { method: 'POST' });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        store()
+    }, [])
+
     return (
         <motion.header
             initial="hidden"

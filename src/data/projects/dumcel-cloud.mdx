@@ -1,0 +1,138 @@
+# Dumcel Cloud
+
+Dumcel Cloud is a **React-focused cloud deployment platform** designed to make deploying frontend applications straightforward and observable.  
+Connect a GitHub repository, trigger a deployment manually, and Dumcel handles builds, containers, logs, and deployment history.
+
+---
+
+## Why Dumcel Exists
+
+Frontend developers need:
+- Predictable deployments
+- Clear visibility into builds
+- Control over when code goes live
+- No deep DevOps knowledge
+
+Dumcel removes infrastructure friction while keeping developers in control.
+
+---
+
+## Core Features
+
+### GitHub Integration
+
+- Secure GitHub OAuth integration
+- Repository access for build pipelines
+- Webhook support for metadata and commit context
+
+Deployments are **manual by design**, not automatic.
+
+---
+
+### Manual Deployment Pipeline
+
+- Deploy when *you* decide
+- Deterministic, containerized builds
+- Isolated build environments per deployment
+
+No surprise production changes.
+
+---
+
+### Logs & Deployment History
+
+- Real-time build logs during deployments
+- Persistent logs for debugging
+- Full deployment history with commit references and status
+
+Observability is a core feature.
+
+---
+
+### Custom Domains & Routing
+
+- Wildcard custom domain support
+- Automatic domain mapping per project
+- Reverse proxy for routing traffic to active deployments
+
+Production-ready networking without manual setup.
+
+---
+
+## Technical Architecture
+
+### Microservices Architecture
+
+- Independent services for builds, deployments, logging, and orchestration
+- Event-driven communication between services
+- Fault isolation to prevent cascading failures
+
+Designed for long-term scalability.
+
+---
+
+### Infrastructure
+
+- **Docker** for build isolation
+- **AWS ECS** for container orchestration
+- **Kafka** for event pipelines
+- **Redis** for queues and ephemeral state
+- **Node.js** services for orchestration and APIs
+
+---
+
+## Infrastructure & Demo Environment Notes
+
+To keep the platform sustainable for demo and portfolio usage, certain background and orchestration components are currently **scaled down or disabled**.
+
+- The full ECS-based microservices architecture, Kafka event pipeline, and Redis-backed coordination layers have been designed, implemented, and validated.
+- Continuous background workers and high-throughput pipelines are paused where not required for interactive demos.
+- All services remain containerized with preserved deployment workflows and can be re-enabled or scaled horizontally when needed.
+
+This setup reflects real-world platform engineering tradeoffs: maintaining production-grade architecture while optimizing operational cost during early-stage usage.
+
+---
+
+## Tech Stack
+
+**Frontend**
+- Next.js
+- Tailwind CSS
+
+**Backend & Platform**
+- Node.js
+- Docker
+- AWS ECS
+- Kafka
+- Redis
+
+---
+
+## Challenges Faced
+
+- Designing reliable microservice boundaries
+- Streaming logs in real time
+- Deployment state consistency across services
+- Secure domain routing and reverse proxy setup
+- Preventing partial failures from impacting the platform
+
+---
+
+## Key Learnings
+
+- Microservices system design
+- Platform observability patterns
+- Reverse proxy and domain routing
+- Event-driven orchestration
+- Building developer-focused infrastructure
+
+---
+
+## Status
+
+Dumcel Cloud is **Deployed** you can try it now.  
+The focus is on stability, observability, and clean system boundaries before broader adoption.
+
+---
+
+Dumcel prioritizes **control, visibility, and correctness** over automation hype.
