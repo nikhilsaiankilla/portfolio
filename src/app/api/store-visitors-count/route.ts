@@ -3,7 +3,7 @@ import { visitorSnapshots } from "@/src/db/schema";
 import { getRedisInstance } from "@/src/lib/redis";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET(req: NextRequest) {
     try {
         if (req.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
             return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
