@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedTooltip from "./animated-tooltip";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu";
@@ -11,11 +11,24 @@ const AvailablePrimaryColors = [
     { name: "Indigo", colorCode: "0.585 0.225 264.376" },
     { name: "Violet", colorCode: "0.541 0.252 286.033" },
     { name: "Purple", colorCode: "0.607 0.241 292.717" },
+
     { name: "Teal", colorCode: "0.643 0.137 182.503" },
+    { name: "Cyan", colorCode: "0.676 0.129 200.000" },
+
     { name: "Green", colorCode: "0.713 0.170 142.495" },
+    { name: "Lime", colorCode: "0.785 0.160 125.000" },
+
     { name: "Amber", colorCode: "0.769 0.188 70.080" },
+    { name: "Yellow", colorCode: "0.815 0.150 95.000" },
+
     { name: "Orange", colorCode: "0.705 0.213 41.116" },
+    { name: "Red", colorCode: "0.627 0.234 29.234" },
+
     { name: "Rose", colorCode: "0.645 0.246 16.439" },
+    { name: "Pink", colorCode: "0.673 0.230 350.000" },
+
+    { name: "Slate", colorCode: "0.540 0.040 260.000" },
+    { name: "Neutral", colorCode: "0.600 0.020 270.000" },
 ];
 
 const TogglePrimaryColor = () => {
@@ -57,13 +70,13 @@ const TogglePrimaryColor = () => {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 8 }}
                             transition={{ duration: 0.18, ease: "easeOut" }}
-                            className="grid grid-cols-3 gap-2 p-2 rounded-lg"
+                            className="grid grid-cols-4 gap-2 p-2 rounded-lg"
                         >
                             {AvailablePrimaryColors.map((color) => (
                                 <Button
                                     key={color.name}
                                     onClick={() => setPrimaryColor(color.colorCode)}
-                                    className="w-5 rounded-sm border border-black/10 hover:scale-110 transition-transform aspect-square cursor-pointer"
+                                    className="w-full rounded-sm border border-black/10 hover:scale-110 transition-transform aspect-square cursor-pointer shadow-2xl"
                                     style={{ background: `oklch(${color.colorCode})` }}
                                 />
                             ))}

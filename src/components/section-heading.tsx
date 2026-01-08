@@ -23,7 +23,7 @@ const SectionHeading = ({
         <motion.h2
             variants={itemVariants}
             className={cn(
-                "text-2xl font-bold text-black dark:text-white mb-8 font-heading",
+                "text-2xl font-bold text-black dark:text-white mb-8 font-montserrat",
                 className
             )}
         >

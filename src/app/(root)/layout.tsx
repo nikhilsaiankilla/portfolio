@@ -1,22 +1,22 @@
 import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from "next";
-import { Poppins, Comic_Neue } from "next/font/google";
+import { Poppins, Comic_Neue, Roboto, Montserrat } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/src/components/theme-provider";
 import { Toaster } from "@/src/components/ui/sonner";
 import ReactLenis from 'lenis/react';
 import { ViewTransitions } from 'next-view-transitions'
 
-const poppins = Poppins({
+const roboto = Roboto({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"], // pick the ones you need
-  variable: "--font-poppins",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-roboto",
 });
 
-const comicNeue = Comic_Neue({
+const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["300", "400", "700"], // light / regular / bold
-  variable: "--font-comic",
+  variable: "--font-montserrat",
 });
 
 export const metadata: Metadata = {
@@ -85,7 +85,7 @@ export default function RootLayout({
           <script defer src="https://cloud.umami.is/script.js" data-website-id="d4bb3fad-5fce-48b5-8f8a-17f873fd923f"></script>
         </head>
         <body
-          className={`${poppins.variable} ${comicNeue.variable} antialiased selection:bg-blue-600/90 selection:text-white`}
+          className={`${roboto.variable} ${montserrat.variable} antialiased selection:bg-blue-600/90 selection:text-white`}
         >
           <ThemeProvider
             attribute={'class'}

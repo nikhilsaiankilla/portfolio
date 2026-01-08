@@ -107,14 +107,14 @@ const ProjectCard = ({ title, description, technologies, live, image, status, gi
                             <AnimatedTooltip label={'View Website'}>
                                 {
                                     live && <Link href={live} target="_blank" className=''>
-                                        <Globe size={20} />
+                                        <Globe size={20} className='hover:text-primary'/>
                                     </Link>
                                 }
                             </AnimatedTooltip>
                             <AnimatedTooltip label={'View Github'}>
                                 {
                                     github && <Link href={github} target="_blank" className=''>
-                                        <GithubIcon size={20} />
+                                        <GithubIcon size={20} className='hover:text-primary'/>
                                     </Link>
                                 }
                             </AnimatedTooltip>
@@ -137,9 +137,9 @@ const ProjectCard = ({ title, description, technologies, live, image, status, gi
                 <div className='w-full group'>
                     <Link
                         href={`/projects/${slug}`}
-                        className='flex items-center gap-2 text-gray-500 dark:text-gray-300 text-sm ml-auto w-fit hover:underline'
+                        className='flex items-center gap-2 text-gray-500 dark:text-gray-300 text-sm ml-auto w-fit group'
                     >
-                        View Details <ArrowRight size={16} />
+                        <p className='group-hover:text-primary'>View Details</p> <ArrowRight size={16} className='group-hover:text-primary'/>
                     </Link>
                 </div>
             </div>

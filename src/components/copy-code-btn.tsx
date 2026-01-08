@@ -2,6 +2,8 @@
 
 import { Copy, CopyCheck } from 'lucide-react';
 import { useState } from 'react';
+import { Button } from './ui/button';
+import { toast } from 'sonner';
 
 interface CodeCopyButtonProps {
     code: string;
@@ -14,27 +16,33 @@ export function CodeCopyButton({ code }: CodeCopyButtonProps) {
         try {
             await navigator.clipboard.writeText(code);
             setIsCopied(true);
-            setTimeout(() => setIsCopied(false), 2000); // Reset after 2 seconds
+            toast.success('Code Copied!!')
+            setTimeout(() => setIsCopied(false), 2000);
         } catch (err) {
-            console.error('Failed to copy text: ', err);
+             toast.error('Code Failed To Copied!!')
+            console.error('Failed to copy text:', err);
         }
     };
 
     return (
-        <form
-            action={copyToClipboard}
-            className="absolute top-3 right-3 rounded-md opacity-0 transition-all duration-200 group-hover:opacity-100 hover:cursor-pointer"
+        <Button
+            type="button"
+            onClick={copyToClipboard}
+            className="
+        absolute top-3 right-3
+        rounded-md
+        transition-all duration-200
+        cursor-pointer
+        bg-transparent
+        hover:bg-transparent
+      "
             title={isCopied ? 'Copied!' : 'Copy code'}
         >
             {isCopied ? (
-                <span>
-                    <CopyCheck className="h-4 w-4 text-green-500" />
-                </span>
+                <CopyCheck size={28} className="text-green-500" />
             ) : (
-                <span>
-                    <Copy className="h-4 w-4 text-secondary" />
-                </span>
+                <Copy size={28} className="text-gray-600" />
             )}
-        </form>
+        </Button>
     );
 }

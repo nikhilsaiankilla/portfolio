@@ -16,9 +16,10 @@ export const ProjectComponents = {
         <Image
             src={src}
             alt={alt}
+            unoptimized
             width={800}
             height={400}
-            className="rounded-lg"
+            className="rounded-lg w-full aspect-video"
             {...props}
         />
     ),
@@ -29,7 +30,7 @@ export const ProjectComponents = {
         children: React.ReactNode;
         [key: string]: unknown;
     }) => (
-        <h1 className="mb-6 text-4xl font-bold" {...props}>
+        <h1 className="mb-6 text-4xl font-bold font-montserrat" {...props}>
             {children}
         </h1>
     ),
@@ -40,7 +41,7 @@ export const ProjectComponents = {
         children: React.ReactNode;
         [key: string]: unknown;
     }) => (
-        <h2 className="mb-4 mt-8 text-3xl font-semibold" {...props}>
+        <h2 className="mb-4 mt-8 text-3xl font-semibold font-montserrat" {...props}>
             {children}
         </h2>
     ),
@@ -51,7 +52,7 @@ export const ProjectComponents = {
         children: React.ReactNode;
         [key: string]: unknown;
     }) => (
-        <h3 className="mb-3 mt-6 text-2xl font-medium" {...props}>
+        <h3 className="mb-3 mt-6 text-2xl font-medium font-montserrat" {...props}>
             {children}
         </h3>
     ),
@@ -62,7 +63,7 @@ export const ProjectComponents = {
         children: React.ReactNode;
         [key: string]: unknown;
     }) => (
-        <p className="mb-4 leading-7 text-muted-foreground" {...props}>
+        <p className="mb-4 leading-7 text-muted-foreground font-roboto" {...props}>
             {children}
         </p>
     ),
@@ -73,7 +74,7 @@ export const ProjectComponents = {
         children: React.ReactNode;
         [key: string]: unknown;
     }) => (
-        <ul className="mb-4 ml-6 list-disc space-y-2" {...props}>
+        <ul className="mb-4 ml-6 list-disc space-y-2 font-roboto" {...props}>
             {children}
         </ul>
     ),
@@ -84,7 +85,7 @@ export const ProjectComponents = {
         children: React.ReactNode;
         [key: string]: unknown;
     }) => (
-        <ol className="mb-4 ml-6 list-decimal space-y-2" {...props}>
+        <ol className="mb-4 ml-6 list-decimal space-y-2 font-roboto" {...props}>
             {children}
         </ol>
     ),
@@ -95,7 +96,7 @@ export const ProjectComponents = {
         children: React.ReactNode;
         [key: string]: unknown;
     }) => (
-        <li className="leading-7 text-muted-foreground" {...props}>
+        <li className="leading-7 text-muted-foreground font-roboto" {...props}>
             {children}
         </li>
     ),
@@ -110,7 +111,7 @@ export const ProjectComponents = {
             if (typeof node === "string") return node;
             if (typeof node === "number") return String(node);
             if (React.isValidElement(node)) {
-                return getTextContent((node.props as { children?: React.ReactNode }).children);
+                return getTextContent((node.props as { children?: React.ReactNode })?.children);
             }
             if (Array.isArray(node)) {
                 return node.map(getTextContent).join("");
@@ -121,13 +122,22 @@ export const ProjectComponents = {
         const codeText = getTextContent(children);
 
         return (
-            <div className="group relative mb-4">
+            <div className="group relative mb-6 not-prose">
                 <pre
-                    className="overflow-x-auto rounded-lg border bg-muted/40 p-4 text-sm"
+                    className="
+          overflow-x-auto
+          rounded-sm
+          border
+          bg-neutral-900
+          text-neutral-100
+          p-4
+          text-sm
+        "
                     {...props}
                 >
                     {children}
                 </pre>
+
                 <CodeCopyButton code={codeText} />
             </div>
         );
@@ -144,7 +154,10 @@ export const ProjectComponents = {
         // BLOCK code (handled by rehype-highlight)
         if (className?.includes("language-")) {
             return (
-                <code className={className} {...props}>
+                <code
+                    className={`${className} block font-mono text-sm`}
+                    {...props}
+                >
                     {children}
                 </code>
             );
@@ -153,7 +166,7 @@ export const ProjectComponents = {
         // INLINE code
         return (
             <code
-                className="rounded bg-muted/60 px-1.5 py-0.5 font-mono text-sm"
+                className="rounded px-1.5 py-0.5 font-mono text-sm"
                 {...props}
             >
                 {children}

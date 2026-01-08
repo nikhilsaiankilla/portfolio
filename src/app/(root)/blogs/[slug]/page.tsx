@@ -11,7 +11,7 @@ import BlogCard from "@/src/components/blog-card";
 import { Calendar, Clock } from "lucide-react";
 import { ProjectComponents } from "@/src/components/project-components";
 
-export async function getServerSidepProps({
+export async function generateMetadata({
     params,
 }: {
     params: Promise<{ slug: string }>;
@@ -36,7 +36,10 @@ export async function getServerSidepProps({
 
     const siteUrl = "https://nikhilsai.in";
     const blogUrl = blog.canonical ?? `${siteUrl}/blogs/${slug}`;
-    const ogImage = blog.image ?? `${siteUrl}/og-image-blogs.png`;
+
+    const ogImage = blog.image
+        ? blog.image
+        : `${siteUrl}/blogs/${slug}/og`;
 
     return {
         title: `${blog.title} | Blog`,
@@ -97,16 +100,17 @@ const BlogPage = async ({ params }: BlogPageProps) => {
             {/* Blog Content */}
             <AnimatedContainer>
                 <div className="w-full space-y-6">
-                    {/* Cover Image */}
-                    <div className="relative aspect-video overflow-hidden rounded-sm">
-                        <Image
-                            src={image || "https://placehold.co/1200x675"}
-                            alt={title || "Blog Cover Image"}
-                            fill
-                            priority
-                            className="object-cover"
-                        />
-                    </div>
+                    {
+                        image && <div className="relative aspect-video overflow-hidden rounded-sm">
+                            <Image
+                                src={image}
+                                alt={title || "Blog Cover Image"}
+                                fill
+                                priority
+                                className="object-cover"
+                            />
+                        </div>
+                    }
 
                     {/* Title */}
                     <SectionHeading
@@ -146,7 +150,13 @@ const BlogPage = async ({ params }: BlogPageProps) => {
                     <Separator />
 
                     {/* MDX Content */}
-                    <div className="prose prose-neutral max-w-none dark:prose-invert">
+                    <div className="prose prose-neutral max-w-none dark:prose-invert
+                                    prose-pre:bg-transparent
+                                    prose-pre:p-0
+                                    prose-code:bg-transparent
+                                    prose-code:p-0
+                        ">
+
                         <MDXRemote
                             source={content || "## Content is Missing!! Please inform Admin."}
                             components={ProjectComponents}
