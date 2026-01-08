@@ -18,7 +18,7 @@ export const blogs: BlogTypes[] = [
     title: "How to Add a Simple Rate Limiter to an Express App Using Redis",
     description:
       "A practical walkthrough of building a Redis-based rate limiter for an Express API using atomic operations and TTL.",
-    image: "/blogs/ratelimiter-blog.png",
+    image: "",
     tags: [
       "Node.js",
       "Rate Limiting",
