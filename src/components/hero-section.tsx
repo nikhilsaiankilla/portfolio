@@ -45,7 +45,7 @@ const HeroSection = () => {
                     variants={itemVariants}
                     className='text-3xl md:text-5xl font-bold text-black dark:text-white font-heading tracking-tight'
                 >
-                    Hi, I'm <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-500 to-blue-600">Nikhil Sai</span>
+                    Hi, I'm <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-primary/90">Nikhil Sai</span>
                 </motion.h1>
 
                 {/* Animated Bio */}
@@ -124,7 +124,7 @@ function Bio() {
     return (
         <div className='w-full space-y-4'>
             <p className="leading-relaxed text-gray-700 dark:text-gray-400 text-sm sm:text-lg">
-                I’m a <span className="font-semibold text-cyan-500">Full Stack Developer</span> making stuff, breaking stuff,
+                I’m a <span className="font-semibold text-primary">Full Stack Developer</span> making stuff, breaking stuff,
                 and learning stuff while building real-world products.
             </p>
             <p className="leading-relaxed text-gray-700 dark:text-gray-400 text-sm sm:text-lg">

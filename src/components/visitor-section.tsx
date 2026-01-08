@@ -47,10 +47,10 @@ const ordinal = (n: number) => {
 
 const VisitorBadge = ({ visitorNo }: { visitorNo: string }) => {
     return (
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-gray-500/10 border border-blue-500/20 text-black dark:text-white shadow-[0_0_10px_rgba(59,130,246,0.1)]">
-            <Eye size={16} className="text-blue-500" />
+        <span className="flex items-center gap-2 border-b-2 border-primary py-1.5">
+            <Eye size={16} className="text-primary" />
             {/* Removed text-sm so it inherits size from parent */}
-            <span className="font-semibold transition-colors text-sm">
+            <span className="font-semibold transition-colors">
                 {visitorNo}
             </span>
         </span>

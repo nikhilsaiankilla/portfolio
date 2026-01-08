@@ -21,7 +21,7 @@ const comicNeue = Comic_Neue({
 
 export const metadata: Metadata = {
   title: {
-    default: "Nikhil Sai — Full Stack Developer",
+    default: "Nikhil Sai | Full Stack Developer",
     template: "%s | Nikhil Sai",
   },
   description:
@@ -85,7 +85,7 @@ export default function RootLayout({
           <script defer src="https://cloud.umami.is/script.js" data-website-id="d4bb3fad-5fce-48b5-8f8a-17f873fd923f"></script>
         </head>
         <body
-          className={`${poppins.variable} ${comicNeue.variable} antialiased`}
+          className={`${poppins.variable} ${comicNeue.variable} antialiased selection:bg-blue-600/90 selection:text-white`}
         >
           <ThemeProvider
             attribute={'class'}

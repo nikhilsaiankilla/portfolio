@@ -6,6 +6,7 @@ import { Menu, X, Github, Linkedin, Terminal } from 'lucide-react';
 import { ModeToggle } from './mode-toggle';
 import { Link } from 'next-view-transitions';
 import AnimatedTooltip from './animated-tooltip';
+import TogglePrimaryColor from './toggle-primary-color';
 
 const navItems = [
     { name: 'Home', href: '/' },
@@ -96,10 +97,10 @@ const NavSection = () => {
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors relative group"
+                                className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors relative group"
                             >
                                 {item.name}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-500 transition-all duration-300 group-hover:w-full"></span>
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                             </Link>
                         ))}
                     </nav>
@@ -111,6 +112,7 @@ const NavSection = () => {
                         <SocialLink href="https://github.com/nikhilsaiankilla" icon={<Github size={18} />} label='Github' />
                         <SocialLink href="https://linkedin.com/in/nikhilsaiankilla" icon={<Linkedin size={18} />} label='Linkedin' />
                         <SocialLink href="https://x.com/nikhilbuildss" icon={<XIcon />} label='X (Twitter)' />
+                        <TogglePrimaryColor />
                     </div>
 
                     <ModeToggle />
@@ -158,6 +160,7 @@ const NavSection = () => {
                                 <SocialLink href="https://github.com/nikhilsaiankilla" icon={<Github size={22} />} label='Github' />
                                 <SocialLink href="https://linkedin.com/in/nikhilsaiankilla" icon={<Linkedin size={22} />} label='Linkedin' />
                                 <SocialLink href="https://x.com/nikhilbuildss" icon={<XIcon className="w-5 h-5" />} label='X (Twitter)' />
+                                <TogglePrimaryColor />
                             </motion.div>
                         </div>
                     </motion.div>
@@ -173,7 +176,7 @@ const SocialLink = ({ href, icon, label }: { href: string, icon: React.ReactNode
         <Link
             href={href}
             target="_blank"
-            className="p-2 text-gray-500 hover:text-cyan-500 dark:text-gray-400 dark:hover:text-cyan-400 transition-colors hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-md"
+            className="p-2 text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-md"
         >
             {icon}
         </Link>

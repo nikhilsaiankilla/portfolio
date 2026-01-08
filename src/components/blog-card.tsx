@@ -48,14 +48,14 @@ const BlogCard = ({
             <div className="flex flex-col p-5 space-y-4">
                 <div className="h-5">
                     {featured && (
-                        <Badge className="bg-cyan-600/70 text-white text-[10px] px-2 rounded-sm">
+                        <Badge className="bg-primary text-white text-[10px] px-2 rounded-sm">
                             Featured
                         </Badge>
                     )}
                 </div>
                 {/* Title & Description */}
                 <div className="space-y-2">
-                    <h3 className="text-xl md:text-2xl font-bold font-heading text-black dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                    <h3 className="text-xl md:text-2xl font-bold font-heading text-black dark:text-white group-hover:text-primary transition-colors">
                         {title}
                     </h3>
                     <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3 leading-relaxed">

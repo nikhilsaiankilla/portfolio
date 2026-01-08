@@ -14,17 +14,17 @@ const FooterSection = () => {
             <div className='space-y-5'>
                 <div className="flex items-center justify-center flex-wrap gap-3">
                     <AnimatedTooltip label="Github">
-                        <Link href="https://github.com/nikhilsaiankilla" target="_blank" className="hover:text-cyan-500 transition-transform hover:-translate-y-1">
+                        <Link href="https://github.com/nikhilsaiankilla" target="_blank" className="hover:text-primary transition-transform hover:-translate-y-1">
                             <Github size={20} />
                         </Link>
                     </AnimatedTooltip>
                     <AnimatedTooltip label="Linkedin">
-                        <Link href="https://linkedin.com/in/nikhilsaiankilla" target="_blank" className="hover:text-cyan-500 transition-transform hover:-translate-y-1">
+                        <Link href="https://linkedin.com/in/nikhilsaiankilla" target="_blank" className="hover:text-primary transition-transform hover:-translate-y-1">
                             <Linkedin size={20} />
                         </Link>
                     </AnimatedTooltip>
                     <AnimatedTooltip label="X (Twitter)">
-                        <Link href="https://x.com/nikhilbuildss" target="_blank" className="hover:text-cyan-500 transition-transform hover:-translate-y-1">
+                        <Link href="https://x.com/nikhilbuildss" target="_blank" className="hover:text-primary transition-transform hover:-translate-y-1">
                             <XIcon className='w-5 h-5' />
                         </Link>
                     </AnimatedTooltip>

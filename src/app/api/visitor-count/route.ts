@@ -1,6 +1,6 @@
 import { getDbInstance } from "@/src/db";
 import { visitorSnapshots } from "@/src/db/schema";
-import { desc } from "drizzle-orm";
+import { sum } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
@@ -8,12 +8,10 @@ export const GET = async () => {
         const db = await getDbInstance();
 
         const result = await db
-            .select({ total: visitorSnapshots.totalVisitors })
+            .select({ value: sum(visitorSnapshots?.totalVisitors) })
             .from(visitorSnapshots)
-            .orderBy(desc(visitorSnapshots.date))
-            .limit(1)
 
-        const visitorCount = result[0]?.total ?? 0
+        const visitorCount = result[0]?.value ?? 0
 
         return NextResponse.json({ message: "Fetched the visitor count", data: { visitorCount } }, { status: 200 })
     } catch (error: unknown) {

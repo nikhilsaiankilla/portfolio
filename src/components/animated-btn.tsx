@@ -29,7 +29,7 @@ const AnimatedButton = ({
     const isPrimary = variant === 'primary';
 
     // Tailwind classes based on variant
-    const primaryClasses = "bg-cyan-500 text-white shadow-lg shadow-cyan-500/20 border-transparent";
+    const primaryClasses = "bg-primary text-white shadow-lg shadow-primary/20 border-transparent";
     const outlineClasses = "bg-white dark:bg-black hover:inset-shadow-sm hover:inset-shadow-black/30 dark:hover:inset-shadow-white/20 backdrop-blur-sm border border-black/10 dark:border-white/10 text-black dark:text-white";
 
     return (
@@ -77,7 +77,7 @@ const AnimatedButton = ({
                             hover: { opacity: 0.4, scale: 1.5 }
                         }}
                         transition={{ duration: 0.3 }}
-                        className='absolute inset-0 rounded-full bg-cyan-500 blur-xl opacity-0 -z-10'
+                        className='absolute inset-0 rounded-full bg-primary blur-xl opacity-0 -z-10'
                     />
 
                     {/* Shine sweep effect */}

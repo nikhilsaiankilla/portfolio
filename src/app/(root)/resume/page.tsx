@@ -36,7 +36,7 @@ const ResumePage = () => {
                                 whileHover="hover"
                                 whileTap={{ scale: 0.95 }}
 
-                                className={`group relative inline-flex items-center justify-center gap-2 rounded-sm font-medium transition-colors w-fit md:px-8 md:py-2 p-2 bg-cyan-500 text-white shadow-lg shadow-cyan-500/20 border-transparent overflow-hidden cursor-pointer`}
+                                className={`group relative inline-flex items-center justify-center gap-2 rounded-sm font-medium transition-colors w-fit md:px-8 md:py-2 p-2 bg-primary text-white shadow-lg shadow-primary/20 border-transparent overflow-hidden cursor-pointer`}
                             >
                                 <Download size={16} strokeWidth={2.5} />
 
@@ -55,7 +55,7 @@ const ResumePage = () => {
                                         hover: { opacity: 0.4, scale: 1.5 }
                                     }}
                                     transition={{ duration: 0.3 }}
-                                    className='absolute inset-0 rounded-full bg-cyan-500 blur-xl opacity-0 -z-10'
+                                    className='absolute inset-0 rounded-full bg-primary blur-xl opacity-0 -z-10'
                                 />
 
                                 {/* Shine sweep effect */}

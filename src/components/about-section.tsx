@@ -50,7 +50,7 @@ const AboutSection = () => {
                         className="relative"
                     >
                         {/* 2. Added z-0 to blur and z-10 to image to ensure stacking is correct */}
-                        <div className="absolute -inset-1 bg-linear-to-r from-cyan-400 to-blue-500 rounded-sm blur opacity-30 animate-pulse z-0"></div>
+                        <div className="absolute -inset-1 bg-linear-to-r from-primary to-primary/90 rounded-sm blur opacity-30 animate-pulse z-0"></div>
                         <Image
                             src={`/nikhil.jpeg`}
                             alt='Nikhil sai Avatar'
@@ -67,7 +67,7 @@ const AboutSection = () => {
                 <div className="w-full col-span-1 md:col-span-2 flex flex-col justify-center space-y-3">
                     <motion.h1
                         variants={itemVariants}
-                        className="text-lg md:text-2xl font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-500 to-blue-600 font-heading tracking-tight"
+                        className="text-lg md:text-2xl font-bold text-transparent bg-clip-text bg-linear-to-r from-primary to-primary/90 font-heading tracking-tight"
                     >
                         Nikhil Sai Ankilla
                     </motion.h1>
@@ -80,7 +80,7 @@ const AboutSection = () => {
 
                     <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                         Currently exploring system design through personal projects and open source.
-                        Open to full time roles <Link href="#contact" className="text-cyan-500 hover:underline">let’s talk</Link>.
+                        Open to full time roles <Link href="#contact" className="text-primary hover:underline">let’s talk</Link>.
                     </p>
 
                     <div className="w-full flex items-start justify-start gap-2 flex-wrap pt-2">

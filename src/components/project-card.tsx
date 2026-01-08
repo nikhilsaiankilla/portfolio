@@ -100,7 +100,7 @@ const ProjectCard = ({ title, description, technologies, live, image, status, gi
                 {/* Title & Description */}
                 <div className='space-y-2'>
                     <div className='flex items-center justify-between'>
-                        <h3 className='text-xl md:text-2xl font-bold font-heading text-black dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors'>
+                        <h3 className='text-xl md:text-2xl font-bold font-heading text-black dark:text-white group-hover:text-primary dark:group-hover:text-primary transition-colors'>
                             {title}
                         </h3>
                         <div className='flex items-center gap-6'>

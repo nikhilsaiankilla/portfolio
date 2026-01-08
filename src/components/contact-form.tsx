@@ -86,7 +86,7 @@ const ContactForm = () => {
                     Name
                 </Label>
                 <div className="relative">
-                    <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 group-focus-within:text-cyan-500 transition-colors" />
+                    <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 group-focus-within:text-primary transition-colors" />
                     <Input
                         id="name"
                         onChange={(e) => setName(e.target?.value)}
@@ -102,7 +102,7 @@ const ContactForm = () => {
                     Email
                 </Label>
                 <div className="relative">
-                    <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 group-focus-within:text-cyan-500 transition-colors" />
+                    <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 group-focus-within:text-primary transition-colors" />
                     <Input
                         id="email"
                         type="email"
@@ -119,7 +119,7 @@ const ContactForm = () => {
                     Message
                 </Label>
                 <div className="relative">
-                    <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-gray-400 group-focus-within:text-cyan-500 transition-colors" />
+                    <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-gray-400 group-focus-within:text-primary transition-colors" />
                     <Textarea
                         id="message"
                         onChange={(e) => setMessage(e.target?.value)}
@@ -142,7 +142,7 @@ const ContactForm = () => {
                     whileHover="hover"
                     whileTap={{ scale: 0.95 }}
 
-                    className='group relative w-full flex items-center justify-center gap-2 px-8 py-2.5 bg-cyan-500 hover:bg-cyan-500 text-white rounded-sm font-medium overflow-hidden cursor-pointer'
+                    className='group relative w-full flex items-center justify-center gap-2 px-8 py-2.5 bg-primary hover:bg-primary text-white rounded-sm font-medium overflow-hidden cursor-pointer'
                 >
                     <span className='relative z-10 text-sm font-normal flex items-center gap-2'>{isSubmitting ? <><Loader size={12} className='animate-spin' />Sending message!!</> : 'Send Message'}</span>
 
@@ -161,7 +161,7 @@ const ContactForm = () => {
                             hover: { opacity: 0.4, scale: 1.5 }
                         }}
                         transition={{ duration: 0.3 }}
-                        className='absolute inset-0 rounded-full bg-cyan-500 blur-xl opacity-0 -z-10'
+                        className='absolute inset-0 rounded-full bg-primary blur-xl opacity-0 -z-10'
                     />
 
                     {/* Optional: Shine sweep effect */}

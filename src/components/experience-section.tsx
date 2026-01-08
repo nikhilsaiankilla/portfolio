@@ -60,7 +60,7 @@ const ExperienceSection = () => {
                             {/* Header Row: Company | Badge | Date */}
                             <div className="flex flex-col md:flex-row md:items-center justify-between gap-1 md:gap-0">
                                 <div className="flex items-center flex-wrap gap-2">
-                                    <h3 className="text-lg font-bold text-cyan-500">
+                                    <h3 className="text-lg font-bold text-primary">
                                         {exp.company}
                                     </h3>
 
@@ -78,7 +78,7 @@ const ExperienceSection = () => {
                                     )}
 
                                     {/* Chevron Icon */}
-                                    <ChevronRight className="text-cyan-500 w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out" />
+                                    <ChevronRight className="text-primary w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out" />
                                 </div>
 
                                 {/* Date */}

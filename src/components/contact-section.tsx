@@ -130,10 +130,10 @@ const ContactSection = () => {
                                     {copied ? (
                                         <Check size={12} className="text-green-600 dark:text-green-400" />
                                     ) : (
-                                        <Smartphone size={12} className="text-cyan-600 dark:text-cyan-400" />
+                                        <Smartphone size={12} className="text-primary" />
                                     )}
                                 </div>
-                                <span className={`font-semibold text-sm transition-colors w-16 ${copied ? 'text-green-600 dark:text-green-400' : 'text-gray-700 dark:text-gray-200 group-hover:text-cyan-600 dark:group-hover:text-cyan-400'}`}>
+                                <span className={`font-semibold text-sm transition-colors w-16 ${copied ? 'text-green-600 dark:text-green-400' : 'text-gray-700 dark:text-gray-200 group-hover:text-primary'}`}>
                                     {copied ? 'Copied!' : 'UPI'}
                                 </span>
                             </motion.button>

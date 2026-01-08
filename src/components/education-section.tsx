@@ -71,7 +71,7 @@ const EducationSection = () => {
                         {/* Content Column */}
                         <div className="flex-1 space-y-1">
                             <div className="flex flex-col md:flex-row md:items-center justify-between gap-1 md:gap-0">
-                                <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-cyan-500 transition-colors">
+                                <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">
                                     {edu.institution}
                                 </h3>
                                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400 tabular-nums">

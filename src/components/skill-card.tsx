@@ -57,7 +57,7 @@ const SkillCard = ({ name, src, id, isEdit = false }: TooltipImageProps) => {
                 bg-gray-500/10 dark:hover:bg-zinc-900 
                 transition-colors duration-200 dark:bg-gray-500/20
                 relative cursor-grab active:cursor-grabbing
-                ${isEdit ? "cursor-pointer hover:border-cyan-500 hover:bg-cyan-500/10" : "cursor-grab active:cursor-grabbing"}
+                ${isEdit ? "cursor-pointer hover:border-primary hover:bg-primary/10" : "cursor-grab active:cursor-grabbing"}
             `}
         >
             <AnimatePresence>
