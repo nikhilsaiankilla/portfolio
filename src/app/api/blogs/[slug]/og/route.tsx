@@ -1,13 +1,14 @@
 import { ImageResponse } from "next/og";
 import { getBlogById } from "@/src/lib/blogs";
-
-export const runtime = "edge";
+import { NextRequest } from "next/server";
 
 export async function GET(
-    _: Request,
-    { params }: { params: { slug: string } }
+    request: NextRequest,
+    { params }: { params: Promise<{ slug: string }> }
 ) {
-    const blog = getBlogById(params.slug);
+    const { slug } = await params;
+
+    const blog = getBlogById(slug);
 
     if (!blog || !blog.isPublished) {
         return new ImageResponse(

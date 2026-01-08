@@ -39,7 +39,7 @@ export async function generateMetadata({
 
     const ogImage = blog.image
         ? blog.image
-        : `${siteUrl}/blogs/${slug}/og`;
+        : `${siteUrl}/api/blogs/${slug}/og`;
 
     return {
         title: `${blog.title} | Blog`,
