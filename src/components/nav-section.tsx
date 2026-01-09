@@ -81,8 +81,8 @@ const NavSection = () => {
             animate="visible"
             variants={navbarVariants}
             className={`sticky top-0 z-50 w-full transition-all duration-300 ease-in-out ${scrolled
-                ? 'bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200 dark:border-zinc-800'
-                : 'bg-transparent'
+                ? 'backdrop-blur-md'
+                : 'bg-transparent  border-b border-gray-200 dark:border-zinc-800'
                 }  py-6`}
         >
             <div className="w-full px-5 md:px-6 flex items-center justify-between">
