@@ -10,6 +10,10 @@ import { getBlogById, getRelatedBlogs } from "@/src/lib/blogs";
 import BlogCard from "@/src/components/blog-card";
 import { Calendar, Clock } from "lucide-react";
 import { ProjectComponents } from "@/src/components/project-components";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import { extractHeadings } from "@/src/lib/extractHeadings";
+import FloatingTOC from "@/src/components/floating-toc";
 
 export async function generateMetadata({
     params,
@@ -72,6 +76,8 @@ const BlogPage = async ({ params }: BlogPageProps) => {
     const { slug } = await params;
     const blog = getBlogById(slug);
     const relatedBlogs = getRelatedBlogs(slug);
+
+    const toc = extractHeadings(blog?.content || "");
 
     if (!blog || blog.error) {
         return (
@@ -162,12 +168,21 @@ const BlogPage = async ({ params }: BlogPageProps) => {
                             components={ProjectComponents}
                             options={{
                                 mdxOptions: {
-                                    rehypePlugins: [rehypeHighlight],
+                                    rehypePlugins: [
+                                        rehypeHighlight,
+                                        rehypeSlug,
+                                        [
+                                            rehypeAutolinkHeadings,
+                                            { behaviour: "wrap" }
+                                        ]
+                                    ],
                                 },
                             }}
                         />
                     </div>
                 </div>
+
+                <FloatingTOC items={toc} />
             </AnimatedContainer>
 
             {/* Related Blogs */}
