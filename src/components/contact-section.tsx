@@ -94,67 +94,6 @@ const ContactSection = () => {
                     </div>
 
                     <ContactForm />
-
-                    {/* 3. Support Section */}
-                    <div className="flex flex-col items-center gap-4 mt-8">
-                        <span className="text-sm font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">
-                            Support my work
-                        </span>
-
-                        <div className="flex flex-wrap items-center justify-center gap-3">
-
-                            {/* 1. Buy Me Coffee (Link) */}
-                            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
-                                <Link
-                                    href="https://buymeacoffee.com/nikhilsaiankilla" // Replace with your URL
-                                    target="_blank"
-                                    className="flex items-center gap-2 px-2 py-1 bg-gray-50 dark:bg-zinc-900 rounded-lg shadow-sm hover:shadow-md transition-all group border border-dashed border-gray-600 dark:border-zinc-700"
-                                >
-                                    <div className="p-1.5 bg-amber-100 dark:bg-amber-900/30 rounded-md">
-                                        <Coffee size={12} className="text-amber-600 dark:text-amber-400" />
-                                    </div>
-                                    <span className="font-semibold text-gray-700 dark:text-gray-200 text-sm group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
-                                        Buy Me Coffee
-                                    </span>
-                                </Link>
-                            </motion.div>
-
-                            {/* 2. UPI (Click to Copy) */}
-                            <motion.button
-                                onClick={handleCopy}
-                                whileHover={{ y: -2 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="flex items-center gap-2 px-2 py-1 bg-gray-50 dark:bg-zinc-900 rounded-lg shadow-sm hover:shadow-md transition-all group border border-dashed border-gray-600 dark:border-zinc-700 relative overflow-hidden cursor-pointer"
-                            >
-                                <div className={`p-1.5 rounded-md transition-colors ${copied ? 'bg-green-100 dark:bg-green-900/30' : 'bg-blue-100 dark:bg-blue-900/30'}`}>
-                                    {copied ? (
-                                        <Check size={12} className="text-green-600 dark:text-green-400" />
-                                    ) : (
-                                        <Smartphone size={12} className="text-primary" />
-                                    )}
-                                </div>
-                                <span className={`font-semibold text-sm transition-colors w-16 ${copied ? 'text-green-600 dark:text-green-400' : 'text-gray-700 dark:text-gray-200 group-hover:text-primary'}`}>
-                                    {copied ? 'Copied!' : 'UPI'}
-                                </span>
-                            </motion.button>
-
-                            {/* 3. Razorpay (Link) */}
-                            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
-                                <Link
-                                    href="https://razorpay.me/@nikhilsaiankilla"
-                                    target="_blank"
-                                    className="flex items-center gap-2 px-2 py-1 bg-gray-50 dark:bg-zinc-900 rounded-lg shadow-sm hover:shadow-md transition-all group border border-dashed border-gray-600 dark:border-zinc-700"
-                                >
-                                    <div className="p-1.5 bg-indigo-100 dark:bg-indigo-900/30 rounded-md">
-                                        <CreditCard size={12} className="text-blue-700 dark:text-blue-500" />
-                                    </div>
-                                    <span className="font-semibold text-gray-700 dark:text-gray-200 text-sm group-hover:text-blue-700 dark:group-hover:text-blue-500 transition-colors">
-                                        Razorpay
-                                    </span>
-                                </Link>
-                            </motion.div>
-                        </div>
-                    </div>
                 </div>
             </AnimatedContainer>
         </section>
