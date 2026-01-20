@@ -7,6 +7,23 @@ import { Toaster } from "@/src/components/ui/sonner";
 import ReactLenis from 'lenis/react';
 import { ViewTransitions } from 'next-view-transitions'
 
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Nikhil Sai Ankilla",
+  "url": "https://nikhilsai.in",
+  "image": "https://nikhilsai.in/nikhil.jpeg",
+  "description":
+    "Portfolio of Nikhil Sai Ankilla, a fresher full-stack developer showcasing projects, technical work, and contact information.",
+  "email": "mailto:nikhilsaiankilla@gmail.com",
+  "telephone": "+91-8374056888",
+  "sameAs": [
+    "https://github.com/nikhilsaiankilla",
+    "https://www.linkedin.com/in/nikhilsaiankilla"
+  ]
+};
+
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -84,22 +101,12 @@ export default function RootLayout({
         <head>
           <script defer src="https://cloud.umami.is/script.js" data-website-id="d4bb3fad-5fce-48b5-8f8a-17f873fd923f"></script>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Nikhil Sai Ankilla",
-  "url": "https://nikhilsai.in",
-  "image": "https://nikhilsai.in/nikhil.jpeg",
-  "description": "Portfolio of Nikhil Sai Ankilla, a fresher full-stack developer showcasing projects, technical work, and contact information.",
-  "email": "mailto:nikhilsaiankilla@gmail.com",
-  "telephone": "+91-8374056888",
-  "sameAs": [
-    "https://github.com/nikhilsaiankilla",
-    "https://www.linkedin.com/in/nikhilsaiankilla"
-  ]
-}
-</script>
+<script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
+        />
         </head>
         <body
           className={`${roboto.variable} ${montserrat.variable} antialiased selection:bg-blue-600/90 selection:text-white`}
