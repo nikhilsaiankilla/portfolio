@@ -87,13 +87,17 @@ export default function RootLayout({
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Nikhil sai ",
+  "@type": "Person",
+  "name": "Nikhil Sai Ankilla",
   "url": "https://nikhilsai.in",
-  "logo": "https://nikhilsai.in/nikhil.jpeg",
-  "description": "This is the portfolio of Nikhil Sai Ankilla, a fresher full-stack developer. It showcases his projects, technical work, and includes his contact details.",
-  "email": "nikhilsaiankilla@gmail.com",
-  "telephone": "+918374056888"
+  "image": "https://nikhilsai.in/nikhil.jpeg",
+  "description": "Portfolio of Nikhil Sai Ankilla, a fresher full-stack developer showcasing projects, technical work, and contact information.",
+  "email": "mailto:nikhilsaiankilla@gmail.com",
+  "telephone": "+91-8374056888",
+  "sameAs": [
+    "https://github.com/nikhilsaiankilla",
+    "https://www.linkedin.com/in/nikhilsaiankilla"
+  ]
 }
 </script>
         </head>
