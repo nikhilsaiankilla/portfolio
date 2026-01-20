@@ -90,7 +90,7 @@ export default function RootLayout({
   "@type": "Organization",
   "name": "Nikhil sai ",
   "url": "https://nikhilsai.in",
-  "logo": "https://nikhilsai.in/nikhil.png",
+  "logo": "https://nikhilsai.in/nikhil.jpeg",
   "description": "This is the portfolio of Nikhil Sai Ankilla, a fresher full-stack developer. It showcases his projects, technical work, and includes his contact details.",
   "email": "nikhilsaiankilla@gmail.com",
   "telephone": "+918374056888"
