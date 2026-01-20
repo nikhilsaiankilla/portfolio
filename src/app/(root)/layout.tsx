@@ -83,6 +83,19 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <head>
           <script defer src="https://cloud.umami.is/script.js" data-website-id="d4bb3fad-5fce-48b5-8f8a-17f873fd923f"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Nikhil sai ",
+  "url": "https://nikhilsai.in",
+  "logo": "https://nikhilsai.in/nikhil.png",
+  "description": "This is the portfolio of Nikhil Sai Ankilla, a fresher full-stack developer. It showcases his projects, technical work, and includes his contact details.",
+  "email": "nikhilsaiankilla@gmail.com",
+  "telephone": "+918374056888"
+}
+</script>
         </head>
         <body
           className={`${roboto.variable} ${montserrat.variable} antialiased selection:bg-blue-600/90 selection:text-white`}
