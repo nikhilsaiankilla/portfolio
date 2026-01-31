@@ -5,6 +5,7 @@ import ExperienceSection from "@/src/components/experience-section";
 import FooterSection from "@/src/components/footer-section";
 import HeroSection from "@/src/components/hero-section";
 import NavSection from "@/src/components/nav-section";
+import NewsletterSection from "@/src/components/newsletter-section";
 import ProofOfWorkSection from "@/src/components/proof-of-work-section";
 import SkillsSection from "@/src/components/skills-section";
 import VisitorSection from "@/src/components/visitor-section";
@@ -22,6 +23,7 @@ export default function Home() {
         <EducationSection />
         <BlogsSection />
         <ContactSection />
+        <NewsletterSection />
         <VisitorSection />
         <FooterSection />
       </div>

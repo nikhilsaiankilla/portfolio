@@ -1,5 +1,6 @@
 import NavSection from "@/src/components/nav-section";
 import FooterSection from "@/src/components/footer-section";
+import NewsletterSection from "@/src/components/newsletter-section";
 
 export default function ProjectsLayout({
     children,
@@ -11,6 +12,7 @@ export default function ProjectsLayout({
             <div className="w-full border-2 border-b-0 border-t-0 border-gray-700/10 dark:border-gray-700/40 max-w-4xl mx-auto min-h-screen">
                 <NavSection />
                 {children}
+                <NewsletterSection />
                 <FooterSection />
             </div>
         </div>

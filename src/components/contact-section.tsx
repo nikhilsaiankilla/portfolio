@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Smartphone, CreditCard, Coffee, Check, } from 'lucide-react';
+import { Smartphone, CreditCard, Coffee, Check, Mail, } from 'lucide-react';
 import AnimatedContainer from './animated-container';
 import { AnimatePresence, motion } from 'framer-motion';
 import ContactForm from './contact-form';
@@ -11,17 +11,8 @@ import { XIcon } from './nav-section';
 const MotionLink = motion.create(Link);
 
 const ContactSection = () => {
-    const [copied, setCopied] = useState(false);
-    const upiId = "8374056888@superyes"; // UPI ID
-
-    const handleCopy = () => {
-        navigator.clipboard.writeText(upiId);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
-    };
-
     const [isHovered, setIsHovered] = useState<boolean>(false)
-    const [isDragging, setIsDragging] = useState<boolean>(false)
+    const [isEmailHovered, setIsEmailHovered] = useState<boolean>(false)
 
     return (
         <section id='contact' className='w-full'>
@@ -34,15 +25,15 @@ const ContactSection = () => {
                     </h2>
 
                     {/* 2. Text with Inline Badges */}
-                    <div className="text-lg text-gray-600 dark:text-gray-400 max-w-lg leading-relaxed">
-                        Want to chat? Just shoot me a dm via{' '}
+                    <div className="text-lg text-gray-600 dark:text-gray-400 max-w-lg leading-loose">
+                        I’m most active on{' '}
 
-                        <div
-                            className='relative inline-flex items-center justify-center'
+                        {/* Twitter badge */}
+                        <span
+                            className="relative inline-flex items-center"
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
                         >
-                            {/* The Tooltip */}
                             <AnimatePresence>
                                 {isHovered && (
                                     <motion.div
@@ -50,50 +41,60 @@ const ContactSection = () => {
                                         animate={{ opacity: 1, y: -35, scale: 1 }}
                                         exit={{ opacity: 0, y: 10, scale: 0.8 }}
                                         transition={{ duration: 0.2, type: "spring", stiffness: 300 }}
-                                        className="absolute left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] px-2 py-1 rounded shadow-lg whitespace-nowrap z-50 pointer-events-none flex items-center justify-center flex-col gap-2"
+                                        className="absolute left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] px-2 py-1 rounded shadow-lg whitespace-nowrap z-50 pointer-events-none"
                                     >
-                                        Click to Say Hi on <br />
-                                        <svg
-                                            viewBox="0 0 24 24"
-                                            aria-hidden="true"
-                                            className="w-3 h-3 fill-current" // Size 20px (w-5)
-                                        >
-                                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
-                                        </svg>
-                                        {/* Little triangle arrow pointing down */}
-                                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-900"></div>
+                                        Fastest way to reach me
+                                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-900" />
                                     </motion.div>
                                 )}
                             </AnimatePresence>
 
-                            {/* The Icon */}
                             <MotionLink
                                 drag
                                 dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
                                 dragElastic={0.2}
-
-                                // 3. Animations
                                 whileDrag={{
                                     scale: 1.1,
                                     zIndex: 50,
                                     cursor: "grabbing",
                                     boxShadow: "0px 15px 30px rgba(0,0,0,0.2)",
                                 }}
-                                whileTap={{ scale: 0.95, cursor: "grabbing" }}
-
+                                whileTap={{ scale: 0.95 }}
                                 href="https://twitter.com/nikhilbuildss"
                                 target="_blank"
-                                className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-dashed border-gray-600 dark:border-zinc-700
-                    bg-gray-500/10 dark:hover:bg-zinc-900  text-sm font-medium text-gray-900 dark:text-white transition-colors mx-1 align-middle rotate-6"
+                                className="inline-flex items-center gap-1.5 px-2 py-0.5 mx-1 rounded border border-dashed border-gray-600 dark:border-zinc-700
+        bg-gray-500/10 dark:hover:bg-zinc-900 text-sm font-medium text-gray-900 dark:text-white"
                             >
-                                <XIcon className='w-5 h-5'/>
+                                <XIcon className="w-4 h-4" />
                                 Twitter
                             </MotionLink>
-                        </div>
-                        {' '}or reach out from below form{' '}
+                        </span>
+
+                        feel free to DM me there.
+                        You can also{' '}
+
+                        {/* Email badge */}
+                        <span
+                            className="relative inline-flex items-center"
+                            onMouseEnter={() => setIsEmailHovered(true)}
+                            onMouseLeave={() => setIsEmailHovered(false)}
+                        >
+                            <MotionLink
+                                href="mailto:nikhilsaiankilla@gmail.com"
+                                className="inline-flex items-center gap-1.5 px-2 py-0.5 mx-1 rounded
+    border border-dashed border-gray-600 dark:border-zinc-700
+    bg-gray-500/10 dark:hover:bg-zinc-900
+    text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                <Mail className="w-4 h-4" />
+                                Email me
+                            </MotionLink>
+
+                        </span>
+
+                        {' '}or use the form below.
                     </div>
 
-                    <ContactForm />
                 </div>
             </AnimatedContainer>
         </section>
