@@ -2,6 +2,7 @@ import AnimatedContainer from '@/src/components/animated-container'
 import BlogCard from '@/src/components/blog-card';
 import FooterSection from '@/src/components/footer-section'
 import NavSection from '@/src/components/nav-section'
+import NewsletterSection from '@/src/components/newsletter-section';
 import SectionHeading from '@/src/components/section-heading'
 import { getAllBlogs } from '@/src/lib/blogs';
 import { Metadata } from 'next';
@@ -83,6 +84,7 @@ const page = () => {
                     </div>
                 </AnimatedContainer>
 
+                <NewsletterSection />
                 <div className="mt-auto">
                     <FooterSection />
                 </div>
