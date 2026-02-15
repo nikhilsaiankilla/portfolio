@@ -20,67 +20,84 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProjectById(slug);
 
-  if (project?.error) {
+  if (!project || project?.error) {
     return {
       title: "Project Not Found",
       description: "The requested project does not exist.",
-      robots: {
-        index: false,
-        follow: false,
-      },
+      robots: { index: false, follow: false, noarchive: true },
     };
   }
 
-  if (!project.isPublished) {
+  if (!project?.isPublished) {
     return {
-      title: `${project.title} (Draft)`,
-      robots: {
-        index: false,
-        follow: false,
-      },
+      title: `${project?.title} (Draft)`,
+      robots: { index: false, follow: false, noarchive: true },
     };
   }
-
-  const { title, description, image, technologies } = project;
 
   const siteUrl = "https://nikhilsai.in";
   const projectUrl = `${siteUrl}/projects/${slug}`;
-  const ogImage = image ?? `${siteUrl}/og-image.png`;
+
+  const ogImage = project?.image
+    ? project?.image?.startsWith("http")
+      ? project?.image
+      : `${siteUrl}${project?.image}`
+    : `${siteUrl}/og-image.png`;
 
   return {
-    title: `${title} | Projects`,
-    description,
+    title: `${project?.title} | Full Stack Project`,
+    description: project?.description,
+
     keywords: [
-      ...technologies,
-      title,
-      "Nikhil Sai Projects",
-      "Nikhil Sai",
-      "nikhilbuildss",
+      project?.title,
+      ...project?.technologies,
+      "Full Stack Project",
+      "Next.js Project",
+      "Node.js Backend Project",
+      "System Design Project",
+      "Nikhil Sai Portfolio",
     ],
+
+    authors: [{ name: "Nikhil Sai", url: siteUrl }],
+    creator: "Nikhil Sai",
+    publisher: "Nikhil Sai",
+
     alternates: {
       canonical: projectUrl,
     },
+
     openGraph: {
-      title,
-      description,
+      title: project?.title,
+      description: project?.description,
       url: projectUrl,
-      siteName: "Nikhil Sai / Portfolio",
+      siteName: "Nikhil Sai Projects",
       images: [
         {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: title,
+          alt: project?.title,
         },
       ],
       type: "article",
+      locale: "en_IN",
     },
+
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: project?.title,
+      description: project?.description,
       images: [ogImage],
       creator: "@nikhilbuildss",
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
     },
   };
 }

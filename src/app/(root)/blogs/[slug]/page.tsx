@@ -27,41 +27,86 @@ export async function generateMetadata({
     return {
       title: "Blog Not Found",
       description: "The requested blog does not exist.",
-      robots: { index: false, follow: false },
+      robots: { index: false, follow: false, noarchive: true },
     };
   }
 
-  if (!blog.isPublished) {
+  if (!blog?.isPublished) {
     return {
-      title: `${blog.title} (Draft)`,
-      robots: { index: false, follow: false },
+      title: `${blog?.title} (Draft)`,
+      robots: { index: false, follow: false, noarchive: true },
     };
   }
 
   const siteUrl = "https://nikhilsai.in";
-  const blogUrl = blog.canonical ?? `${siteUrl}/blogs/${slug}`;
+  const blogUrl = blog?.canonical ?? `${siteUrl}/blogs/${slug}`;
 
-  const ogImage = blog.image ? blog.image : `${siteUrl}/api/blogs/${slug}/og`;
+  const ogImage = blog.image
+    ? blog?.image.startsWith("http")
+      ? blog?.image
+      : `${siteUrl}${blog?.image}`
+    : `${siteUrl}/api/blogs/${slug}/og`;
+
+  const publishedTime = blog?.publishedOn;
 
   return {
-    title: `${blog.title} | Blog`,
-    description: blog.description,
-    keywords: [...blog.tags, blog.title, "Nikhil Sai Blog"],
-    alternates: { canonical: blogUrl },
-    openGraph: {
-      title: blog.title,
-      description: blog.description,
-      url: blogUrl,
-      siteName: "Nikhil Sai / Blog",
-      images: [{ url: ogImage, width: 1200, height: 630 }],
-      type: "article",
+    title: `${blog?.title} | Engineering Blog`,
+    description: blog?.description,
+
+    keywords: [
+      ...blog?.tags,
+      blog?.title,
+      "Nikhil Sai Blog",
+      "Engineering Blog",
+      "System Design",
+      "Backend Engineering",
+      "Next.js",
+      "AI Engineering",
+    ],
+
+    authors: [{ name: "Nikhil Sai", url: siteUrl }],
+    creator: "Nikhil Sai",
+    publisher: "Nikhil Sai",
+
+    alternates: {
+      canonical: blogUrl,
     },
+
+    openGraph: {
+      title: blog?.title,
+      description: blog?.description,
+      url: blogUrl,
+      siteName: "Nikhil Sai Blog",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: blog.title,
+        },
+      ],
+      type: "article",
+      publishedTime,
+      section: "Engineering",
+      tags: blog?.tags,
+      locale: "en_IN",
+    },
+
     twitter: {
       card: "summary_large_image",
-      title: blog.title,
-      description: blog.description,
+      title: blog?.title,
+      description: blog?.description,
       images: [ogImage],
       creator: "@nikhilbuildss",
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
     },
   };
 }

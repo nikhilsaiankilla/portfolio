@@ -5,56 +5,83 @@ import NavSection from "@/src/components/nav-section";
 import NewsletterSection from "@/src/components/newsletter-section";
 import SectionHeading from "@/src/components/section-heading";
 import { getAllBlogs } from "@/src/lib/blogs";
-import { Metadata } from "next";
+import type { Metadata } from "next";
+
+const SITE_URL = "https://nikhilsai.in";
+const OG_IMAGE = `${SITE_URL}/og-image-blogs.png`;
 
 export const metadata: Metadata = {
-  title: "Blogs",
+  metadataBase: new URL(SITE_URL),
+
+  title: "Tech Blogs | System Design, Backend, AI, Next.js, Data Systems",
   description:
-    "Writing about what I’m building and learning system design, backend engineering, analytics, and lessons from shipping real products.",
+    "Tech blogs covering system design, backend architecture, AI, Next.js, Kafka, ClickHouse, and lessons from building scalable products and developer tools.",
+
   keywords: [
-    "Nikhil Sai Blog",
-    "Engineering Blog",
-    "System Design",
-    "Backend Engineering",
-    "Full Stack Development",
-    "Analytics Systems",
-    "Developer Tools",
-    "Kafka",
-    "ClickHouse",
-    "Next.js",
-    "Building in Public",
+    "Full Stack Developer Blog",
+    "Next.js Blog",
+    "System Design Blog",
+    "Backend Engineering Blog",
+    "Kafka Tutorials",
+    "ClickHouse Guides",
+    "Analytics Engineering",
+    "Developer Tools Blog",
+    "Building in Public Engineering",
   ],
-  metadataBase: new URL("https://nikhilsai.in"),
+
+  authors: [{ name: "Nikhil Sai", url: SITE_URL }],
+  creator: "Nikhil Sai",
+  publisher: "Nikhil Sai",
+
+  category: "technology",
+  applicationName: "Nikhil Sai Blog",
+  referrer: "origin-when-cross-origin",
+
   alternates: {
-    canonical: "https://nikhilsai.in/blogs",
+    canonical: `${SITE_URL}/blogs`,
   },
+
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+
   openGraph: {
-    title: "Blog — Nikhil Sai",
+    title:
+      "Engineering Blog – System Design, Next.js, Backend, Kafka | Nikhil Sai",
     description:
-      "Thoughts, breakdowns, and lessons from building products, backend systems, and developer tools.",
-    url: "https://nikhilsai.in/blogs",
-    siteName: "Nikhil Sai / Blog",
+      "Deep dives into backend systems, scalable architectures, analytics pipelines, and modern full stack development.",
+    url: `${SITE_URL}/blogs`,
+    siteName: "Nikhil Sai Blog",
     images: [
       {
-        url: "/og-image-blogs.png",
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Nikhil Sai Blog",
+        alt: "Nikhil Sai Engineering Blog",
       },
     ],
+    locale: "en_IN",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Blog — Nikhil Sai",
+    title: "Engineering Blog – Nikhil Sai",
     description:
-      "Writing about system design, backend engineering, analytics, and building real products.",
-    images: ["/og-image-blogs.png"],
+      "System design, backend engineering, Next.js, Kafka, ClickHouse, and real-world build breakdowns.",
+    images: [OG_IMAGE],
     creator: "@nikhilbuildss",
   },
+
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 

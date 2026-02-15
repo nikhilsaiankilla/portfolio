@@ -6,55 +6,69 @@ import SectionHeading from "@/src/components/section-heading";
 import { getAllProjects } from "@/src/lib/project";
 import { Metadata } from "next";
 
+const SITE_URL = "https://nikhilsai.in";
+const OG_IMAGE = `${SITE_URL}/og-image-projects.png`;
+
 export const metadata: Metadata = {
-  title: "Projects",
+  metadataBase: new URL(SITE_URL),
+
+  title: "Full Stack Developer Projects | Next.js, Node.js, Kafka, ClickHouse",
   description:
-    "A collection of projects I’ve built across frontend, backend, and platform engineering — from analytics systems to developer tools and real-world products.",
+    "A portfolio of full stack and backend projects built with Next.js, React, Node.js, Kafka, ClickHouse, and analytics pipelines. Real-world systems, developer tools, and scalable web apps.",
+
   keywords: [
-    "Nikhil Sai Projects",
-    "Full Stack Projects",
-    "Web Applications",
-    "Backend Systems",
-    "Developer Tools",
-    "System Design",
-    "Analytics Platforms",
-    "React",
-    "Next.js",
-    "Node.js",
-    "Kafka",
-    "ClickHouse",
+    "Full Stack Developer Projects",
+    "Next.js Projects Portfolio",
+    "Node.js Backend Projects",
+    "Kafka ClickHouse Projects",
+    "System Design Projects",
+    "Developer Tools Projects",
+    "Analytics Engineering Projects",
   ],
-  metadataBase: new URL("https://nikhilsai.in"),
+
+  authors: [{ name: "Nikhil Sai", url: SITE_URL }],
+  creator: "Nikhil Sai",
+  publisher: "Nikhil Sai",
+
   alternates: {
-    canonical: "https://nikhilsai.in/projects",
+    canonical: `${SITE_URL}/projects`,
   },
+
   openGraph: {
-    title: "Projects — Nikhil Sai",
+    title:
+      "Full Stack & Backend Projects – Next.js, Node.js, Kafka | Nikhil Sai",
     description:
-      "Real-world projects spanning web apps, backend systems, analytics platforms, and developer tooling.",
-    url: "https://nikhilsai.in/projects",
-    siteName: "Nikhil Sai / Projects",
+      "Real-world projects across web apps, backend systems, analytics platforms, and developer tooling.",
+    url: `${SITE_URL}/projects`,
+    siteName: "Nikhil Sai Projects",
     images: [
       {
-        url: "/og-image-projects.png",
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Nikhil Sai Projects",
+        alt: "Nikhil Sai Full Stack Projects",
       },
     ],
+    locale: "en_IN",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Projects — Nikhil Sai",
+    title: "Full Stack & Backend Projects – Nikhil Sai",
     description:
-      "A showcase of products and systems I’ve built — from frontend interfaces to backend infrastructure.",
-    images: ["/og-image-projects.png"],
+      "Scalable systems, analytics pipelines, and developer tools built with modern web and data stacks.",
+    images: [OG_IMAGE],
     creator: "@nikhilbuildss",
   },
+
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 
@@ -66,7 +80,7 @@ const page = () => {
       <div className="w-full border-2 border-b-0 border-t-0 border-gray-700/10 dark:border-gray-700/40 max-w-4xl mx-auto min-h-screen">
         <NavSection />
         <AnimatedContainer>
-          <SectionHeading title="Projects!" />
+          <SectionHeading title="Full Stack & Backend Projects" />
           {projects && projects.length > 0 ? (
             <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 px-2">
               {projects.map((project, index) => (
