@@ -37,4 +37,28 @@ export const blogs: BlogTypes[] = [
     readingTime: "4 min read",
     featured: true,
   },
+  {
+    slug: "prettier-husky-setup",
+    title:
+      "I Just Discovered Prettier and Husky and Now I'm Wondering Why I Didn't Start Earlier",
+    description:
+      "A practical guide to setting up Prettier and Husky to enforce consistent formatting at commit time, eliminate noisy diffs, and speed up team code reviews.",
+    image: "",
+    tags: [
+      "Prettier",
+      "Husky",
+      "Developer Experience",
+      "Code Quality",
+      "JavaScript",
+      "TypeScript",
+      "Git Hooks",
+      "Frontend",
+      "Tooling",
+    ],
+    canonical: "https://nikhilsai.in/blog/prettier-husky-setup",
+    isPublished: true,
+    publishedOn: "2026-02-15",
+    readingTime: "3 min read",
+    featured: true,
+  },
 ];

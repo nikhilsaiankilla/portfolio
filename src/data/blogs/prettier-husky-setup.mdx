@@ -1,0 +1,204 @@
+A few days ago, I added **Prettier** and **Husky** to my workflow.
+
+Now I’m looking at my older projects and asking myself:  
+why wasn’t I doing this from day one?
+
+If you’re working on a **JavaScript/TypeScript codebase**, especially with a team, this setup is not a “nice to have” it’s foundational.
+
+Let’s break it down.
+
+---
+
+### The Problem: Inconsistent Code in Team Projects
+
+When multiple developers work on the same repository, formatting becomes a silent source of friction:
+
+- different quote styles (`'` vs `"`)
+- random spacing and line breaks  
+- unsorted imports  
+- no consistent wrapping rules  
+
+None of this affects functionality, but it **destroys readability** and pollutes pull requests with meaningless diffs.
+
+You end up reviewing formatting instead of logic.  
+That’s wasted time.
+
+---
+
+### Prettier: A Single Source of Formatting Truth
+
+Prettier is a code formatter that automatically formats your code based on rules you define.
+
+You configure it once using a `.prettierrc.json` file:
+
+```json
+{
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "importOrder": [
+    "^react",
+    "^next",
+    "<THIRD_PARTY_MODULES>",
+    "^@repo/(.*)$",
+    "^@/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderGroupNamespaceSpecifiers": true,
+  "importOrderCaseInsensitive": true
+}
+```
+
+---
+
+Now your entire project has one formatting standard.
+
+#### Check formatting
+
+```bash
+pnpm prettier --check .
+```
+
+#### Auto-fix everything
+
+```bash
+pnpm prettier --write .
+```
+
+This eliminates style debates and keeps the codebase clean.
+
+---
+
+### Why Manual Formatting Fails
+
+Even if your team agrees to run Prettier before pushing, people forget.
+
+Not because they don’t care — it’s just an extra step in a busy workflow.
+
+That’s where automation becomes critical.
+
+---
+
+### Husky: Enforcing Formatting at Commit Time
+
+Husky lets you run scripts automatically using Git hooks.
+
+#### Install Husky
+```bash
+pnpm add -D husky
+pnpm husky init
+
+```
+
+This creates a .husky folder in your project root.
+
+#### Configure the pre-commit hook
+
+Edit:
+```bash
+.husky/pre-commit
+```
+
+Add:
+```bash
+pnpm prettier --check .
+pnpm prettier --write .
+```
+
+Now every time you commit:
+
+- Prettier checks your code
+
+- fixes formatting if needed
+
+- prevents inconsistent code from entering the repo
+
+No manual steps. No forgotten commands.
+
+---
+
+### Optional: Faster Commits with lint-staged
+
+Running Prettier on the entire repo can be slow.
+
+Use lint-staged to format only staged files.
+
+#### Install
+```bash
+pnpm add -D lint-staged
+```
+
+### Add to package.json
+```json
+{
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,md,css}": "prettier --write"
+  }
+}
+```
+
+### Update Husky hook
+```bash
+pnpm lint-staged
+```
+
+This keeps commits fast while enforcing formatting.
+
+---
+
+The Real Benefits
+
+This setup gives you:
+
+- consistent formatting across the entire codebase
+
+- cleaner pull requests (only logic changes show up)
+
+- faster code reviews
+
+- zero formatting arguments
+
+- easier onboarding for new developers
+
+- Tooling enforces the standard — not humans.
+
+---
+
+### What I’d Do From Day One
+
+If I were starting a new project today, this would be my default:
+
+- install Prettier
+
+- define formatting rules
+
+- add Husky with a pre-commit hook
+
+- add lint-staged for performance
+
+Formatting would never be a discussion again.
+
+---
+
+### Final Thoughts
+
+Prettier keeps your code consistent.
+Husky makes that consistency automatic.
+
+Together, they remove an entire class of problems from your development process.
+
+This isn’t about making code “look pretty.”
+It’s about making teams faster, reviews cleaner, and codebases easier to maintain.
+
+If your repo doesn’t have this yet, add it today.
