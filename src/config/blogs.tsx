@@ -30,9 +30,11 @@ export const blogs: BlogTypes[] = [
       "Redis",
       "Backend",
     ],
-    canonical: "https://medium.com/@nikhilsaiankilla/how-to-add-a-simple-rate-limiter-to-your-express-app-using-redis-4f85a0a9e26a",
+    canonical:
+      "https://medium.com/@nikhilsaiankilla/how-to-add-a-simple-rate-limiter-to-your-express-app-using-redis-4f85a0a9e26a",
     isPublished: true,
     publishedOn: "2025-01-26",
     readingTime: "4 min read",
     featured: true,
-  }]
+  },
+];

@@ -11,10 +11,12 @@ This post explains how to add a **basic rate limiter to an Express app using Red
 Rate limiting is a technique used to **restrict how many requests a client can make** to an API within a specific time window.
 
 For example:
+
 - Allow **10 requests per minute per IP**
 - Block requests once the limit is exceeded
 
 Rate limiting helps protect your application from:
+
 - accidental infinite loops
 - brute force attacks
 - unfair or abusive usage
@@ -24,10 +26,12 @@ Rate limiting helps protect your application from:
 ## Why Redis?
 
 You could store request counts in memory, but that breaks as soon as:
+
 - the server restarts
 - your application scales to multiple instances
 
 Redis works well for rate limiting because:
+
 - it’s fast and in-memory
 - it’s shared across all app instances
 - it supports atomic operations like `INCR`
@@ -76,6 +80,7 @@ const Redis = require("ioredis");
 
 const redisClient = new Redis();
 ```
+
 This client should be reused across requests, not created inside the middleware.
 
 ---
@@ -129,7 +134,7 @@ Several details make this approach reliable:
 - Redis automatically deletes the key after the TTL expires
 - No in-memory state is required
 - Works across multiple application instances
-This is why Redis is commonly used for rate limiting in real-world systems.
+  This is why Redis is commonly used for rate limiting in real-world systems.
 
 ### Using the rate limiter at route level
 
@@ -149,6 +154,7 @@ app.listen(3000, () => {
   console.log("Server running on port 3000");
 });
 ```
+
 This keeps your application flexible and avoids unnecessary global limits.
 
 ---
@@ -161,14 +167,13 @@ This implementation is intentionally simple. In production systems, you may also
 
 - user-based limits instead of IP-based limits
 
-- rate-limit headers (X-RateLimit-*)
+- rate-limit headers (X-RateLimit-\*)
 
 - Lua scripts to combine INCR and EXPIRE safely
 
 - better fallback behavior if Redis is unavailable
 
 For learning purposes and many real-world use cases, this approach is sufficient.
-
 
 ## Final thoughts
 
