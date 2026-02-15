@@ -1,0 +1,73 @@
+# =============================
+# Package managers / deps
+# =============================
+node_modules
+.pnpm-store
+.pnp
+.pnp.js
+
+# lockfiles (no need to format)
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# =============================
+# Build outputs
+# =============================
+.next
+out
+dist
+build
+coverage
+.turbo
+
+# turborepo cache in packages
+**/.turbo
+**/dist
+**/build
+**/.next
+
+# =============================
+# Env / secrets
+# =============================
+.env
+.env.*
+!.env.example
+
+# =============================
+# Logs
+# =============================
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =============================
+# OS / editor junk
+# =============================
+.DS_Store
+Thumbs.db
+.vscode
+.idea
+
+# =============================
+# Generated / public assets
+# =============================
+public/generated
+public/uploads
+
+# =============================
+# TypeScript / Next generated
+# =============================
+.next/types
+*.tsbuildinfo
+
+# =============================
+# Misc
+# =============================
+tmp
+temp
+
+# Ignore all HTML files (optional — keep only if you truly never want formatting)
+**/*.html
