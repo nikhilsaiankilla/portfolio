@@ -46,7 +46,7 @@ You configure it once using a `.prettierrc.json` file:
     "prettier-plugin-tailwindcss"
   ],
   "importOrder": [
-    "^react",
+    "^react$",
     "^next",
     "<THIRD_PARTY_MODULES>",
     "^@repo/(.*)$",
@@ -56,7 +56,8 @@ You configure it once using a `.prettierrc.json` file:
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "importOrderGroupNamespaceSpecifiers": true,
-  "importOrderCaseInsensitive": true
+  "importOrderCaseInsensitive": true,
+  "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"]
 }
 ```
 
