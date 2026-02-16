@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "prepare": "husky",
-    "format": "prettier --write"
+    "format": "prettier --write ."
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,md,css}": [

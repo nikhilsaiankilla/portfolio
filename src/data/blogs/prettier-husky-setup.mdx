@@ -14,9 +14,9 @@ Let’s break it down.
 When multiple developers work on the same repository, formatting becomes a silent source of friction:
 
 - different quote styles (`'` vs `"`)
-- random spacing and line breaks  
-- unsorted imports  
-- no consistent wrapping rules  
+- random spacing and line breaks
+- unsorted imports
+- no consistent wrapping rules
 
 None of this affects functionality, but it **destroys readability** and pollutes pull requests with meaningless diffs.
 
@@ -95,6 +95,7 @@ That’s where automation becomes critical.
 Husky lets you run scripts automatically using Git hooks.
 
 #### Install Husky
+
 ```bash
 pnpm add -D husky
 pnpm husky init
@@ -106,11 +107,13 @@ This creates a .husky folder in your project root.
 #### Configure the pre-commit hook
 
 Edit:
+
 ```bash
 .husky/pre-commit
 ```
 
 Add:
+
 ```bash
 pnpm prettier --check .
 pnpm prettier --write .
@@ -135,11 +138,13 @@ Running Prettier on the entire repo can be slow.
 Use lint-staged to format only staged files.
 
 #### Install
+
 ```bash
 pnpm add -D lint-staged
 ```
 
 ### Add to package.json
+
 ```json
 {
   "lint-staged": {
@@ -149,6 +154,7 @@ pnpm add -D lint-staged
 ```
 
 ### Update Husky hook
+
 ```bash
 pnpm lint-staged
 ```

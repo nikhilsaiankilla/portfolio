@@ -1,6 +1,6 @@
 {
   "semi": true,
-  "trailingCome": "es5",
+  "trailingComma": "es5",
   "singleQuote": true,
   "printWidth": 80,
   "tabWidth": 2,
@@ -12,15 +12,16 @@
     "prettier-plugin-tailwindcss"
   ],
   "importOrder": [
-    "^react",
+    "^react$",
     "^next",
     "<THIRD_PARTY_MODULES>",
     "^@repo/(.*)$",
     "^@/(.*)$",
     "^[./]"
   ],
-  "importOrderSeperation": true,
+  "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "importOrderGroupNamespaceSpecifiers": true,
-  "importOrderCaseInsensitive": true
+  "importOrderCaseInsensitive": true,
+  "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"]
 }
